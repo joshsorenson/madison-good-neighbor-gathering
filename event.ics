@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Madison Good Neighbor Gathering//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+DTSTART;TZID=America/Chicago:20260913T120000
+DTEND;TZID=America/Chicago:20260913T160000
+SUMMARY:Madison Good Neighbor Gathering
+DESCRIPTION:Free community festival at Brittingham Park!\nLive music\, cultural performances\, food trucks\, kids activities\, climbing wall\, bouncy structures & more. No tickets needed — just show up!
+LOCATION:829 W Washington Ave\, Madison\, WI 53715
+URL:https://madisongoodneighborgathering.org/
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR
