@@ -894,6 +894,10 @@
       border: none; cursor: pointer; transition: background 0.2s, transform 0.1s;
     }
     .invite-copy-btn:hover { background: #e03d5e; transform: scale(1.03); }
+    .invite-downloads {
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+      gap: 0.5rem; margin-bottom: 1.25rem;
+    }
     .invite-share-row {
       display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.5rem;
     }
