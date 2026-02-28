@@ -237,6 +237,25 @@
       <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Madison+Good+Neighbor+Gathering&dates=20260913T170000Z/20260913T210000Z&details=Free+community+festival!+Live+music,+cultural+performances,+food+trucks,+kids+activities+%26+more.+No+tickets+needed.&location=829+W+Washington+Ave,+Madison,+WI+53715&ctz=America%2FChicago" target="_blank" rel="noopener" class="cal-btn">Google Calendar</a>
       <a href="event.ics" download class="cal-btn">Apple / iCal</a>
     </div>
+    <div class="hero-share" aria-label="Share this event">
+      <span class="share-label">Know someone who'd love this?</span>
+      <button class="share-pill share-pill-main" id="btn-share-main" aria-label="Share event">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        Share Event
+      </button>
+      <a class="share-pill share-pill-fb" id="btn-share-fb" href="#" target="_blank" rel="noopener" aria-label="Share on Facebook">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        Facebook
+      </a>
+      <a class="share-pill share-pill-x" id="btn-share-x" href="#" target="_blank" rel="noopener" aria-label="Share on X">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        X
+      </a>
+      <button class="share-pill share-pill-copy" id="btn-copy-link" aria-label="Copy link to event">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        Copy Link
+      </button>
+    </div>
     <p class="hero-rain-note">No tickets. No registration. <span>Just show up and have fun.</span></p>
   </div>
 </section>
@@ -687,9 +706,48 @@
   </div>
 </section>
 
-<!-- Wave: location (white) → FAQ (cream) -->
-<div class="wave-divider" style="background:#ffffff" aria-hidden="true">
-  <svg viewBox="0 0 1440 55" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,0 C360,55 1080,0 1440,40 L1440,55 L0,55 Z" fill="#FFFDF5"/></svg>
+<!-- Wave: location (cream) → invite (dark) -->
+<div class="wave-divider" style="background:#FFFDF5" aria-hidden="true">
+  <svg viewBox="0 0 1440 55" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,40 C480,0 960,55 1440,20 L1440,55 L0,55 Z" fill="#1A1A2E"/></svg>
+</div>
+
+<!-- ═══ INVITE A NEIGHBOR ═══ -->
+<section class="invite-section" aria-labelledby="invite-heading">
+  <div class="invite-inner">
+    <div class="ent-eyebrow">Spread the Word</div>
+    <h2 class="invite-h2" id="invite-heading">Know a neighbor who'd <span class="c-pink">love this?</span></h2>
+    <p class="invite-sub">Copy this message and send it — text, email, whatever works.</p>
+
+    <div class="invite-card">
+      <p class="invite-msg" id="invite-msg-text">Hey! There's a free community festival in Madison on Sunday, September 13th — the Good Neighbor Gathering at Brittingham Park.
+
+Live music, cultural performances, food trucks, bouncy structures, kids activities, and more. All completely free, no tickets needed. 12–4 PM.
+
+Hope you can make it! 🎉</p>
+      <button class="invite-copy-btn" id="btn-copy-msg">Copy Message</button>
+    </div>
+
+    <div class="invite-share-row">
+      <span class="invite-share-label">Or share directly:</span>
+      <a class="invite-share-pill invite-share-fb" id="invite-fb-link" href="#" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        Facebook
+      </a>
+      <a class="invite-share-pill invite-share-x" id="invite-x-link" href="#" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        X / Twitter
+      </a>
+      <button class="invite-share-pill invite-share-native" id="invite-native-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        More Options
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Wave: invite (dark) → FAQ (cream) -->
+<div class="wave-divider" style="background:#1A1A2E" aria-hidden="true">
+  <svg viewBox="0 0 1440 55" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,20 C480,55 960,0 1440,35 L1440,55 L0,55 Z" fill="#FFFDF5"/></svg>
 </div>
 
 <!-- ═══ FAQ ═══ -->
@@ -827,6 +885,54 @@
 
   </div>
 </footer>
+
+<script>
+(function () {
+  var PAGE_URL = window.location.href;
+  var SHARE_TITLE = 'Madison Good Neighbor Gathering';
+  var SHARE_TEXT = 'Free festival in Madison — live music, food trucks, bouncy structures & kids activities! Sept 13, 12–4 PM at Brittingham Park. All ages, no tickets needed!';
+  var INVITE_MSG = 'Hey! There\'s a free community festival in Madison on Sunday, September 13th — the Good Neighbor Gathering at Brittingham Park.\n\nLive music, cultural performances, food trucks, bouncy structures, kids activities, and more. All completely free, no tickets needed. 12\u20134 PM.\n\nHope you can make it! \uD83C\uDF89\n\n' + PAGE_URL;
+
+  function fbUrl() { return 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(PAGE_URL); }
+  function xUrl()  { return 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(SHARE_TEXT) + '&url=' + encodeURIComponent(PAGE_URL); }
+
+  function setLinks() {
+    ['btn-share-fb', 'invite-fb-link'].forEach(function(id) {
+      var el = document.getElementById(id); if (el) el.href = fbUrl();
+    });
+    ['btn-share-x', 'invite-x-link'].forEach(function(id) {
+      var el = document.getElementById(id); if (el) el.href = xUrl();
+    });
+  }
+
+  function doShare() {
+    if (navigator.share) {
+      navigator.share({ title: SHARE_TITLE, text: SHARE_TEXT, url: PAGE_URL }).catch(function(){});
+    } else {
+      doCopy(PAGE_URL, 'btn-copy-link', 'Link copied!');
+    }
+  }
+
+  function doCopy(text, btnId, label) {
+    navigator.clipboard.writeText(text).then(function() {
+      var btn = document.getElementById(btnId);
+      if (!btn) return;
+      var orig = btn.innerHTML;
+      btn.textContent = '\u2713 ' + label;
+      setTimeout(function() { btn.innerHTML = orig; }, 2200);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    setLinks();
+    var el;
+    el = document.getElementById('btn-share-main'); if (el) el.addEventListener('click', doShare);
+    el = document.getElementById('btn-copy-link');  if (el) el.addEventListener('click', function() { doCopy(PAGE_URL, 'btn-copy-link', 'Link copied!'); });
+    el = document.getElementById('btn-copy-msg');   if (el) el.addEventListener('click', function() { doCopy(INVITE_MSG, 'btn-copy-msg', 'Copied!'); });
+    el = document.getElementById('invite-native-btn'); if (el) el.addEventListener('click', doShare);
+  });
+}());
+</script>
 
 </body>
 </html>

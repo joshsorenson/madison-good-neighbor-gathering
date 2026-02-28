@@ -828,6 +828,8 @@
       .facts-inner { gap: 1.25rem; }
       .hero-cal { flex-direction: column; align-items: center; gap: 0.4rem; }
       .cal-label { margin-bottom: 0.15rem; }
+      .hero-share { gap: 0.35rem; }
+      .invite-card { padding: 1.25rem 1.25rem; }
     }
     @media (max-width: 480px) {
       .act-card { flex: 0 1 160px; }
@@ -838,6 +840,78 @@
       }
       .visit-col-left, .visit-col-right { flex: 1 1 100%; }
     }
+
+    /* ─────────────────────────────────────
+       HERO SHARE ROW
+    ───────────────────────────────────── */
+    .hero-share {
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+      gap: 0.45rem; margin-bottom: 1.25rem;
+    }
+    .share-label {
+      font-size: 0.8rem; font-weight: 700; color: var(--ink-soft);
+      width: 100%; text-align: center; margin-bottom: 0.1rem;
+    }
+    .share-pill {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      padding: 0.38rem 0.9rem; border-radius: 50px;
+      font-family: 'Baloo 2', cursive; font-size: 0.8rem; font-weight: 700;
+      border: 2px solid var(--ink); color: var(--ink);
+      background: rgba(255,255,255,0.7); cursor: pointer;
+      text-decoration: none; transition: background 0.2s, color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+    }
+    .share-pill:hover { background: var(--ink); color: #fff; }
+    .share-pill-main { border-color: var(--pink); color: var(--pink); background: var(--pink-pale); }
+    .share-pill-main:hover { background: var(--pink); color: #fff; border-color: var(--pink); }
+    .share-pill-fb { border-color: #1877F2; color: #1877F2; background: rgba(24,119,242,0.08); }
+    .share-pill-fb:hover { background: #1877F2; color: #fff; border-color: #1877F2; }
+    .share-pill-x { border-color: #000; color: #000; background: rgba(0,0,0,0.05); }
+    .share-pill-x:hover { background: #000; color: #fff; border-color: #000; }
+
+    /* ─────────────────────────────────────
+       INVITE A NEIGHBOR
+    ───────────────────────────────────── */
+    .invite-section { background: #1A1A2E; padding: 4rem 1.5rem 5rem; text-align: center; }
+    .invite-inner { max-width: 680px; margin: 0 auto; }
+    .invite-h2 {
+      font-size: clamp(2rem, 5vw, 3rem); color: var(--white); margin-bottom: 0.4rem;
+    }
+    .invite-sub { color: rgba(255,255,255,0.5); font-size: 1rem; font-weight: 600; margin-bottom: 2rem; }
+    .invite-card {
+      background: rgba(255,255,255,0.06); border: 1.5px solid rgba(255,255,255,0.12);
+      border-radius: 20px; padding: 1.75rem 2rem; margin-bottom: 2rem; text-align: left;
+    }
+    .invite-msg {
+      font-size: 0.97rem; line-height: 1.75; color: rgba(255,255,255,0.8);
+      white-space: pre-line; margin-bottom: 1.25rem;
+    }
+    .invite-copy-btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.55rem 1.4rem; border-radius: 50px;
+      background: var(--pink); color: #fff;
+      font-family: 'Baloo 2', cursive; font-size: 0.9rem; font-weight: 800;
+      border: none; cursor: pointer; transition: background 0.2s, transform 0.1s;
+    }
+    .invite-copy-btn:hover { background: #e03d5e; transform: scale(1.03); }
+    .invite-share-row {
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.5rem;
+    }
+    .invite-share-label {
+      font-size: 0.8rem; font-weight: 700; color: rgba(255,255,255,0.35);
+      width: 100%; margin-bottom: 0.15rem;
+    }
+    .invite-share-pill {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      padding: 0.4rem 1.1rem; border-radius: 50px;
+      font-family: 'Baloo 2', cursive; font-size: 0.82rem; font-weight: 700;
+      border: 2px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.75);
+      background: rgba(255,255,255,0.06); cursor: pointer;
+      text-decoration: none; transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .invite-share-pill:hover { background: rgba(255,255,255,0.15); color: #fff; border-color: rgba(255,255,255,0.4); }
+    .invite-share-fb:hover { background: #1877F2; border-color: #1877F2; color: #fff; }
+    .invite-share-x:hover  { background: #fff; border-color: #fff; color: #000; }
 
     /* ─────────────────────────────────────
        LOCATION MAP
