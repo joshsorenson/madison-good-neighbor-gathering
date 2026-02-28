@@ -1,0 +1,16 @@
+{
+  "name": "Madison Good Neighbor Gathering",
+  "short_name": "GNG 2026",
+  "description": "Free annual community festival at Brittingham Park, Madison WI. September 13, 2026.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFDF5",
+  "theme_color": "#F65472",
+  "icons": [
+    {
+      "src": "logo-badge.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
