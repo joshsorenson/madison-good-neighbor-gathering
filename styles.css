@@ -811,6 +811,8 @@
         width: calc(50% - 0.5rem) !important; height: 150px !important;
       }
       .facts-inner { gap: 1.25rem; }
+      .hero-cal { flex-direction: column; align-items: center; gap: 0.4rem; }
+      .cal-label { margin-bottom: 0.15rem; }
     }
     @media (max-width: 480px) {
       .act-card { flex: 0 1 160px; }
