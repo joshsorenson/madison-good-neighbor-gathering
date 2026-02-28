@@ -895,8 +895,36 @@
     }
     .invite-copy-btn:hover { background: #e03d5e; transform: scale(1.03); }
     .invite-downloads {
-      display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
-      gap: 0.5rem; margin-bottom: 1.25rem;
+      display: flex; flex-direction: column; align-items: center;
+      gap: 0.75rem; margin-bottom: 1.5rem;
+    }
+    .invite-dl-cards {
+      display: flex; gap: 1.25rem; justify-content: center; flex-wrap: wrap;
+    }
+    .invite-dl-card {
+      display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
+      text-decoration: none; cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .invite-dl-card:hover { transform: translateY(-4px); }
+    .invite-dl-thumb {
+      border-radius: 12px; display: block;
+      border: 2px solid rgba(255,255,255,0.15);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+      object-fit: cover;
+    }
+    .invite-dl-thumb-sq    { width: 120px; height: 120px; }
+    .invite-dl-thumb-story { width: 68px;  height: 120px; }
+    .invite-dl-label {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      padding: 0.35rem 0.9rem; border-radius: 50px;
+      font-family: 'Baloo 2', cursive; font-size: 0.8rem; font-weight: 700;
+      border: 2px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.8);
+      background: rgba(255,255,255,0.07);
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .invite-dl-card:hover .invite-dl-label {
+      background: var(--pink); border-color: var(--pink); color: #fff;
     }
     .invite-share-row {
       display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.5rem;
