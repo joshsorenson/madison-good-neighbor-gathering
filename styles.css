@@ -37,7 +37,8 @@
       line-height: 1.6;
       overflow-x: hidden;
     }
-    h1, h2, h3, h4 { font-family: 'Baloo 2', cursive; line-height: 1.15; }
+    h1, h2, h3, h4 { font-family: 'Baloo 2', cursive; line-height: 1.15; text-wrap: balance; }
+    p { text-wrap: pretty; }
 
     /* ─────────────────────────────────────
        NAV
