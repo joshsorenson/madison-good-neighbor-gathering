@@ -420,42 +420,56 @@
       font-size: clamp(2.2rem, 5vw, 3.5rem);
       color: var(--white); margin-bottom: 0.4rem;
     }
-    .ent-sub { color: rgba(255,255,255,0.55); font-size: 1rem; font-weight: 600; margin-bottom: 3rem; }
-    .ent-items { display: flex; flex-direction: column; gap: 0; }
-    .ent-row {
-      display: flex; align-items: center; gap: 1.25rem;
-      padding: 1.4rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      text-decoration: none;
-      transition: padding-left 0.2s;
+    .ent-sub { color: rgba(255,255,255,0.55); font-size: 1rem; font-weight: 600; margin-bottom: 2.5rem; }
+
+    /* Schedule timeline */
+    .sched-list { list-style: none; display: flex; flex-direction: column; gap: 0; }
+    .sched-item {
+      display: grid;
+      grid-template-columns: 6rem 28px 1fr;
+      gap: 0 1rem;
+      align-items: stretch;
     }
-    .ent-row:first-child { border-top: 1px solid rgba(255,255,255,0.1); }
-    .ent-row:hover { padding-left: 0.75rem; }
-    .ent-num {
-      font-family: 'Baloo 2', cursive; font-size: 1.1rem;
-      font-weight: 800; color: rgba(255,255,255,0.18); min-width: 2.5rem;
+    .sched-time {
+      font-family: 'Baloo 2', cursive;
+      font-size: 0.85rem; font-weight: 800;
+      color: rgba(255,255,255,0.4);
+      text-align: right;
+      padding-top: 0.35rem;
+      white-space: nowrap;
     }
-    .ent-dot {
-      width: 50px; height: 50px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.4rem; flex-shrink: 0;
+    .sched-line {
+      display: flex; flex-direction: column; align-items: center;
+      position: relative;
     }
-    .ent-info { flex: 1; }
+    .sched-dot {
+      width: 14px; height: 14px; border-radius: 50%;
+      flex-shrink: 0; margin-top: 0.4rem;
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.12);
+    }
+    .sched-line::after {
+      content: ''; flex: 1;
+      width: 2px; background: rgba(255,255,255,0.1);
+      margin-top: 6px;
+    }
+    .sched-item:last-child .sched-line::after { display: none; }
+    .sched-info {
+      padding-bottom: 2rem;
+      display: flex; flex-direction: column; gap: 0.2rem;
+    }
     .ent-name {
       font-family: 'Baloo 2', cursive;
-      font-size: clamp(1.3rem, 3vw, 1.9rem);
+      font-size: clamp(1.2rem, 3vw, 1.75rem);
       font-weight: 800; color: var(--white); display: block;
-      transition: color 0.2s;
     }
     .ent-type {
       font-size: 0.82rem; color: rgba(255,255,255,0.4);
       font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
     }
-    .ent-row:nth-child(1):hover .ent-name { color: var(--pink); }
-    .ent-row:nth-child(2):hover .ent-name { color: var(--purple); }
-    .ent-row:nth-child(3):hover .ent-name { color: var(--orange); }
-    .ent-row:nth-child(4):hover .ent-name { color: var(--green); }
-    .ent-row:nth-child(5):hover .ent-name { color: var(--blue); }
+    .sched-note {
+      font-size: 0.8rem; color: rgba(255,255,255,0.3);
+      margin-top: 0.5rem; font-style: italic;
+    }
 
     /* ─────────────────────────────────────
        FOOD
