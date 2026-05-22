@@ -232,7 +232,7 @@
     <div class="hero-cta">
       <a href="#activities" class="btn btn-pink">See What's Happening &#8594;</a>
       <a href="get-involved.html" class="btn btn-outline">Get Involved</a>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdieg_Eyvdv0OCqE2VsMWvu3zp5BCEfnnJUx7UjIUMjyrLANQ/viewform?usp=dialog" target="_blank" rel="noopener" class="btn btn-yellow">&#127881; RSVP Your Kids</a>
+      <a href="#" onclick="openKidsRsvpModal();return false;" class="btn btn-yellow">&#127881; RSVP Your Kids</a>
     </div>
     <div class="hero-cal">
       <span class="cal-label">&#128197; Save the date:</span>
@@ -439,7 +439,7 @@
     <p style="font-size:1.05rem;line-height:1.6;color:rgba(255,255,255,0.9);margin-bottom:2rem;">
       Bringing kids to the festival? RSVP to receive updates and be entered for prizes at the Good Neighbor Gathering!
     </p>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdieg_Eyvdv0OCqE2VsMWvu3zp5BCEfnnJUx7UjIUMjyrLANQ/viewform?usp=dialog" target="_blank" rel="noopener" class="btn btn-pink">&#127881; RSVP for Kids</a>
+    <a href="#" onclick="openKidsRsvpModal();return false;" class="btn btn-pink">&#127881; RSVP for Kids</a>
   </div>
 </section>
 
@@ -977,5 +977,33 @@ Hope you can make it! 🎉</p>
 }());
 </script>
 
+
+<!-- ═══ KIDS RSVP MODAL ═══ -->
+<div id="kids-rsvp-modal" role="dialog" aria-modal="true" aria-labelledby="krsvp-title">
+  <div class="krsvp-inner">
+    <div class="krsvp-header">
+      <span class="krsvp-title" id="krsvp-title">&#127881; Kids RSVP &mdash; Updates &amp; Prizes</span>
+      <button class="krsvp-close" onclick="closeKidsRsvpModal()" aria-label="Close form">&#10005;</button>
+    </div>
+    <iframe class="krsvp-frame"
+      src="https://docs.google.com/forms/d/e/1FAIpQLSdieg_Eyvdv0OCqE2VsMWvu3zp5BCEfnnJUx7UjIUMjyrLANQ/viewform?embedded=true"
+      title="Kids RSVP Form">Loading form&hellip;</iframe>
+  </div>
+</div>
+<script>
+function openKidsRsvpModal(){
+  document.getElementById('kids-rsvp-modal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeKidsRsvpModal(){
+  document.getElementById('kids-rsvp-modal').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('DOMContentLoaded',function(){
+  var m=document.getElementById('kids-rsvp-modal');
+  m.addEventListener('click',function(e){ if(e.target===m) closeKidsRsvpModal(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeKidsRsvpModal(); });
+});
+</script>
 </body>
 </html>
