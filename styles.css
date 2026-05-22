@@ -187,7 +187,7 @@
     }
     .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,0,0,0.14); }
     .btn-pink   { background: var(--pink);   color: #fff; }
-    .btn-outline { background: #fff; color: var(--purple); border: 3px solid var(--purple); }
+    .btn-outline { background: #c5eda0; color: var(--purple); border: 3px solid var(--purple); }
     .btn-yellow  { background: var(--yellow); color: var(--ink); }
     .btn-green   { background: var(--green);  color: #fff; }
     .btn-blue    { background: var(--blue);   color: #fff; }
@@ -944,7 +944,7 @@
     }
     .invite-share-pill:hover { background: rgba(255,255,255,0.15); color: #fff; border-color: rgba(255,255,255,0.4); }
     .invite-share-fb:hover { background: #1877F2; border-color: #1877F2; color: #fff; }
-    .invite-share-x:hover  { background: #fff; border-color: #fff; color: #000; }
+    .invite-share-x:hover  { background: #c5eda0; border-color: #fff; color: #000; }
 
     /* ─────────────────────────────────────
        LOCATION MAP
@@ -972,7 +972,7 @@
       display: inline-flex; align-items: center; gap: 0.4rem;
       padding: 0.5rem 1.1rem;
       border-radius: 50px;
-      background: #fff;
+      background: #c5eda0;
       font-family: 'Baloo 2', cursive;
       font-weight: 700; font-size: 0.9rem;
       color: var(--ink);
@@ -1045,7 +1045,7 @@
   display: flex;
 }
 .krsvp-inner {
-  background: #fff;
+  background: #c5eda0;
   border-radius: 16px;
   width: 100%;
   max-width: 660px;
