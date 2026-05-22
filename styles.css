@@ -1049,7 +1049,7 @@
   border-radius: 16px;
   width: 100%;
   max-width: 660px;
-  max-height: 92vh;
+  max-height: 96vh;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -1093,5 +1093,5 @@
   flex: 1;
   border: none;
   width: 100%;
-  min-height: 520px;
+  min-height: 75vh;
 }
