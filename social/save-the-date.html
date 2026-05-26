@@ -53,12 +53,12 @@
     color:rgba(255,255,255,0.75); margin-top:4px;
   }
 
-  .logo-wrap { margin-bottom:28px; }
+  .logo-wrap { margin-bottom:20px; }
   .logo-wrap img { width:500px; height:auto; }
 
   .details {
     display:flex; gap:20px; justify-content:center; flex-wrap:wrap;
-    margin-bottom:32px;
+    margin-bottom:20px;
   }
   .detail-pill {
     font-family:'Baloo 2',cursive; font-weight:700; font-size:24px;
@@ -67,6 +67,14 @@
   .dp-1 { background:#F65472; }
   .dp-2 { background:#3DAAC8; }
   .dp-3 { background:#8CC63E; }
+
+  .photo-strip {
+    display:flex; gap:10px; width:100%; margin-bottom:20px;
+  }
+  .photo-strip img {
+    flex:1; height:150px; object-fit:cover; border-radius:16px;
+    box-shadow:0 4px 24px rgba(26,26,46,0.2);
+  }
 
   .free-line {
     font-family:'Baloo 2',cursive; font-weight:800; font-size:36px;
@@ -107,6 +115,11 @@
       <div class="detail-pill dp-1">⏰ 12 – 4 PM</div>
       <div class="detail-pill dp-2">🌿 Brittingham Park</div>
       <div class="detail-pill dp-3">🏙️ Madison, WI</div>
+    </div>
+    <div class="photo-strip">
+      <img src="../photos/joy.jpg" alt="Joy at the festival">
+      <img src="../photos/taiko-group.jpg" alt="Taiko drumming performance">
+      <img src="../photos/community-dance.jpg" alt="Community dancing">
     </div>
     <div class="free-line">Live Music · Food Trucks · Kids Activities · <span>100% Free!</span></div>
   </div>

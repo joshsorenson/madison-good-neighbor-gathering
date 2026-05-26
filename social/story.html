@@ -76,12 +76,23 @@
     display:grid; grid-template-columns:1fr 1fr; gap:18px;
   }
   .expect-item {
-    background:rgba(255,255,255,0.08); border-radius:18px;
-    padding:26px 24px; text-align:center;
-    border:1.5px solid rgba(255,255,255,0.1);
+    border-radius:18px; overflow:hidden; position:relative; height:175px;
   }
-  .expect-emoji { font-size:44px; display:block; margin-bottom:10px; }
-  .expect-text { font-family:'Nunito',sans-serif; font-weight:800; font-size:24px; color:#fff; line-height:1.2; }
+  .expect-photo {
+    position:absolute; inset:0;
+    background-size:cover; background-position:center;
+  }
+  .expect-overlay {
+    position:absolute; inset:0;
+    background:rgba(26,26,46,0.55);
+  }
+  .expect-content {
+    position:relative; z-index:1;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    height:100%; padding:16px; text-align:center;
+  }
+  .expect-emoji { font-size:40px; display:block; margin-bottom:8px; }
+  .expect-text { font-family:'Nunito',sans-serif; font-weight:800; font-size:22px; color:#fff; line-height:1.2; }
 
   /* Bottom CTA */
   .bottom-cta {
@@ -166,10 +177,26 @@
   <div class="expect-section">
     <div class="expect-title">What to Expect</div>
     <div class="expect-grid">
-      <div class="expect-item"><span class="expect-emoji">🎵</span><div class="expect-text">Live Music & Cultural Performances</div></div>
-      <div class="expect-item"><span class="expect-emoji">🏰</span><div class="expect-text">Bouncy Structures & Climbing Wall</div></div>
-      <div class="expect-item"><span class="expect-emoji">🍜</span><div class="expect-text">Local Food Trucks & Carts</div></div>
-      <div class="expect-item"><span class="expect-emoji">🔬</span><div class="expect-text">Kids Activities & Science Fun</div></div>
+      <div class="expect-item">
+        <div class="expect-photo" style="background-image:url('../photos/guitarist.jpg')"></div>
+        <div class="expect-overlay"></div>
+        <div class="expect-content"><span class="expect-emoji">🎵</span><div class="expect-text">Live Music & Cultural Performances</div></div>
+      </div>
+      <div class="expect-item">
+        <div class="expect-photo" style="background-image:url('../photos/bouncy-castle.jpg')"></div>
+        <div class="expect-overlay"></div>
+        <div class="expect-content"><span class="expect-emoji">🏰</span><div class="expect-text">Bouncy Structures & Climbing Wall</div></div>
+      </div>
+      <div class="expect-item">
+        <div class="expect-photo" style="background-image:url('../photos/food-truck.jpg')"></div>
+        <div class="expect-overlay"></div>
+        <div class="expect-content"><span class="expect-emoji">🍜</span><div class="expect-text">Local Food Trucks & Carts</div></div>
+      </div>
+      <div class="expect-item">
+        <div class="expect-photo" style="background-image:url('../photos/kids-science.jpg')"></div>
+        <div class="expect-overlay"></div>
+        <div class="expect-content"><span class="expect-emoji">🔬</span><div class="expect-text">Kids Activities & Science Fun</div></div>
+      </div>
     </div>
   </div>
 

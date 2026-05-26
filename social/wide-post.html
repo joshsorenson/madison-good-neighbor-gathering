@@ -27,7 +27,16 @@
     position:absolute; left:0; top:0; bottom:0; width:580px;
     display:flex; flex-direction:column; justify-content:center;
     padding:60px 50px 60px 70px;
+    background-image: url('../photos/community-dance.jpg');
+    background-size:cover; background-position:center top;
+    overflow:hidden;
   }
+  .left::before {
+    content:'';
+    position:absolute; inset:0; z-index:0;
+    background: linear-gradient(135deg, rgba(26,26,46,0.88) 0%, rgba(45,16,96,0.78) 100%);
+  }
+  .left > * { position:relative; z-index:1; }
 
   .badge {
     display:inline-flex; align-items:center; gap:8px;
