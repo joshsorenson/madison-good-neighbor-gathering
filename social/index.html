@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GNG 2026 Social Media Kit</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #1A1A2E;
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #1A1A2E 0%, #12122a 100%);
+    border-bottom: 3px solid transparent;
+    padding: 48px 60px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(to right, #F65472, #FFDE59, #8CC63E, #3DAAC8, #F07F1B);
+  }
+
+  /* Decorative blobs in header */
+  .header-blob-1 {
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: #F65472;
+    opacity: 0.06;
+  }
+  .header-blob-2 {
+    position: absolute;
+    bottom: -80px;
+    left: 40%;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: #FFDE59;
+    opacity: 0.05;
+  }
+
+  .header-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .header-logo img {
+    height: 64px;
+    width: auto;
+    filter: brightness(0) invert(1);
+  }
+
+  .header-text h1 {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: 36px;
+    color: #FFDE59;
+    letter-spacing: -0.01em;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .header-text p {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: rgba(255,255,255,0.50);
+    letter-spacing: 0.02em;
+  }
+
+  .header-meta {
+    text-align: right;
+  }
+  .header-meta .event-name {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    color: rgba(255,255,255,0.40);
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .header-meta .event-date {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: rgba(255,255,255,0.65);
+  }
+
+  /* Stats bar */
+  .stats-bar {
+    display: flex;
+    gap: 0;
+    background: rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding: 0 60px;
+  }
+  .stat-item {
+    padding: 20px 32px 20px 0;
+    margin-right: 32px;
+    border-right: 1px solid rgba(255,255,255,0.08);
+  }
+  .stat-item:last-child {
+    border-right: none;
+  }
+  .stat-num {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: 32px;
+    color: #FFDE59;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .stat-label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: rgba(255,255,255,0.40);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* Main content */
+  .main {
+    padding: 48px 60px 80px;
+  }
+
+  /* Section headers */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+    margin-top: 52px;
+  }
+  .section-header:first-child {
+    margin-top: 0;
+  }
+  .section-rule {
+    height: 3px;
+    flex: 1;
+    border-radius: 2px;
+  }
+  .section-title {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    color: rgba(255,255,255,0.85);
+    white-space: nowrap;
+    letter-spacing: 0.01em;
+  }
+  .section-dim {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: rgba(255,255,255,0.30);
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    margin-left: 4px;
+  }
+
+  /* Card grid */
+  .card-grid {
+    display: grid;
+    gap: 20px;
+  }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .grid-1 { grid-template-columns: 1fr; }
+
+  /* Individual graphic card */
+  .graphic-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none;
+    display: block;
+  }
+  .graphic-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255,255,255,0.18);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+  }
+
+  /* Iframe preview container */
+  .preview-container {
+    width: 100%;
+    background: #0e0e1e;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .preview-container iframe {
+    border: none;
+    display: block;
+    transform-origin: top left;
+  }
+
+  /* 1080x1080 square → shown at ~300px wide */
+  .preview-sq {
+    height: 200px;
+  }
+  .preview-sq iframe {
+    width: 1080px;
+    height: 1080px;
+    transform: scale(0.278);
+    margin-bottom: calc(-1080px * (1 - 0.278));
+  }
+
+  /* 1080x1350 portrait → shown at ~240px */
+  .preview-portrait {
+    height: 200px;
+  }
+  .preview-portrait iframe {
+    width: 1080px;
+    height: 1350px;
+    transform: scale(0.222);
+    margin-bottom: calc(-1350px * (1 - 0.222));
+  }
+
+  /* 1080x1920 story → shown at ~113px wide, stretch to fill */
+  .preview-story {
+    height: 200px;
+  }
+  .preview-story iframe {
+    width: 1080px;
+    height: 1920px;
+    transform: scale(0.156);
+    margin-bottom: calc(-1920px * (1 - 0.156));
+  }
+
+  /* 1200x630 wide → shown at ~300px wide */
+  .preview-wide {
+    height: 158px;
+  }
+  .preview-wide iframe {
+    width: 1200px;
+    height: 630px;
+    transform: scale(0.300);
+    margin-bottom: calc(-630px * (1 - 0.300));
+  }
+
+  /* 1200x675 twitter */
+  .preview-twitter {
+    height: 168px;
+  }
+  .preview-twitter iframe {
+    width: 1200px;
+    height: 675px;
+    transform: scale(0.300);
+    margin-bottom: calc(-675px * (1 - 0.300));
+  }
+
+  /* 1200x627 linkedin */
+  .preview-linkedin {
+    height: 157px;
+  }
+  .preview-linkedin iframe {
+    width: 1200px;
+    height: 627px;
+    transform: scale(0.300);
+    margin-bottom: calc(-627px * (1 - 0.300));
+  }
+
+  /* Card info */
+  .card-info {
+    padding: 16px 20px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .card-name {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 15px;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .card-dim {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.04em;
+  }
+
+  .card-tag {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    padding: 2px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .tag-instagram { background: rgba(246,84,114,0.20); color: #F65472; }
+  .tag-facebook  { background: rgba(61,170,200,0.20); color: #3DAAC8; }
+  .tag-twitter   { background: rgba(255,222,89,0.20); color: #FFDE59; }
+  .tag-linkedin  { background: rgba(140,198,62,0.20); color: #8CC63E; }
+  .tag-story     { background: rgba(240,127,27,0.20); color: #F07F1B; }
+
+  .card-link {
+    margin-left: auto;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.03em;
+  }
+
+  /* Footer */
+  .footer {
+    background: rgba(255,255,255,0.03);
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding: 32px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-left {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: rgba(255,255,255,0.30);
+  }
+  .footer-right {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: rgba(255,255,255,0.25);
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="header-blob-1"></div>
+  <div class="header-blob-2"></div>
+  <div class="header-inner">
+    <div class="header-left">
+      <div class="header-logo">
+        <img src="../logo.svg" alt="Logo">
+      </div>
+      <div class="header-text">
+        <h1>GNG 2026 Social Media Kit</h1>
+        <p>Madison Good Neighbor Gathering · All graphics for download &amp; capture</p>
+      </div>
+    </div>
+    <div class="header-meta">
+      <div class="event-name">Madison Good Neighbor Gathering</div>
+      <div class="event-date">September 13, 2026 · Brittingham Park</div>
+    </div>
+  </div>
+</div>
+
+<!-- Stats bar -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-num">13</div>
+    <div class="stat-label">Total Graphics</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">5</div>
+    <div class="stat-label">Formats</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">6</div>
+    <div class="stat-label">Square (1080×1080)</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">3</div>
+    <div class="stat-label">Stories (1080×1920)</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">4</div>
+    <div class="stat-label">Wide / FB / Twitter / LinkedIn</div>
+  </div>
+</div>
+
+<!-- Main content -->
+<div class="main">
+
+  <!-- SQUARE INSTAGRAM FEED -->
+  <div class="section-header">
+    <div class="section-title">Instagram Feed — Square <span class="section-dim">1080 × 1080</span></div>
+    <div class="section-rule" style="background: linear-gradient(to right, #F65472, transparent);"></div>
+  </div>
+
+  <div class="card-grid grid-3">
+
+    <a class="graphic-card" href="sq-save-date.html" target="_blank">
+      <div class="preview-container preview-sq">
+        <iframe src="sq-save-date.html" scrolling="no" tabindex="-1"></iframe>
+      </div>
+      <div class="card-info">
+        <div class="card-name">Save the Date</div>
+        <div class="card-meta">
+          <div class="card-dim">1080 × 1080 px</div>
+          <div class="card-tag tag-instagram">Instagram</div>
+          <div class="card-link">sq-save-date.html ↗</div>
+        </div>
+      </div>
+    </a>
+
+    <a class="graphic-card" href="sq-announce.html" target="_blank">
+      <div class="preview-container preview-sq">
+        <iframe src="sq-announce.html" scrolling="no" tabindex="-1"></iframe>
+      </div>
+      <div class="card-info">
+        <div class="card-name">Main Announcement</div>
+        <div class="card-meta">
+          <div class="card-dim">1080 × 1080 px</div>
+          <div class="card-tag tag-instagram">Instagram</div>
+          <div class="card-link">sq-announce.html ↗</div>
+        </div>
+      </div>
+    </a>
+
+    <a class="graphic-card" href="sq-music.html" target="_blank">
+      <div class="preview-container preview-sq">
+        <iframe src="sq-music.html" scrolling="no" tabindex="-1"></iframe>
+      </div>
+      <div class="card-info">
+        <div class="card-name">Live Music &amp; Performances</div>
+        <div class="card-meta">
+          <div class="card-dim">1080 × 1080 px</div>
+          <div class="card-tag tag-instagram">Instagram</div>
+          <div class="card-link">sq-music.html ↗</div>
+        </div>
+      </div>
+    </a>
+
+    <a class="graphic-card" href="sq-kids.html" target="_blank">
+      <div class="preview-container preview-sq">
+        <iframe src="sq-kids.html" scrolling="no" tabindex="-1"></iframe>
+      </div>
+      <div class="card-info">
+        <div class="card-name">Kids &amp; Families</div>
+        <div class="card-meta">
+          <div class="card-dim">1080 × 1080 px</div>
+          <div class="card-tag tag-instagram">Instagram</div>
+          <div class="card-link">sq-kids.html ↗</div>
+        </div>
+      </div>
+    </a>
+
+    <a class="graphic-card" href="sq-food.html" target="_blank">
+      <div class="preview-container preview-sq">
+        <iframe src="sq-food.html" scrolling="no" tabindex="-1"></iframe>
+      </div>
+      <div class="card-info">
+        <div class="card-name">Food &amp; Fun</div>
+        <div class="card-meta">
+          <div class="card-dim">1080 × 1080 px</div>
+          <div class="card-tag tag-instagram">Instagram</div>
+          <div class="card-link">sq-food.html ↗</div>
+        </div>
+      </div>
+    </a>
+
+    <a class="graphic-card" href="sq-community.html" target="_blank">
+      <div class="preview-container preview-sq">
+        <iframe src="sq-community.html" scrolling="no" tabindex="-1"></iframe>
+      </div>
+      <div class="card-info">
+        <div class="card-name">Community / Neighborhood</div>
+        <div class="card-meta">
+          <div class="card-dim">1080 × 1080 px</div>
+          <div class="card-tag tag-instagram">Instagram</div>
+          <div class="card-link">sq-community.html ↗</div>
+        </div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- PORTRAIT -->
+  <div class="section-header">
+    <div class="section-title">Instagram Feed — Portrait <span class="section-dim">1080 × 1350</span></div>
+    <div class="section-rule" style="background: linear-gradient(to right, #F07F1B, transparent);"></div>
+  </div>
+
+  <div class="card-grid grid-3">
+    <a class="graphic-card" href="portrait-montage.html" target="_blank">
+      <div class="preview-container preview-portrait">
+        <iframe src="portrait-montage.html" scrolling="no" tabindex="-1"></iframe>
+      </div>
+      <div class="card-info">
+        <div class="card-name">Photo Montage</div>
+        <div class="card-meta">
+          <div class="card-dim">1080 × 1350 px</div>
+          <div class="card-tag tag-instagram">Instagram</div>
+          <div class="card-link">portrait-montage.html ↗</div>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <!-- STORIES -->
+  <div class="section-header">
+    <div class="section-title">Stories <span class="section-dim">1080 × 1920</span></div>
+    <div class="section-rule" style="background: linear-gradient(to right, #FFDE59, transparent);"></div>
+  </div>
+
+  <div class="card-grid grid-3">
+
+    <a class="graphic-card" href="story-save-date.html" target="_blank">
+      <div class="preview-container preview-story">
+        <iframe src="story-save-date.html" scrolling="no" tabindex="-1"></iframe>
+      </div>
+      <div class="card-info">
+        <div class="card-name">Story — Save the Date</div>
+        <div class="card-meta">
+          <div class="card-dim">1080 × 1920 px</div>
+          <div class="card-tag tag-story">Story</div>
+          <div class="card-link">story-save-date.html ↗</div>
+        </div>
+      </div>
+    </a>
+
+    <a class="graphic-card" href="story-announce.html" target="_blank">
+      <div class="preview-container preview-story">
+        <iframe src="story-announce.html" scrolling="no" tabindex="-1"></iframe>
+      </div>
+      <div class="card-info">
+        <div class="card-name">Story — Main Announcement</div>
+        <div class="card-meta">
+          <div class="card-dim">1080 × 1920 px</div>
+          <div class="card-tag tag-story">Story</div>
+          <div class="card-link">story-announce.html ↗</div>
+        </div>
+      </div>
+    </a>
+
+    <a class="graphic-card" href="story-activities.html" target="_blank">
+      <div class="preview-container preview-story">
+        <iframe src="story-activities.html" scrolling="no" tabindex="-1"></iframe>
+      </div>
+      <div class="card-info">
+        <div class="card-name">Story — Activities Showcase</div>
+        <div class="card-meta">
+          <div class="card-dim">1080 × 1920 px</div>
+          <div class="card-tag tag-story">Story</div>
+          <div class="card-link">story-activities.html ↗</div>
+        </div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- WIDE / FACEBOOK -->
+  <div class="section-header">
+    <div class="section-title">Facebook / LinkedIn / Twitter — Wide <span class="section-dim">1200px wide</span></div>
+    <div class="section-rule" style="background: linear-gradient(to right, #3DAAC8, transparent);"></div>
+  </div>
+
+  <div class="card-grid grid-2">
+
+    <a class="graphic-card" href="wide-save-date.html" target="_blank">
+      <div class="preview-container preview-wide">
+        <iframe src="wide-save-date.html" scrolling="no" tabindex="-1"></iframe>
+      </div>
+      <div class="card-info">
+        <div class="card-name">Facebook — Save the Date</div>
+        <div class="card-meta">
+          <div class="card-dim">1200 × 630 px</div>
+          <div class="card-tag tag-facebook">Facebook</div>
+          <div class="card-link">wide-save-date.html ↗</div>
+        </div>
+      </div>
+    </a>
+
+    <a class="graphic-card" href="wide-announce.html" target="_blank">
+      <div class="preview-container preview-wide">
+        <iframe src="wide-announce.html" scrolling="no" tabindex="-1"></iframe>
+      </div>
+      <div class="card-info">
+        <div class="card-name">Facebook — General Announcement</div>
+        <div class="card-meta">
+          <div class="card-dim">1200 × 630 px</div>
+          <div class="card-tag tag-facebook">Facebook</div>
+          <div class="card-link">wide-announce.html ↗</div>
+        </div>
+      </div>
+    </a>
+
+    <a class="graphic-card" href="wide-music.html" target="_blank">
+      <div class="preview-container preview-wide">
+        <iframe src="wide-music.html" scrolling="no" tabindex="-1"></iframe>
+      </div>
+      <div class="card-info">
+        <div class="card-name">Facebook — Music &amp; Performances</div>
+        <div class="card-meta">
+          <div class="card-dim">1200 × 630 px</div>
+          <div class="card-tag tag-facebook">Facebook</div>
+          <div class="card-link">wide-music.html ↗</div>
+        </div>
+      </div>
+    </a>
+
+    <a class="graphic-card" href="twitter-card.html" target="_blank">
+      <div class="preview-container preview-twitter">
+        <iframe src="twitter-card.html" scrolling="no" tabindex="-1"></iframe>
+      </div>
+      <div class="card-info">
+        <div class="card-name">Twitter/X Card</div>
+        <div class="card-meta">
+          <div class="card-dim">1200 × 675 px</div>
+          <div class="card-tag tag-twitter">Twitter / X</div>
+          <div class="card-link">twitter-card.html ↗</div>
+        </div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- LINKEDIN -->
+  <div class="section-header">
+    <div class="section-title">LinkedIn <span class="section-dim">1200 × 627</span></div>
+    <div class="section-rule" style="background: linear-gradient(to right, #8CC63E, transparent);"></div>
+  </div>
+
+  <div class="card-grid grid-2">
+
+    <a class="graphic-card" href="linkedin-post.html" target="_blank">
+      <div class="preview-container preview-linkedin">
+        <iframe src="linkedin-post.html" scrolling="no" tabindex="-1"></iframe>
+      </div>
+      <div class="card-info">
+        <div class="card-name">LinkedIn Post</div>
+        <div class="card-meta">
+          <div class="card-dim">1200 × 627 px</div>
+          <div class="card-tag tag-linkedin">LinkedIn</div>
+          <div class="card-link">linkedin-post.html ↗</div>
+        </div>
+      </div>
+    </a>
+
+  </div>
+
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <div class="footer-left">Madison Good Neighbor Gathering 2026 · Social Media Kit · District 13</div>
+  <div class="footer-right">madisongoodneighborgathering.org · September 13, 2026</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>GNG 2026 – Save the Date</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px;
+    height: 1080px;
+    overflow: hidden;
+    background: #FFFDF5;
+    font-family: 'Nunito', sans-serif;
+  }
+  .canvas {
+    width: 1080px;
+    height: 1080px;
+    overflow: hidden;
+    position: relative;
+    background: #FFFDF5;
+  }
+
+  /* Corner blobs */
+  .blob-tl {
+    position: absolute;
+    top: -80px;
+    left: -80px;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: #F65472;
+    opacity: 0.12;
+    z-index: 1;
+  }
+  .blob-br {
+    position: absolute;
+    bottom: -100px;
+    right: -100px;
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    background: #3DAAC8;
+    opacity: 0.12;
+    z-index: 1;
+  }
+  .blob-tr {
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: #FFDE59;
+    opacity: 0.18;
+    z-index: 1;
+  }
+
+  /* Photo top section */
+  .photo-wrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1080px;
+    height: 480px;
+    overflow: hidden;
+    z-index: 2;
+  }
+  .photo-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    display: block;
+  }
+  .photo-fade {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 260px;
+    background: linear-gradient(to bottom, transparent 0%, rgba(255,253,245,0.7) 50%, #FFFDF5 100%);
+  }
+
+  /* Content area */
+  .content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1080px;
+    height: 1080px;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* "From Last Year" badge */
+  .from-last-year {
+    position: absolute;
+    top: 16px;
+    right: 24px;
+    background: rgba(26,26,46,0.6);
+    color: rgba(255,255,255,0.85);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    letter-spacing: 0.02em;
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+
+  .spacer-top { height: 340px; flex-shrink: 0; }
+
+  /* Date pill */
+  .date-block {
+    background: #1A1A2E;
+    border-radius: 20px;
+    padding: 22px 64px;
+    text-align: center;
+    box-shadow: 0 8px 40px rgba(26,26,46,0.18), 0 2px 8px rgba(26,26,46,0.10);
+    margin-bottom: 32px;
+    flex-shrink: 0;
+  }
+  .date-label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    color: #FFDE59;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .date-main {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: 68px;
+    color: #FFDE59;
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+  .date-year {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: 32px;
+    color: rgba(255,222,89,0.7);
+    margin-top: 2px;
+  }
+
+  /* Logo */
+  .logo-wrap {
+    margin-bottom: 36px;
+    flex-shrink: 0;
+  }
+  .logo-wrap img {
+    height: 100px;
+    width: auto;
+    filter: brightness(0) saturate(100%);
+  }
+
+  /* Tagline */
+  .tagline {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    color: #1A1A2E;
+    text-align: center;
+    margin-bottom: 32px;
+    letter-spacing: 0.01em;
+  }
+
+  /* Detail pills row */
+  .pills-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 36px;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0 40px;
+  }
+  .pill {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border-radius: 50px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+    white-space: nowrap;
+  }
+  .pill-time {
+    background: #F65472;
+    color: #fff;
+  }
+  .pill-location {
+    background: #3DAAC8;
+    color: #fff;
+  }
+  .pill-free {
+    background: #8CC63E;
+    color: #fff;
+  }
+  .pill-icon {
+    font-size: 22px;
+    line-height: 1;
+  }
+
+  /* Website */
+  .website {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: #1A1A2E;
+    opacity: 0.55;
+    letter-spacing: 0.04em;
+    margin-top: 8px;
+  }
+
+  /* Decorative dots */
+  .dots {
+    position: absolute;
+    z-index: 2;
+  }
+  .dot {
+    position: absolute;
+    border-radius: 50%;
+  }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="blob-tl"></div>
+  <div class="blob-br"></div>
+  <div class="blob-tr"></div>
+
+  <!-- Decorative dots -->
+  <div style="position:absolute;top:200px;left:40px;width:14px;height:14px;border-radius:50%;background:#F65472;opacity:0.5;z-index:2;"></div>
+  <div style="position:absolute;top:250px;left:70px;width:9px;height:9px;border-radius:50%;background:#FFDE59;opacity:0.6;z-index:2;"></div>
+  <div style="position:absolute;top:180px;right:60px;width:12px;height:12px;border-radius:50%;background:#3DAAC8;opacity:0.5;z-index:2;"></div>
+  <div style="position:absolute;top:220px;right:90px;width:7px;height:7px;border-radius:50%;background:#8CC63E;opacity:0.6;z-index:2;"></div>
+  <div style="position:absolute;bottom:160px;left:50px;width:10px;height:10px;border-radius:50%;background:#F07F1B;opacity:0.4;z-index:2;"></div>
+  <div style="position:absolute;bottom:200px;left:80px;width:16px;height:16px;border-radius:50%;background:#3DAAC8;opacity:0.3;z-index:2;"></div>
+  <div style="position:absolute;bottom:180px;right:60px;width:11px;height:11px;border-radius:50%;background:#F65472;opacity:0.4;z-index:2;"></div>
+
+  <!-- Photo area -->
+  <div class="photo-wrap">
+    <img src="../photos/aerial.jpg" alt="Aerial view of the park">
+    <div class="photo-fade"></div>
+  </div>
+
+  <!-- From last year badge -->
+  <div style="position:absolute;top:16px;right:24px;z-index:10;background:rgba(26,26,46,0.55);color:rgba(255,255,255,0.85);font-family:'Nunito',sans-serif;font-weight:700;font-size:14px;padding:5px 14px;border-radius:20px;letter-spacing:0.03em;backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,0.15);">From Last Year</div>
+
+  <!-- Main content -->
+  <div class="content">
+    <div class="spacer-top"></div>
+
+    <div class="date-block">
+      <div class="date-label">Save the Date</div>
+      <div class="date-main">September 13</div>
+      <div class="date-year">2026</div>
+    </div>
+
+    <div class="logo-wrap">
+      <img src="../logo.svg" alt="Madison Good Neighbor Gathering">
+    </div>
+
+    <div class="tagline">Brittingham Park, Madison WI</div>
+
+    <div class="pills-row">
+      <div class="pill pill-time">
+        <span class="pill-icon">🕛</span>
+        12:00 – 4:00 PM
+      </div>
+      <div class="pill pill-location">
+        <span class="pill-icon">📍</span>
+        Brittingham Park
+      </div>
+      <div class="pill pill-free">
+        <span class="pill-icon">🎉</span>
+        100% Free
+      </div>
+    </div>
+
+    <div class="website">madisongoodneighborgathering.org</div>
+  </div>
+</div>
+</body>
+</html>

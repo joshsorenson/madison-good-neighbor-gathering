@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>GNG 2026 – Story Activities</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px;
+    height: 1920px;
+    overflow: hidden;
+    font-family: 'Nunito', sans-serif;
+    background: #1A1A2E;
+  }
+  .canvas {
+    width: 1080px;
+    height: 1920px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Header band */
+  .header-band {
+    position: relative;
+    z-index: 2;
+    background: #1A1A2E;
+    width: 100%;
+    padding: 52px 56px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 3px solid transparent;
+    background-clip: padding-box;
+  }
+
+  /* Colored accent bar under header */
+  .header-rule {
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(to right, #F65472, #FFDE59, #8CC63E, #3DAAC8, #F07F1B);
+    margin: 0;
+  }
+
+  .header-logo img {
+    height: 72px;
+    width: auto;
+    filter: brightness(0) invert(1);
+  }
+
+  .header-title {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: 40px;
+    color: #fff;
+    text-align: center;
+    letter-spacing: 0.01em;
+  }
+  .header-title span {
+    color: #FFDE59;
+  }
+
+  /* Activity cards grid - 2 columns */
+  .activities-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    gap: 12px;
+    padding: 20px 20px;
+    flex: 1;
+    height: calc(1920px - 220px - 120px);
+  }
+
+  .act-card {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+  }
+
+  .act-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  /* Gradient overlay on each card */
+  .act-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent 25%,
+      rgba(26,26,46,0.55) 65%,
+      rgba(26,26,46,0.88) 100%
+    );
+  }
+
+  /* Card label */
+  .act-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 16px 20px;
+  }
+
+  .act-emoji {
+    font-size: 28px;
+    line-height: 1;
+    margin-bottom: 4px;
+    display: block;
+  }
+
+  .act-name {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: 26px;
+    color: #fff;
+    line-height: 1;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  }
+
+  /* Color accent stripe on each card */
+  .act-stripe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 100%;
+  }
+  .stripe-1 { background: #F65472; }
+  .stripe-2 { background: #3DAAC8; }
+  .stripe-3 { background: #FFDE59; }
+  .stripe-4 { background: #8CC63E; }
+  .stripe-5 { background: #F07F1B; }
+  .stripe-6 { background: #F65472; }
+
+  /* Bottom band */
+  .bottom-band {
+    position: relative;
+    z-index: 2;
+    background: #1A1A2E;
+    width: 100%;
+    padding: 20px 56px 52px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .bottom-rule {
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(to right, #F07F1B, #F65472, #FFDE59);
+    margin-bottom: 4px;
+  }
+
+  .bottom-row {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .bot-chip {
+    padding: 11px 26px;
+    border-radius: 50px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    white-space: nowrap;
+  }
+  .bot-date { background: #F65472; color: #fff; box-shadow: 0 4px 16px rgba(246,84,114,0.35); }
+  .bot-free { background: #FFDE59; color: #1A1A2E; box-shadow: 0 4px 16px rgba(255,222,89,0.35); }
+
+  .bot-website {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: rgba(255,255,255,0.38);
+    letter-spacing: 0.05em;
+  }
+
+  /* From badge */
+  .from-badge {
+    position: absolute;
+    top: 52px;
+    right: 56px;
+    z-index: 10;
+    background: rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.50);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.14);
+  }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="from-badge">From Last Year</div>
+
+  <!-- Header -->
+  <div class="header-band">
+    <div class="header-logo">
+      <img src="../logo.svg" alt="Madison Good Neighbor Gathering">
+    </div>
+    <div class="header-title">What's <span>Happening</span></div>
+  </div>
+  <div class="header-rule"></div>
+
+  <!-- Activity cards grid -->
+  <div class="activities-grid">
+
+    <div class="act-card">
+      <img src="../photos/guitarist.jpg" alt="Live music" style="object-position: center 20%;">
+      <div class="act-overlay"></div>
+      <div class="act-stripe stripe-1"></div>
+      <div class="act-label">
+        <span class="act-emoji">🎸</span>
+        <div class="act-name">Live Music</div>
+      </div>
+    </div>
+
+    <div class="act-card">
+      <img src="../photos/taiko-group.jpg" alt="Cultural performances" style="object-position: center 25%;">
+      <div class="act-overlay"></div>
+      <div class="act-stripe stripe-2"></div>
+      <div class="act-label">
+        <span class="act-emoji">🥁</span>
+        <div class="act-name">Cultural Performances</div>
+      </div>
+    </div>
+
+    <div class="act-card">
+      <img src="../photos/bouncy-castle.jpg" alt="Bouncy structures" style="object-position: center;">
+      <div class="act-overlay"></div>
+      <div class="act-stripe stripe-3"></div>
+      <div class="act-label">
+        <span class="act-emoji">🏰</span>
+        <div class="act-name">Bouncy Structures</div>
+      </div>
+    </div>
+
+    <div class="act-card">
+      <img src="../photos/climbing-wall.jpg" alt="Climbing wall" style="object-position: center 30%;">
+      <div class="act-overlay"></div>
+      <div class="act-stripe stripe-4"></div>
+      <div class="act-label">
+        <span class="act-emoji">🧗</span>
+        <div class="act-name">Climbing Wall</div>
+      </div>
+    </div>
+
+    <div class="act-card">
+      <img src="../photos/food-truck.jpg" alt="Food trucks" style="object-position: center 50%;">
+      <div class="act-overlay"></div>
+      <div class="act-stripe stripe-5"></div>
+      <div class="act-label">
+        <span class="act-emoji">🍜</span>
+        <div class="act-name">Food Trucks</div>
+      </div>
+    </div>
+
+    <div class="act-card">
+      <img src="../photos/kids-science.jpg" alt="Kids activities" style="object-position: center;">
+      <div class="act-overlay"></div>
+      <div class="act-stripe stripe-6"></div>
+      <div class="act-label">
+        <span class="act-emoji">🔬</span>
+        <div class="act-name">Kids Activities</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom band -->
+  <div class="bottom-rule"></div>
+  <div class="bottom-band">
+    <div class="bottom-row">
+      <div class="bot-chip bot-date">📅 Sept 13, 2026</div>
+      <div class="bot-chip bot-free">100% Free</div>
+    </div>
+    <div style="font-family:'Nunito',sans-serif;font-weight:800;font-size:20px;color:rgba(255,255,255,0.55);">Brittingham Park · Madison WI</div>
+    <div class="bot-website">madisongoodneighborgathering.org</div>
+  </div>
+</div>
+</body>
+</html>

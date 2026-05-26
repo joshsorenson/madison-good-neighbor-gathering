@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>GNG 2026 – Story Save the Date</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px;
+    height: 1920px;
+    overflow: hidden;
+    font-family: 'Nunito', sans-serif;
+  }
+  .canvas {
+    width: 1080px;
+    height: 1920px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Full-bleed photo */
+  .photo-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+  .photo-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    display: block;
+  }
+
+  /* Multi-stop gradient — stronger top & bottom, lighter middle */
+  .overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(
+      to bottom,
+      rgba(26,26,46,0.88) 0%,
+      rgba(26,26,46,0.55) 18%,
+      rgba(26,26,46,0.20) 35%,
+      rgba(26,26,46,0.15) 50%,
+      rgba(26,26,46,0.25) 62%,
+      rgba(26,26,46,0.70) 78%,
+      rgba(26,26,46,0.95) 90%,
+      rgba(26,26,46,1.0) 100%
+    );
+  }
+
+  /* Content wrapper */
+  .content {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 60px;
+  }
+
+  /* ---- TOP SECTION ---- */
+  .top-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 100px;
+  }
+
+  .save-label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 36px;
+    color: #FFDE59;
+    letter-spacing: 0.20em;
+    text-transform: uppercase;
+    text-shadow: 0 3px 16px rgba(0,0,0,0.5);
+    margin-bottom: 16px;
+  }
+
+  /* ---- MIDDLE SECTION — Date card ---- */
+  .middle-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 40px;
+  }
+
+  .date-card {
+    background: #1A1A2E;
+    border-radius: 28px;
+    padding: 42px 72px;
+    text-align: center;
+    box-shadow: 0 16px 60px rgba(0,0,0,0.45), 0 4px 16px rgba(0,0,0,0.20);
+    width: 100%;
+    max-width: 900px;
+    border: 1px solid rgba(255,222,89,0.15);
+  }
+  .date-month {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 26px;
+    color: rgba(255,222,89,0.7);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .date-day {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: 120px;
+    color: #FFDE59;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .date-divider {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(to right, #F65472, #F07F1B);
+    border-radius: 2px;
+    margin: 12px auto;
+  }
+  .date-year {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: 48px;
+    color: rgba(255,222,89,0.65);
+    letter-spacing: 0.04em;
+  }
+
+  /* Logo in middle */
+  .logo-wrap {
+    margin: 0;
+  }
+  .logo-wrap img {
+    height: 96px;
+    width: auto;
+    filter: brightness(0) invert(1);
+  }
+
+  /* ---- INFO CARDS ---- */
+  .info-cards {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .info-card {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 20px;
+    overflow: hidden;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.20);
+  }
+
+  .info-icon {
+    width: 76px;
+    height: 76px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    border-radius: 0;
+  }
+  .icon-date { background: #F65472; }
+  .icon-time { background: #F07F1B; }
+  .icon-loc  { background: #3DAAC8; }
+  .icon-free { background: #8CC63E; }
+
+  .info-text {
+    padding: 0 24px;
+    flex: 1;
+  }
+  .info-label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: rgba(255,255,255,0.50);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .info-value {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 26px;
+    color: #fff;
+  }
+
+  /* ---- BOTTOM SECTION ---- */
+  .bottom-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 80px;
+    gap: 20px;
+  }
+
+  .cta-pill {
+    background: #FFDE59;
+    color: #1A1A2E;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 28px;
+    padding: 18px 48px;
+    border-radius: 50px;
+    letter-spacing: 0.01em;
+    box-shadow: 0 8px 32px rgba(255,222,89,0.40);
+    text-align: center;
+  }
+
+  .website {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.06em;
+  }
+
+  /* From last year badge */
+  .from-badge {
+    position: absolute;
+    top: 44px;
+    right: 48px;
+    z-index: 10;
+    background: rgba(255,255,255,0.10);
+    color: rgba(255,255,255,0.60);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.18);
+  }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="photo-bg">
+    <img src="../photos/aerial.jpg" alt="Aerial view of the park">
+  </div>
+  <div class="overlay"></div>
+
+  <div class="from-badge">From Last Year</div>
+
+  <div class="content">
+
+    <!-- Top section -->
+    <div class="top-section">
+      <div class="save-label">📅 Save the Date</div>
+    </div>
+
+    <!-- Middle section -->
+    <div class="middle-section">
+      <div class="date-card">
+        <div class="date-month">September</div>
+        <div class="date-day">13</div>
+        <div class="date-divider"></div>
+        <div class="date-year">2026</div>
+      </div>
+
+      <div class="logo-wrap">
+        <img src="../logo.svg" alt="Madison Good Neighbor Gathering">
+      </div>
+
+      <div class="info-cards">
+        <div class="info-card">
+          <div class="info-icon icon-date">📅</div>
+          <div class="info-text">
+            <div class="info-label">Date</div>
+            <div class="info-value">Sunday, September 13</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon icon-time">🕛</div>
+          <div class="info-text">
+            <div class="info-label">Time</div>
+            <div class="info-value">12:00 – 4:00 PM</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon icon-loc">📍</div>
+          <div class="info-text">
+            <div class="info-label">Location</div>
+            <div class="info-value">Brittingham Park, Madison WI</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon icon-free">🎉</div>
+          <div class="info-text">
+            <div class="info-label">Admission</div>
+            <div class="info-value">100% Free · All Ages</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom section -->
+    <div class="bottom-section">
+      <div class="cta-pill">No Tickets Needed · Just Show Up!</div>
+      <div class="website">madisongoodneighborgathering.org</div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

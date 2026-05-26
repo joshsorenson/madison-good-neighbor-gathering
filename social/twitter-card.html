@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1200">
+<title>GNG 2026 – Twitter/X Card</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1200px;
+    height: 675px;
+    overflow: hidden;
+    font-family: 'Nunito', sans-serif;
+    background: #1A1A2E;
+  }
+  .canvas {
+    width: 1200px;
+    height: 675px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+  }
+
+  /* LEFT: content over photo */
+  .left-side {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .photo-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+  .photo-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 35%;
+    display: block;
+  }
+
+  /* Gradient overlay left */
+  .photo-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(
+      to bottom,
+      rgba(26,26,46,0.82) 0%,
+      rgba(26,26,46,0.55) 30%,
+      rgba(26,26,46,0.65) 65%,
+      rgba(26,26,46,0.92) 100%
+    );
+  }
+
+  /* Right edge fade for seamless join */
+  .photo-fade-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 80px;
+    height: 100%;
+    background: linear-gradient(to right, transparent, #1A1A2E);
+    z-index: 3;
+  }
+
+  /* Content on left */
+  .left-content {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 36px 44px;
+  }
+
+  .logo-wrap {
+    margin-bottom: 16px;
+  }
+  .logo-wrap img {
+    height: 60px;
+    width: auto;
+    filter: brightness(0) invert(1);
+  }
+
+  .main-text {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: 34px;
+    color: #FFDE59;
+    line-height: 1.1;
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+  }
+
+  .loc-text {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    color: rgba(255,255,255,0.70);
+    margin-bottom: 18px;
+  }
+
+  /* Activity tags */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .tag {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    color: rgba(255,255,255,0.65);
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.14);
+    padding: 5px 14px;
+    border-radius: 50px;
+    white-space: nowrap;
+  }
+
+  /* CTA pill */
+  .cta-pill {
+    display: inline-flex;
+    background: #FFDE59;
+    color: #1A1A2E;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 17px;
+    padding: 10px 24px;
+    border-radius: 50px;
+    box-shadow: 0 6px 20px rgba(255,222,89,0.30);
+    margin-bottom: 10px;
+    width: fit-content;
+  }
+
+  .website {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: rgba(255,255,255,0.30);
+    letter-spacing: 0.05em;
+  }
+
+  /* RIGHT: 2x2 photo mini-grid */
+  .right-side {
+    width: 380px;
+    flex-shrink: 0;
+    background: #1A1A2E;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 8px;
+    padding: 16px 20px 16px 8px;
+    align-items: stretch;
+  }
+
+  .mini-photo {
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+  }
+  .mini-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .mini-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(26,26,46,0.15);
+  }
+
+  /* From badge */
+  .from-badge {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 10;
+    background: rgba(255,255,255,0.10);
+    color: rgba(255,255,255,0.50);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.14);
+  }
+</style>
+</head>
+<body>
+<div class="canvas">
+
+  <!-- Left content panel -->
+  <div class="left-side">
+    <div class="photo-bg">
+      <img src="../photos/joy.jpg" alt="Joy at the event">
+    </div>
+    <div class="photo-overlay"></div>
+    <div class="photo-fade-right"></div>
+    <div class="from-badge">From Last Year</div>
+
+    <div class="left-content">
+      <div class="logo-wrap">
+        <img src="../logo.svg" alt="Madison Good Neighbor Gathering">
+      </div>
+
+      <div class="main-text">Free Community Festival<br>Sept 13, 2026</div>
+      <div class="loc-text">📍 Brittingham Park, Madison WI</div>
+
+      <div class="tags">
+        <div class="tag">🎸 Live Music</div>
+        <div class="tag">🍜 Food Trucks</div>
+        <div class="tag">🏰 Kids Activities</div>
+        <div class="tag">💃 Cultural Performances</div>
+      </div>
+
+      <div class="cta-pill">100% Free · All Ages</div>
+      <div class="website">madisongoodneighborgathering.org</div>
+    </div>
+  </div>
+
+  <!-- Right 2x2 mini photo grid -->
+  <div class="right-side">
+    <div class="mini-photo">
+      <img src="../photos/taiko-closeup.jpg" alt="Taiko" style="object-position: center 25%;">
+      <div class="mini-overlay"></div>
+    </div>
+    <div class="mini-photo">
+      <img src="../photos/bouncy-castle.jpg" alt="Bouncy castle" style="object-position: center;">
+      <div class="mini-overlay"></div>
+    </div>
+    <div class="mini-photo">
+      <img src="../photos/food-truck.jpg" alt="Food trucks" style="object-position: center 55%;">
+      <div class="mini-overlay"></div>
+    </div>
+    <div class="mini-photo">
+      <img src="../photos/community-dance.jpg" alt="Community dancing" style="object-position: center 40%;">
+      <div class="mini-overlay"></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

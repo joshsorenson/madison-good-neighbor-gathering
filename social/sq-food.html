@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>GNG 2026 – Food & Fun</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Nunito', sans-serif;
+  }
+  .canvas {
+    width: 1080px;
+    height: 1080px;
+    overflow: hidden;
+    position: relative;
+    background: #1A1A2E;
+  }
+
+  /* Photo top half */
+  .photo-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1080px;
+    height: 560px;
+    overflow: hidden;
+    z-index: 1;
+  }
+  .photo-top img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 55%;
+    display: block;
+  }
+
+  /* Gradient fade at bottom of photo */
+  .photo-fade {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 220px;
+    background: linear-gradient(to bottom, transparent 0%, #1A1A2E 100%);
+    z-index: 2;
+  }
+
+  /* Bottom content area */
+  .bottom-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 1080px;
+    height: 560px;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 56px 52px;
+    text-align: center;
+  }
+
+  /* Badge top overlap */
+  .food-badge {
+    position: absolute;
+    top: 320px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    background: linear-gradient(135deg, #F07F1B, #FFDE59);
+    color: #1A1A2E;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 22px;
+    padding: 13px 36px;
+    border-radius: 50px;
+    box-shadow: 0 6px 28px rgba(240,127,27,0.45);
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+  }
+
+  /* Main headline */
+  .headline {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: 88px;
+    color: #FFDE59;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+    text-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  }
+
+  .subhead {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 26px;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 28px;
+    letter-spacing: 0.01em;
+  }
+
+  /* Logo */
+  .logo-wrap {
+    margin-bottom: 28px;
+  }
+  .logo-wrap img {
+    height: 78px;
+    width: auto;
+    filter: brightness(0) invert(1);
+  }
+
+  /* Detail row */
+  .detail-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .detail-chip {
+    padding: 10px 22px;
+    border-radius: 50px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 19px;
+    white-space: nowrap;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  }
+  .dc-date { background: #F65472; color: #fff; }
+  .dc-time { background: rgba(255,255,255,0.12); border: 1.5px solid rgba(255,255,255,0.22); color: #fff; }
+  .dc-loc  { background: #3DAAC8; color: #fff; }
+  .dc-free { background: #8CC63E; color: #fff; }
+
+  /* Website */
+  .website {
+    color: rgba(255,255,255,0.38);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 0.05em;
+  }
+
+  /* Decorative elements */
+  .star {
+    position: absolute;
+    z-index: 4;
+  }
+
+  /* From last year */
+  .from-badge {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    z-index: 10;
+    background: rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.65);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.18);
+  }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="photo-top">
+    <img src="../photos/food-truck.jpg" alt="Food trucks at the event">
+  </div>
+  <div class="photo-fade"></div>
+  <div class="from-badge">From Last Year</div>
+
+  <div class="food-badge">🍜 Food Trucks &amp; Local Vendors</div>
+
+  <div class="bottom-content">
+    <div class="headline">Come<br>Hungry.</div>
+    <div class="subhead">Great Food. Great Vibes. Great Neighbors.</div>
+
+    <div class="logo-wrap">
+      <img src="../logo.svg" alt="Madison Good Neighbor Gathering">
+    </div>
+
+    <div class="detail-row">
+      <div class="detail-chip dc-date">📅 Sept 13, 2026</div>
+      <div class="detail-chip dc-time">🕛 12–4 PM</div>
+      <div class="detail-chip dc-loc">📍 Brittingham Park</div>
+      <div class="detail-chip dc-free">🎉 FREE</div>
+    </div>
+
+    <div class="website">madisongoodneighborgathering.org</div>
+  </div>
+
+  <!-- Decorative dots -->
+  <div style="position:absolute;left:28px;top:600px;width:12px;height:12px;border-radius:50%;background:#F07F1B;opacity:0.5;z-index:5;"></div>
+  <div style="position:absolute;left:52px;top:640px;width:8px;height:8px;border-radius:50%;background:#FFDE59;opacity:0.4;z-index:5;"></div>
+  <div style="position:absolute;right:32px;top:580px;width:10px;height:10px;border-radius:50%;background:#F65472;opacity:0.5;z-index:5;"></div>
+  <div style="position:absolute;right:58px;top:620px;width:14px;height:14px;border-radius:50%;background:#3DAAC8;opacity:0.35;z-index:5;"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1200">
+<title>GNG 2026 – Music/Performances Wide</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+    font-family: 'Nunito', sans-serif;
+  }
+  .canvas {
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+  }
+
+  /* Three equal photo columns */
+  .photo-col {
+    flex: 1;
+    height: 630px;
+    position: relative;
+    overflow: hidden;
+  }
+  .photo-col img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Thin colored dividers between columns */
+  .divider {
+    width: 4px;
+    height: 630px;
+    flex-shrink: 0;
+    background: rgba(26,26,46,0.8);
+    position: relative;
+    z-index: 5;
+  }
+
+  /* Dark overlay on all photos */
+  .col-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+  }
+  .ov-1 {
+    background: linear-gradient(to bottom, rgba(26,26,46,0.40) 0%, rgba(26,26,46,0.25) 50%, rgba(26,26,46,0.50) 100%);
+  }
+  .ov-2 {
+    background: linear-gradient(to bottom, rgba(26,26,46,0.45) 0%, rgba(26,26,46,0.20) 50%, rgba(26,26,46,0.45) 100%);
+  }
+  .ov-3 {
+    background: linear-gradient(to bottom, rgba(26,26,46,0.30) 0%, rgba(26,26,46,0.15) 50%, rgba(26,26,46,0.40) 100%);
+  }
+
+  /* Tint layers for visual variety */
+  .tint-1 { position:absolute;inset:0;z-index:2;background:rgba(246,84,114,0.06); }
+  .tint-2 { position:absolute;inset:0;z-index:2;background:rgba(61,170,200,0.06); }
+  .tint-3 { position:absolute;inset:0;z-index:2;background:rgba(240,127,27,0.06); }
+
+  /* Bottom photo label per column */
+  .col-label {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 4;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 17px;
+    color: rgba(255,255,255,0.75);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* Global overlay across all photos for text readability */
+  .global-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 6;
+    background: rgba(26,26,46,0.38);
+  }
+
+  /* Center content panel */
+  .center-content {
+    position: absolute;
+    inset: 0;
+    z-index: 7;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 48px;
+    text-align: center;
+  }
+
+  .headline {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: 54px;
+    color: #fff;
+    line-height: 1.0;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .headline span {
+    color: #FFDE59;
+  }
+
+  .subhead {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 20px;
+    letter-spacing: 0.01em;
+  }
+
+  /* Logo */
+  .logo-wrap {
+    margin-bottom: 16px;
+  }
+  .logo-wrap img {
+    height: 56px;
+    width: auto;
+    filter: brightness(0) invert(1);
+  }
+
+  /* Chips */
+  .chips-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .chip {
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 17px;
+    white-space: nowrap;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.30);
+  }
+  .c-date { background: #F65472; color: #fff; }
+  .c-free { background: #8CC63E; color: #fff; }
+  .c-site { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.22); color: rgba(255,255,255,0.70); font-size: 15px; }
+
+  /* From badge */
+  .from-badge {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    z-index: 10;
+    background: rgba(255,255,255,0.10);
+    color: rgba(255,255,255,0.50);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 4px 12px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+</style>
+</head>
+<body>
+<div class="canvas">
+
+  <!-- Three photo columns -->
+  <div class="photo-col">
+    <img src="../photos/taiko-closeup.jpg" alt="Taiko drumming" style="object-position: center 25%;">
+    <div class="col-overlay ov-1"></div>
+    <div class="tint-1"></div>
+    <div class="col-label">Taiko</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="photo-col">
+    <img src="../photos/ballet-folklorico-blue.jpg" alt="Ballet Folklorico" style="object-position: center 20%;">
+    <div class="col-overlay ov-2"></div>
+    <div class="tint-2"></div>
+    <div class="col-label">Ballet Folklórico</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="photo-col">
+    <img src="../photos/guitarist.jpg" alt="Guitarist" style="object-position: center 15%;">
+    <div class="col-overlay ov-3"></div>
+    <div class="tint-3"></div>
+    <div class="col-label">Live Guitar</div>
+  </div>
+
+  <!-- Global overlay for text readability -->
+  <div class="global-overlay"></div>
+
+  <!-- Centered content -->
+  <div class="center-content">
+    <div class="headline">Live Music &amp;<br><span>Cultural Performances</span></div>
+    <div class="subhead">Madison's most diverse stage. One afternoon.</div>
+
+    <div class="logo-wrap">
+      <img src="../logo.svg" alt="Madison Good Neighbor Gathering">
+    </div>
+
+    <div class="chips-row">
+      <div class="chip c-date">📅 September 13, 2026</div>
+      <div class="chip c-free">FREE Admission</div>
+      <div class="chip c-site">madisongoodneighborgathering.org</div>
+    </div>
+  </div>
+
+  <div class="from-badge">From Last Year</div>
+</div>
+</body>
+</html>

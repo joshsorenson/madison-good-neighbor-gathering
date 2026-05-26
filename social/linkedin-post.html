@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1200">
+<title>GNG 2026 – LinkedIn Post</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1200px;
+    height: 627px;
+    overflow: hidden;
+    font-family: 'Nunito', sans-serif;
+    background: #1A1A2E;
+  }
+  .canvas {
+    width: 1200px;
+    height: 627px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+  }
+
+  /* Left content panel — 50% width */
+  .left-panel {
+    width: 600px;
+    flex-shrink: 0;
+    height: 627px;
+    background: #1A1A2E;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px 52px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Subtle gradient bg on left panel */
+  .left-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 20% 80%, rgba(61,170,200,0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(246,84,114,0.05) 0%, transparent 50%);
+  }
+
+  /* Colored left border accent on panel */
+  .left-border {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 5px;
+    height: 100%;
+    background: linear-gradient(to bottom, #F65472 0%, #FFDE59 33%, #8CC63E 66%, #3DAAC8 100%);
+  }
+
+  /* Community event label */
+  .event-label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 13px;
+    color: rgba(255,255,255,0.40);
+    letter-spacing: 0.20em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  /* Logo */
+  .logo-wrap {
+    margin-bottom: 16px;
+  }
+  .logo-wrap img {
+    height: 64px;
+    width: auto;
+    filter: brightness(0) invert(1);
+  }
+
+  /* Description */
+  .description {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: rgba(255,255,255,0.80);
+    line-height: 1.35;
+    margin-bottom: 22px;
+    max-width: 460px;
+  }
+  .description strong {
+    color: #fff;
+    font-weight: 800;
+  }
+
+  /* Detail rows */
+  .detail-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .detail-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .det-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .di-1 { background: rgba(246,84,114,0.20); }
+  .di-2 { background: rgba(240,127,27,0.20); }
+  .di-3 { background: rgba(61,170,200,0.20); }
+  .di-4 { background: rgba(140,198,62,0.20); }
+
+  .det-text {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    color: rgba(255,255,255,0.75);
+  }
+
+  /* Website */
+  .website {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: rgba(255,255,255,0.30);
+    letter-spacing: 0.05em;
+  }
+
+  /* Right photo panel — 50% width */
+  .right-panel {
+    flex: 1;
+    height: 627px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .right-panel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    display: block;
+  }
+
+  /* Colored left border on photo */
+  .photo-left-border {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 6px;
+    height: 100%;
+    background: linear-gradient(to bottom, #FFDE59, #F07F1B);
+    z-index: 3;
+  }
+
+  /* Subtle overlay on photo */
+  .photo-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(135deg, rgba(26,26,46,0.15) 0%, transparent 50%);
+  }
+
+  /* Date badge top-right of photo */
+  .date-badge {
+    position: absolute;
+    top: 22px;
+    right: 24px;
+    z-index: 5;
+    background: #FFDE59;
+    color: #1A1A2E;
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    padding: 10px 22px;
+    border-radius: 14px;
+    box-shadow: 0 6px 24px rgba(255,222,89,0.45);
+    text-align: center;
+    line-height: 1.2;
+  }
+
+  /* From badge */
+  .from-badge {
+    position: absolute;
+    bottom: 18px;
+    right: 18px;
+    z-index: 6;
+    background: rgba(26,26,46,0.55);
+    color: rgba(255,255,255,0.55);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 4px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.14);
+  }
+</style>
+</head>
+<body>
+<div class="canvas">
+
+  <!-- Left panel -->
+  <div class="left-panel">
+    <div class="left-bg"></div>
+    <div class="left-border"></div>
+
+    <div class="event-label">Community Event · Madison, WI</div>
+
+    <div class="logo-wrap">
+      <img src="../logo.svg" alt="Madison Good Neighbor Gathering">
+    </div>
+
+    <div class="description">
+      Madison's District 13 invites you to the<br>
+      <strong>2026 Good Neighbor Gathering</strong> —<br>
+      a free festival for the whole community.
+    </div>
+
+    <div class="detail-rows">
+      <div class="detail-row">
+        <div class="det-icon di-1">📅</div>
+        <div class="det-text">Sunday, September 13, 2026</div>
+      </div>
+      <div class="detail-row">
+        <div class="det-icon di-2">🕛</div>
+        <div class="det-text">12:00 – 4:00 PM</div>
+      </div>
+      <div class="detail-row">
+        <div class="det-icon di-3">📍</div>
+        <div class="det-text">Brittingham Park, Madison WI</div>
+      </div>
+      <div class="detail-row">
+        <div class="det-icon di-4">🎉</div>
+        <div class="det-text">100% Free Admission · All Ages</div>
+      </div>
+    </div>
+
+    <div class="website">madisongoodneighborgathering.org</div>
+  </div>
+
+  <!-- Right photo panel -->
+  <div class="right-panel">
+    <img src="../photos/aerial.jpg" alt="Aerial view of the gathering">
+    <div class="photo-overlay"></div>
+    <div class="photo-left-border"></div>
+
+    <div class="date-badge">Sept 13<br>2026</div>
+    <div class="from-badge">From Last Year</div>
+  </div>
+
+</div>
+</body>
+</html>

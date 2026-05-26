@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>GNG 2026 – Kids & Families</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Nunito', sans-serif;
+  }
+  .canvas {
+    width: 1080px;
+    height: 1080px;
+    overflow: hidden;
+    position: relative;
+    background: #1A1A2E;
+  }
+
+  /* 2x2 photo grid background */
+  .photo-grid {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 4px;
+    z-index: 1;
+  }
+  .photo-cell {
+    overflow: hidden;
+    position: relative;
+  }
+  .photo-cell img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  /* Dark overlay on grid */
+  .grid-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: rgba(26,26,46,0.62);
+  }
+
+  /* Vignette for depth */
+  .vignette {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: radial-gradient(ellipse at center, transparent 30%, rgba(26,26,46,0.55) 100%);
+  }
+
+  /* Content */
+  .content {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px;
+    text-align: center;
+  }
+
+  /* Kids badge */
+  .kids-badge {
+    background: linear-gradient(135deg, #F65472, #F07F1B);
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 22px;
+    padding: 12px 36px;
+    border-radius: 50px;
+    letter-spacing: 0.03em;
+    box-shadow: 0 6px 28px rgba(246,84,114,0.45);
+    margin-bottom: 28px;
+  }
+
+  /* Logo */
+  .logo-wrap {
+    margin-bottom: 28px;
+  }
+  .logo-wrap img {
+    height: 90px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    drop-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+
+  /* Main headline */
+  .headline {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: 76px;
+    color: #FFDE59;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+    text-shadow: 0 4px 24px rgba(0,0,0,0.5);
+  }
+  .sub-line {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+    color: #fff;
+    margin-bottom: 28px;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+  }
+
+  /* Activity pills */
+  .activities {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 28px;
+  }
+  .act-pill {
+    padding: 9px 22px;
+    border-radius: 50px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    border: 2px solid rgba(255,255,255,0.35);
+    background: rgba(255,255,255,0.10);
+    color: #fff;
+    backdrop-filter: blur(8px);
+  }
+  .act-pill.highlight {
+    background: rgba(255,222,89,0.18);
+    border-color: rgba(255,222,89,0.5);
+    color: #FFDE59;
+  }
+
+  /* Date + free */
+  .cta-row {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .date-pill {
+    background: rgba(255,255,255,0.12);
+    border: 1.5px solid rgba(255,255,255,0.25);
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 19px;
+    padding: 10px 24px;
+    border-radius: 50px;
+    backdrop-filter: blur(8px);
+  }
+  .free-pill {
+    background: #8CC63E;
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 19px;
+    padding: 10px 24px;
+    border-radius: 50px;
+    box-shadow: 0 4px 16px rgba(140,198,62,0.4);
+  }
+  .website {
+    color: rgba(255,255,255,0.40);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: 0.05em;
+  }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <!-- 2x2 photo grid background -->
+  <div class="photo-grid">
+    <div class="photo-cell">
+      <img src="../photos/bouncy-castle.jpg" alt="Bouncy castle">
+    </div>
+    <div class="photo-cell">
+      <img src="../photos/kids-crown.jpg" alt="Kids with crown">
+    </div>
+    <div class="photo-cell">
+      <img src="../photos/kids-science.jpg" alt="Kids science">
+    </div>
+    <div class="photo-cell">
+      <img src="../photos/crafts.jpg" alt="Crafts activity">
+    </div>
+  </div>
+
+  <div class="grid-overlay"></div>
+  <div class="vignette"></div>
+
+  <div class="content">
+    <div class="kids-badge">👧 Kids &amp; Families</div>
+
+    <div class="logo-wrap">
+      <img src="../logo.svg" alt="Madison Good Neighbor Gathering">
+    </div>
+
+    <div class="headline">Bring the<br>Whole Family</div>
+    <div class="sub-line">Something amazing for every age</div>
+
+    <div class="activities">
+      <div class="act-pill highlight">🏰 Bouncy Castles</div>
+      <div class="act-pill highlight">🧗 Climbing Wall</div>
+      <div class="act-pill highlight">🔬 Science Fun</div>
+      <div class="act-pill highlight">🎨 Crafts</div>
+      <div class="act-pill">🎵 Live Music</div>
+      <div class="act-pill">🍦 Food &amp; Ice Cream</div>
+    </div>
+
+    <div class="cta-row">
+      <div class="date-pill">📅 Sept 13, 2026</div>
+      <div class="free-pill">100% Free</div>
+    </div>
+    <div style="color:rgba(255,255,255,0.50);font-family:'Nunito',sans-serif;font-weight:700;font-size:17px;margin-bottom:8px;">Brittingham Park · Madison WI</div>
+    <div class="website">madisongoodneighborgathering.org</div>
+  </div>
+
+  <!-- "From last year" badge -->
+  <div style="position:absolute;bottom:20px;right:20px;z-index:10;background:rgba(255,255,255,0.10);color:rgba(255,255,255,0.55);font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;padding:4px 12px;border-radius:16px;border:1px solid rgba(255,255,255,0.15);">From Last Year</div>
+</div>
+</body>
+</html>

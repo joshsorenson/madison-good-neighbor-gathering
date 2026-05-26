@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>GNG 2026 – Community</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Nunito', sans-serif;
+  }
+  .canvas {
+    width: 1080px;
+    height: 1080px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Full-bleed photo */
+  .photo-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+  .photo-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+    display: block;
+  }
+
+  /* Warm gradient overlay */
+  .overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(
+      to bottom,
+      rgba(26,26,46,0.15) 0%,
+      rgba(26,26,46,0.05) 25%,
+      rgba(26,26,46,0.20) 50%,
+      rgba(26,26,46,0.70) 68%,
+      rgba(26,26,46,0.92) 85%,
+      rgba(26,26,46,0.98) 100%
+    );
+  }
+
+  /* Warm color tint */
+  .tint {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(
+      to bottom,
+      transparent 40%,
+      rgba(246,84,114,0.06) 100%
+    );
+  }
+
+  /* Content */
+  .content {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 52px 52px;
+    text-align: center;
+  }
+
+  /* Top badge */
+  .top-badge {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255,255,255,0.14);
+    border: 1.5px solid rgba(255,255,255,0.28);
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 20px;
+    padding: 12px 30px;
+    border-radius: 50px;
+    letter-spacing: 0.02em;
+    backdrop-filter: blur(10px);
+    white-space: nowrap;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  }
+
+  /* From badge */
+  .from-badge {
+    position: absolute;
+    top: 40px;
+    right: 36px;
+    background: rgba(255,255,255,0.10);
+    color: rgba(255,255,255,0.6);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.16);
+  }
+
+  /* Big headline */
+  .headline {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: 78px;
+    color: #fff;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+    text-shadow: 0 4px 24px rgba(0,0,0,0.5);
+  }
+  .headline span {
+    color: #FFDE59;
+  }
+
+  .subhead {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 26px;
+    color: rgba(255,255,255,0.70);
+    margin-bottom: 28px;
+    letter-spacing: 0.01em;
+  }
+
+  /* Logo */
+  .logo-wrap {
+    margin-bottom: 28px;
+  }
+  .logo-wrap img {
+    height: 84px;
+    width: auto;
+    filter: brightness(0) invert(1);
+  }
+
+  /* Detail chips */
+  .chips {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .chip {
+    padding: 10px 22px;
+    border-radius: 50px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 19px;
+    white-space: nowrap;
+  }
+  .c1 { background: #F65472; color: #fff; box-shadow: 0 4px 16px rgba(246,84,114,0.35); }
+  .c2 { background: rgba(255,255,255,0.12); border: 1.5px solid rgba(255,255,255,0.22); color: #fff; }
+  .c3 { background: #3DAAC8; color: #fff; box-shadow: 0 4px 16px rgba(61,170,200,0.35); }
+
+  /* Free line */
+  .free-line {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 22px;
+    color: #FFDE59;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .website {
+    color: rgba(255,255,255,0.38);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 0.05em;
+  }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="photo-bg">
+    <img src="../photos/community-dance.jpg" alt="Community dancing together">
+  </div>
+  <div class="overlay"></div>
+  <div class="tint"></div>
+
+  <div class="top-badge">🏘️ Neighbors Welcoming Neighbors</div>
+  <div class="from-badge">From Last Year</div>
+
+  <div class="content">
+    <div class="headline">All of Madison.<br><span>One Afternoon.</span></div>
+    <div class="subhead">Organized with love by District 13 neighbors</div>
+
+    <div class="logo-wrap">
+      <img src="../logo.svg" alt="Madison Good Neighbor Gathering">
+    </div>
+
+    <div class="chips">
+      <div class="chip c1">📅 September 13, 2026</div>
+      <div class="chip c2">🕛 12:00 – 4:00 PM</div>
+      <div class="chip c3">📍 Brittingham Park, Madison WI</div>
+    </div>
+
+    <div class="free-line">Free · All Ages · No Tickets Needed</div>
+    <div class="website">madisongoodneighborgathering.org</div>
+  </div>
+</div>
+</body>
+</html>

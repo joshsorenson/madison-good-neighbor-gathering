@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>GNG 2026 – Story Announcement</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px;
+    height: 1920px;
+    overflow: hidden;
+    font-family: 'Nunito', sans-serif;
+    background: #1A1A2E;
+  }
+  .canvas {
+    width: 1080px;
+    height: 1920px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Photo top half */
+  .photo-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1080px;
+    height: 840px;
+    overflow: hidden;
+    z-index: 1;
+  }
+  .photo-top img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 35%;
+    display: block;
+  }
+
+  /* Gradient fade from photo into dark navy */
+  .photo-fade {
+    position: absolute;
+    top: 600px;
+    left: 0;
+    right: 0;
+    height: 300px;
+    background: linear-gradient(to bottom, transparent, #1A1A2E);
+    z-index: 2;
+  }
+
+  /* Top overlay on photo */
+  .photo-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1080px;
+    height: 840px;
+    background: linear-gradient(to bottom, rgba(26,26,46,0.40) 0%, rgba(26,26,46,0.15) 50%, transparent 100%);
+    z-index: 2;
+  }
+
+  /* Content */
+  .content {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 56px;
+  }
+
+  /* District badge */
+  .district-badge {
+    margin-top: 70px;
+    background: #8CC63E;
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 20px;
+    padding: 10px 28px;
+    border-radius: 50px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    box-shadow: 0 4px 20px rgba(140,198,62,0.40);
+    margin-bottom: 0;
+  }
+
+  .spacer-1 { flex: 1; min-height: 0; }
+
+  /* Headline */
+  .headline-block {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+  .headline {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: 96px;
+    color: #fff;
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    text-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  }
+  .headline span {
+    color: #FFDE59;
+  }
+  .headline-sub {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 26px;
+    color: rgba(255,255,255,0.65);
+    margin-top: 8px;
+    letter-spacing: 0.01em;
+  }
+
+  /* Logo */
+  .logo-wrap {
+    margin-bottom: 32px;
+  }
+  .logo-wrap img {
+    height: 88px;
+    width: auto;
+    filter: brightness(0) invert(1);
+  }
+
+  /* Info cards column */
+  .info-cards {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 36px;
+  }
+  .info-card {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 18px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+  }
+  .info-icon {
+    width: 68px;
+    height: 68px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+  }
+  .icon-c1 { background: #F65472; }
+  .icon-c2 { background: #F07F1B; }
+  .icon-c3 { background: #3DAAC8; }
+  .icon-c4 { background: #8CC63E; }
+
+  .info-text {
+    padding: 0 22px;
+  }
+  .info-label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1px;
+  }
+  .info-value {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 24px;
+    color: #fff;
+  }
+
+  /* "What to Expect" section */
+  .expect-section {
+    width: 100%;
+    margin-bottom: 36px;
+  }
+  .expect-title {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: 28px;
+    color: #FFDE59;
+    text-align: center;
+    margin-bottom: 16px;
+    letter-spacing: 0.01em;
+  }
+  .photo-grid-2x2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px;
+    height: 320px;
+  }
+  .grid-cell {
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+  }
+  .grid-cell img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .grid-cell-label {
+    position: absolute;
+    bottom: 8px;
+    left: 10px;
+    right: 10px;
+    background: rgba(26,26,46,0.70);
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    padding: 5px 12px;
+    border-radius: 8px;
+    backdrop-filter: blur(4px);
+    text-align: center;
+  }
+
+  /* CTA + website */
+  .bottom-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding-bottom: 70px;
+  }
+  .cta-pill {
+    background: #FFDE59;
+    color: #1A1A2E;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 26px;
+    padding: 16px 48px;
+    border-radius: 50px;
+    letter-spacing: 0.01em;
+    box-shadow: 0 8px 30px rgba(255,222,89,0.35);
+    text-align: center;
+  }
+  .website {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: rgba(255,255,255,0.38);
+    letter-spacing: 0.06em;
+  }
+
+  /* From badge */
+  .from-badge {
+    position: absolute;
+    top: 70px;
+    right: 56px;
+    z-index: 10;
+    background: rgba(255,255,255,0.10);
+    color: rgba(255,255,255,0.55);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.16);
+  }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="photo-top">
+    <img src="../photos/overview.jpg" alt="Festival overview">
+  </div>
+  <div class="photo-overlay"></div>
+  <div class="photo-fade"></div>
+
+  <div class="from-badge">From Last Year</div>
+
+  <div class="content">
+    <div class="district-badge">District 13 Presents</div>
+
+    <div class="spacer-1"></div>
+
+    <div class="headline-block">
+      <div class="headline">You're<br><span>Invited</span></div>
+      <div class="headline-sub">to the neighborhood party of the year</div>
+    </div>
+
+    <div class="logo-wrap">
+      <img src="../logo.svg" alt="Madison Good Neighbor Gathering">
+    </div>
+
+    <div class="info-cards">
+      <div class="info-card">
+        <div class="info-icon icon-c1">📅</div>
+        <div class="info-text">
+          <div class="info-label">Date</div>
+          <div class="info-value">Sunday, September 13, 2026</div>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon icon-c2">🕛</div>
+        <div class="info-text">
+          <div class="info-label">Time</div>
+          <div class="info-value">12:00 – 4:00 PM</div>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon icon-c3">📍</div>
+        <div class="info-text">
+          <div class="info-label">Location</div>
+          <div class="info-value">Brittingham Park, Madison WI</div>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon icon-c4">🎉</div>
+        <div class="info-text">
+          <div class="info-label">Admission</div>
+          <div class="info-value">100% Free · All Ages</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="expect-section">
+      <div class="expect-title">What to Expect</div>
+      <div class="photo-grid-2x2">
+        <div class="grid-cell">
+          <img src="../photos/guitarist.jpg" alt="Live music" style="object-position: center 20%;">
+          <div class="grid-cell-label">🎸 Live Music</div>
+        </div>
+        <div class="grid-cell">
+          <img src="../photos/bouncy-castle.jpg" alt="Bouncy castle" style="object-position: center;">
+          <div class="grid-cell-label">🏰 Bouncy Fun</div>
+        </div>
+        <div class="grid-cell">
+          <img src="../photos/food-truck.jpg" alt="Food trucks" style="object-position: center 55%;">
+          <div class="grid-cell-label">🍜 Food Trucks</div>
+        </div>
+        <div class="grid-cell">
+          <img src="../photos/kids-science.jpg" alt="Science activities" style="object-position: center;">
+          <div class="grid-cell-label">🔬 Kids Activities</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-section">
+      <div class="cta-pill">Free · No Tickets Required</div>
+      <div class="website">madisongoodneighborgathering.org</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
