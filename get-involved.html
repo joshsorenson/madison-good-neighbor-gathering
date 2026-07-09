@@ -27,9 +27,10 @@
   <meta name="twitter:description" content="Volunteer, donate, or become a 2026 sponsor for the Madison Good Neighbor Gathering — a free community festival at Brittingham Park.">
   <meta name="twitter:image" content="https://madisongoodneighborgathering.org/og-image.jpg">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Self-hosted fonts (no third-party requests) -->
+  <link rel="preload" href="fonts/nunito-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/baloo-2-800-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="fonts.css">
 
   <link rel="icon" href="logo-badge.svg" type="image/svg+xml">
   <meta name="theme-color" content="#F65472">
@@ -153,6 +154,9 @@
     <p style="font-size:0.95rem;color:rgba(255,255,255,0.75);">
       Contact <a href="mailto:laura@neighborhoodhousemadison.org" style="color:var(--yellow);font-weight:700;">laura@neighborhoodhousemadison.org</a> to learn about sponsorship packages.
     </p>
+    <p style="font-size:0.95rem;margin-top:1rem;">
+      <a href="thanks.html" style="color:var(--yellow);font-weight:700;">See all our sponsors &amp; partners &#8594;</a>
+    </p>
   </div>
 </section>
 
@@ -224,6 +228,7 @@
         <p>Brittingham Park &middot; 829 W Washington Ave, Madison, WI &middot; 100% Free &middot; All Ages</p>
         <p style="margin-top:0.5rem;">
           <a href="index.html">Back to event info</a> &middot;
+          <a href="thanks.html">Our Sponsors</a> &middot;
           Organized by <a href="https://www.neighborhoodhousemadison.org" target="_blank" rel="noopener">Neighborhood House Community Center</a>
           in association with <a href="https://newculturechurch.com" target="_blank" rel="noopener">New Culture Church</a>
         </p>
