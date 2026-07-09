@@ -231,10 +231,11 @@
       <span class="chip chip-purple" role="listitem">&#127881; 100% Free!</span>
       <span class="chip chip-yellow" role="listitem">&#127881; All Ages Welcome</span>
     </div>
+    <p class="hero-countdown" id="hero-countdown" aria-live="polite" hidden></p>
     <div class="hero-cta">
       <a href="#activities" class="btn btn-pink">See What's Happening &#8594;</a>
       <a href="get-involved.html" class="btn btn-outline">Get Involved</a>
-      <a href="#" onclick="openKidsRsvpModal();return false;" class="btn btn-yellow">&#127881; RSVP Your Kids</a>
+      <a href="#" onclick="openKidsRsvpModal();return false;" class="btn btn-yellow gng-celebrate">&#127881; RSVP Your Kids</a>
     </div>
     <div class="hero-cal">
       <span class="cal-label">&#128197; Save the date:</span>
@@ -441,7 +442,7 @@
     <p style="font-size:1.05rem;line-height:1.6;color:rgba(255,255,255,0.9);margin-bottom:2rem;">
       Bringing kids to the festival? RSVP to receive updates and be entered for prizes at the Good Neighbor Gathering!
     </p>
-    <a href="#" onclick="openKidsRsvpModal();return false;" class="btn btn-pink">&#127881; RSVP for Kids</a>
+    <a href="#" onclick="openKidsRsvpModal();return false;" class="btn btn-pink gng-celebrate">&#127881; RSVP for Kids</a>
   </div>
 </section>
 
@@ -1036,6 +1037,54 @@ document.addEventListener('DOMContentLoaded',function(){
   m.addEventListener('click',function(e){ if(e.target===m) closeKidsRsvpModal(); });
   document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeKidsRsvpModal(); });
 });
+</script>
+
+<!-- Countdown + confetti -->
+<script>
+(function(){
+  // ── Countdown to the event ──
+  var EVENT = new Date('2026-09-13T12:00:00-05:00');
+  var el = document.getElementById('hero-countdown');
+  if (el) {
+    var days = Math.ceil((EVENT - new Date()) / 86400000);
+    if (days > 1) {
+      el.innerHTML = '🎉 Just <b>' + days + '</b> sleeps until the party!';
+      el.hidden = false;
+    } else if (days === 1) {
+      el.innerHTML = '🎉 The party is <b>tomorrow</b>!';
+      el.hidden = false;
+    } else if (days === 0) {
+      el.innerHTML = '🎉 The party is <b>today</b> — see you there!';
+      el.hidden = false;
+    }
+  }
+
+  // ── Confetti burst ──
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var COLORS = ['#F65472','#69CFED','#8CC63E','#F07F1B','#9A50A5','#FFD93D'];
+  function burst(x, y){
+    if (reduce) return;
+    for (var i=0;i<34;i++){
+      var p = document.createElement('span');
+      p.className = 'gng-confetti-piece';
+      var ang = Math.random()*Math.PI*2, dist = 90 + Math.random()*160;
+      p.style.left = x+'px'; p.style.top = y+'px';
+      p.style.background = COLORS[i % COLORS.length];
+      p.style.setProperty('--gng-dx', (Math.cos(ang)*dist).toFixed(0)+'px');
+      p.style.setProperty('--gng-dy', (Math.sin(ang)*dist + 140).toFixed(0)+'px');
+      p.style.setProperty('--gng-rot', (Math.random()*720-360).toFixed(0)+'deg');
+      p.style.animation = 'gng-confetti-fall ' + (900 + Math.random()*700).toFixed(0) + 'ms cubic-bezier(0.2,0.6,0.4,1) forwards';
+      document.body.appendChild(p);
+      setTimeout((function(node){return function(){ node.remove(); };})(p), 1700);
+    }
+  }
+  document.querySelectorAll('.gng-celebrate').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var r = btn.getBoundingClientRect();
+      burst(r.left + r.width/2, r.top + r.height/2);
+    });
+  });
+})();
 </script>
 </body>
 </html>

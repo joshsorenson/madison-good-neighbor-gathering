@@ -1095,3 +1095,73 @@
   width: 100%;
   min-height: 75vh;
 }
+
+/* ─── Playful motion (fun & family-friendly) ─────────────────── */
+/* Gentle floating hero blobs */
+.blob-1 { animation: gng-float-a 16s ease-in-out infinite; }
+.blob-2 { animation: gng-float-b 19s ease-in-out infinite; }
+.blob-3 { animation: gng-float-a 13s ease-in-out infinite 1.5s; }
+.blob-4 { animation: gng-float-b 21s ease-in-out infinite 0.8s; }
+@keyframes gng-float-a {
+  0%,100% { transform: translate(0,0); }
+  50%     { transform: translate(14px,-22px); }
+}
+@keyframes gng-float-b {
+  0%,100% { transform: translate(0,0); }
+  50%     { transform: translate(-18px,16px); }
+}
+/* Twinkling stars */
+.star { animation: gng-twinkle 4s ease-in-out infinite; }
+.star:nth-of-type(2) { animation-delay: 1s; }
+.star:nth-of-type(3) { animation-delay: 2s; }
+.star:nth-of-type(4) { animation-delay: 3s; }
+@keyframes gng-twinkle {
+  0%,100% { opacity: 0.15; transform: scale(1) rotate(0deg); }
+  50%     { opacity: 0.4;  transform: scale(1.25) rotate(15deg); }
+}
+/* Slowly drifting confetti dots */
+.hero-confetti { animation: gng-drift 40s linear infinite; }
+@keyframes gng-drift {
+  from { background-position: 10px 10px, 40px 60px, 20px 50px, 70px 20px, 50px 90px; }
+  to   { background-position: 10px 90px, 40px 140px, 20px 130px, 70px 100px, 50px 170px; }
+}
+/* Springy button press */
+.btn:active { transform: translateY(-1px) scale(0.95); }
+/* Emoji icons pop on card hover */
+.act-card-icon, .comm-org-icon { transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); }
+.act-card:hover .act-card-icon,
+.comm-org-card:hover .comm-org-icon { transform: scale(1.18) rotate(-6deg); }
+
+/* Confetti burst overlay (fired on RSVP / primary CTA) */
+.gng-confetti-piece {
+  position: fixed; top: 0; left: 0; width: 10px; height: 14px;
+  will-change: transform, opacity; pointer-events: none; z-index: 10000;
+  border-radius: 2px;
+}
+@keyframes gng-confetti-fall {
+  0%   { transform: translate3d(0,0,0) rotate(0deg); opacity: 1; }
+  100% { transform: translate3d(var(--gng-dx), var(--gng-dy), 0) rotate(var(--gng-rot)); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blob-1, .blob-2, .blob-3, .blob-4,
+  .star, .hero-confetti { animation: none; }
+  .act-card:hover .act-card-icon,
+  .comm-org-card:hover .comm-org-icon { transform: none; }
+}
+
+/* Hero countdown */
+.hero-countdown {
+  display: inline-block;
+  margin: 0 auto 1.5rem;
+  padding: 0.5rem 1.4rem;
+  background: var(--yellow);
+  color: var(--ink);
+  border-radius: 50px;
+  font-family: 'Baloo 2', cursive;
+  font-weight: 800;
+  font-size: 1.05rem;
+  box-shadow: 0 6px 18px rgba(240,127,27,0.25);
+  transform: rotate(-1.5deg);
+}
+.hero-countdown b { color: var(--pink); font-size: 1.15em; }
