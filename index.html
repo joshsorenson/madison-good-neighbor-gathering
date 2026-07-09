@@ -1011,6 +1011,13 @@ Hope you can make it! 🎉</p>
 </script>
 
 
+<!-- ═══ STICKY MOBILE QUICK-ACTION BAR ═══ -->
+<div class="mobile-cta-bar" id="mobile-cta-bar" aria-label="Quick actions">
+  <span class="mcb-date" aria-hidden="true">&#128197; Sept 13</span>
+  <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Madison+Good+Neighbor+Gathering&dates=20260913T170000Z/20260913T210000Z&details=Free+community+festival!+Live+music,+cultural+performances,+food+trucks,+kids+activities+%26+more.+No+tickets+needed.&location=829+W+Washington+Ave,+Madison,+WI+53715&ctz=America%2FChicago" target="_blank" rel="noopener" class="mcb-btn mcb-cal">Add to Calendar</a>
+  <a href="#" onclick="openKidsRsvpModal();return false;" class="mcb-btn mcb-rsvp gng-celebrate">&#127881; RSVP</a>
+</div>
+
 <!-- ═══ KIDS RSVP MODAL ═══ -->
 <div id="kids-rsvp-modal" role="dialog" aria-modal="true" aria-labelledby="krsvp-title">
   <div class="krsvp-inner">
@@ -1084,6 +1091,22 @@ document.addEventListener('DOMContentLoaded',function(){
       burst(r.left + r.width/2, r.top + r.height/2);
     });
   });
+
+  // ── Reveal sticky mobile CTA bar once the hero scrolls out of view ──
+  var bar = document.getElementById('mobile-cta-bar');
+  var hero = document.querySelector('.hero');
+  if (bar && hero) {
+    var ticking = false;
+    var update = function(){
+      ticking = false;
+      var trigger = hero.offsetHeight * 0.6;
+      bar.classList.toggle('show', window.scrollY > trigger);
+    };
+    window.addEventListener('scroll', function(){
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
+    update();
+  }
 })();
 </script>
 </body>
