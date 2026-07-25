@@ -981,19 +981,29 @@
 
 
 /* ─────────────────────────────────────
-   SPONSOR LOGO WALL
-   Every tile is the same box. Each logo gets a --sp-h tuned so all
-   the marks land on roughly the same optical area, which keeps a wide
-   wordmark and a stacked badge reading at the same weight instead of
-   one towering over the other. Very wide lockups span two columns so
-   they get the room they need rather than being shrunk to fit.
+   SPONSOR LOGO WALL (bento)
+   Tiles come in two compartment shapes so each logo gets a box that
+   suits its orientation: wide wordmarks land in a landscape tile
+   (2 cols x 1 row), stacked marks in a portrait one (1 col x 2 rows).
+   Both shapes cover the same number of cells, so the compartments
+   differ in shape while carrying equal weight, and the staggered row
+   heights give the wall its mosaic rhythm.
+
+   Within its tile each logo is sized by --sp-h, tuned so every mark
+   lands on roughly the same optical area. Without that, a 5:1
+   wordmark and a square badge set to one shared height read as
+   completely different sizes.
+
+   At 6 columns the two portrait tiles sit at either end of the first
+   two rows and the seven landscape tiles fill the rest, which
+   tessellates exactly with no gaps.
    ───────────────────────────────────── */
 .sponsor-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  grid-auto-rows: 108px;
-  grid-auto-flow: dense;
-  gap: 0.75rem;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-rows: 96px;
+  grid-auto-flow: row dense;
+  gap: 12px;
   max-width: 900px;
   margin: 0 auto 1.25rem;
 }
@@ -1006,23 +1016,30 @@
   padding: 0.9rem;
   background: #fff;
   border-radius: 8px;
+  grid-column: span 2;          /* landscape compartment */
+}
+.sponsor-tile.sp-tall {         /* portrait compartment */
+  grid-column: span 1;
+  grid-row: span 2;
 }
 .sponsor-tile[href] { cursor: pointer; }
 .sponsor-tile img {
   height: var(--sp-h, 48px);
   width: auto;
   max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
 }
 /* Logos with a baked-in dark background sit on a matching tile. */
 .sponsor-tile.sp-onbrand { background: #4d2a1c; }
-.sponsor-tile.sp-wide { grid-column: span 2; }
 
-@media (max-width: 430px) {
-  .sponsor-grid { grid-auto-rows: 94px; gap: 0.6rem; }
+@media (max-width: 880px) {
+  .sponsor-grid { grid-template-columns: repeat(4, 1fr); }
+}
+@media (max-width: 560px) {
+  .sponsor-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 84px; gap: 10px; }
   .sponsor-tile { padding: 0.7rem; }
-  .sponsor-tile.sp-wide { grid-column: auto; }
-  .sponsor-tile img { height: calc(var(--sp-h, 48px) * 0.84); }
+  .sponsor-tile img { height: calc(var(--sp-h, 48px) * 0.85); }
 }
 .sponsor-tile::after {
   content: attr(data-name);
