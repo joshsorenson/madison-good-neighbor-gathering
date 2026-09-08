@@ -196,27 +196,60 @@
       font-weight: 600;
     }
     .hero-rain-note span { color: var(--blue); font-weight: 800; }
-    .hero-cal {
-      display: flex; flex-wrap: wrap; align-items: center;
-      justify-content: center; gap: 0.5rem;
+
+    /* Social proof: concrete attendance beats "hundreds of families" */
+    .hero-proof {
+      font-family: 'Baloo 2', cursive;
+      font-size: clamp(1rem, 2.2vw, 1.15rem);
+      color: var(--ink);
+      font-weight: 700;
+      margin: -1.25rem auto 0.4rem;
+      max-width: 560px;
+    }
+    .hero-proof strong { color: var(--pink); font-weight: 800; }
+    /* Authority: 1916 lineage, kept quiet so it reads as fact, not boast */
+    .hero-authority {
+      font-size: 0.85rem; color: var(--ink-soft);
+      font-weight: 600;
+      margin: 0 auto 1.75rem;
+      max-width: 560px;
+    }
+    /* Loss framing under the primary CTA */
+    .hero-loss {
+      font-size: 0.9rem; color: var(--purple);
+      font-weight: 700;
+      margin: 0 auto 1rem;
+      max-width: 480px;
+    }
+    /* Secondary CTA row sits visually below the primary calendar button */
+    .hero-cta-secondary { margin-bottom: 1.25rem; }
+    .btn-sm {
+      padding: 0.6rem 1.5rem;
+      font-size: 0.95rem;
+      border-width: 2px;
+    }
+    /* Get Involved demoted out of the button stack */
+    .hero-involved-link {
+      margin-top: 0.75rem;
+      font-size: 0.85rem; font-weight: 700;
+    }
+    .hero-involved-link a { color: var(--ink-soft); text-decoration: underline; }
+    .hero-involved-link a:hover { color: var(--pink); }
+
+    /* Peak-end rule: last thing on the page is emotion plus one action */
+    .closing-note {
+      text-align: center;
+      margin: 2.5rem auto 0;
+      max-width: 560px;
+    }
+    .closing-line {
+      font-family: 'Baloo 2', cursive;
+      font-size: clamp(1.15rem, 3vw, 1.5rem);
+      color: #fff; font-weight: 800;
+      line-height: 1.45;
       margin-bottom: 1.25rem;
     }
-    .cal-label {
-      font-size: 0.85rem; font-weight: 700;
-      color: var(--ink-soft); white-space: nowrap;
-    }
-    .cal-btn {
-      display: inline-flex; align-items: center;
-      padding: 0.4rem 1rem;
-      border-radius: 50px;
-      border: 2px solid var(--ink);
-      font-family: 'Baloo 2', cursive;
-      font-size: 0.82rem; font-weight: 700;
-      color: var(--ink); text-decoration: none;
-      background: rgba(255,255,255,0.7);
-      transition: background 0.2s, color 0.2s, border-color 0.2s;
-    }
-    .cal-btn:hover { background: var(--ink); color: #fff; }
+    .closing-line span { display: block; color: var(--yellow); }
 
     /* ─────────────────────────────────────
        WAVE DIVIDERS
@@ -827,8 +860,6 @@
         width: calc(50% - 0.5rem) !important; height: 150px !important;
       }
       .facts-inner { gap: 1.25rem; }
-      .hero-cal { flex-direction: column; align-items: center; gap: 0.4rem; }
-      .cal-label { margin-bottom: 0.15rem; }
       .hero-share { gap: 0.35rem; }
       .invite-card { padding: 1.25rem 1.25rem; }
     }
