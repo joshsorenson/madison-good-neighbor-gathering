@@ -1026,8 +1026,8 @@
    completely different sizes.
 
    At 6 columns the two portrait tiles sit at either end of the first
-   two rows and the seven landscape tiles fill the rest, which
-   tessellates exactly with no gaps.
+   two rows, a row of two banner tiles follows, and the landscape tiles
+   fill the rest, which tessellates exactly with no gaps.
    ───────────────────────────────────── */
 .sponsor-grid {
   display: grid;
@@ -1053,6 +1053,9 @@
   grid-column: span 1;
   grid-row: span 2;
 }
+.sponsor-tile.sp-wide {         /* banner compartment, two to a row */
+  grid-column: span 3;
+}
 .sponsor-tile[href] { cursor: pointer; }
 .sponsor-tile img {
   height: var(--sp-h, 48px);
@@ -1066,6 +1069,8 @@
 
 @media (max-width: 880px) {
   .sponsor-grid { grid-template-columns: repeat(4, 1fr); }
+  /* Three of four columns would leave a ragged single-column hole. */
+  .sponsor-tile.sp-wide { grid-column: span 4; }
 }
 @media (max-width: 560px) {
   .sponsor-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 84px; gap: 10px; }
