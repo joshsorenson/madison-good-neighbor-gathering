@@ -11,7 +11,7 @@
   :root {
     --pink:#F65472; --blue:#69CFED; --green:#8CC63E;
     --yellow:#FFD93D; --cream:#FFFDF5; --ink:#1A1A2E; --ink-soft:#4a4a5a;
-    --band:5.15in;              /* reserved height of the volunteer band */
+    --band:5.6in;              /* reserved height of the volunteer band */
   }
 
   html, body { width:24in; height:36in; }
@@ -23,7 +23,8 @@
   .sheet {
     width:24in; height:36in; position:relative; overflow:hidden;
     display:flex; flex-direction:column; align-items:center;
-    padding:1in 1.15in calc(var(--band) + .45in);
+    justify-content:space-between; gap:1.4in;
+    padding:1.1in 1.15in calc(var(--band) + 1.7in);
   }
 
   .blob { position:absolute; border-radius:50%; opacity:.16; }
@@ -37,45 +38,45 @@
     position:relative; z-index:2;
     font-family:'Baloo 2', cursive; font-weight:800;
     font-size:5.35in; line-height:.82; letter-spacing:-.02em;
-    color:var(--ink); text-align:center; margin-top:.85in;
+    color:var(--ink); text-align:center;
   }
 
   .sub {
     position:relative; z-index:2;
     font-size:1.12in; line-height:1.28; font-weight:700;
     text-align:center; color:var(--ink-soft);
-    margin-top:.6in; max-width:19.5in;
+    max-width:19.5in;
   }
   .sub strong { color:var(--ink); font-weight:900; }
 
   .scan {
-    position:relative; z-index:2; margin-top:.6in;
-    background:#fff; border-radius:.7in;
-    border:.1in solid var(--ink);
-    padding:.5in .62in;
-    display:flex; align-items:center; gap:.7in;
+    position:relative; z-index:2;
+    background:#fff; border-radius:.8in;
+    border:.115in solid var(--ink);
+    padding:.72in .85in;
+    display:flex; align-items:center; gap:.95in;
     box-shadow:0 .14in .45in rgba(0,0,0,.09);
   }
-  .qr { width:5.9in; height:5.9in; display:block; flex-shrink:0; }
+  .qr { width:7.6in; height:7.6in; display:block; flex-shrink:0; }
   .scan-copy { text-align:left; }
   .scan-copy .big {
     font-family:'Baloo 2', cursive; font-weight:800;
-    font-size:1.4in; line-height:1.0; color:var(--ink);
+    font-size:1.68in; line-height:1.02; color:var(--ink);
   }
   .scan-copy .small {
-    font-size:.72in; font-weight:700; color:var(--ink-soft);
-    margin-top:.16in; line-height:1.28;
+    font-size:.84in; font-weight:700; color:var(--ink-soft);
+    margin-top:.22in; line-height:1.28;
   }
   .scan-copy .url {
     font-family:'Baloo 2', cursive; font-weight:700;
-    font-size:.5in; color:var(--pink); margin-top:.24in;
+    font-size:.58in; color:var(--pink); margin-top:.32in;
   }
 
   .vol {
     position:absolute; left:0; right:0; bottom:0; z-index:3;
     height:var(--band);
     background:var(--green); color:#fff;
-    padding:.62in 1.1in; text-align:center;
+    padding:.62in 1.1in 1.05in; text-align:center;
     display:flex; flex-direction:column; justify-content:center;
   }
   .vol .tag {
