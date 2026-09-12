@@ -1106,10 +1106,21 @@ document.addEventListener('DOMContentLoaded',function(){
 <script>
 (function(){
   // ── Countdown to the event ──
-  var EVENT = new Date('2026-09-13T12:00:00-05:00');
+  // Counted in whole calendar days in Madison's timezone, so "tomorrow" means
+  // tomorrow on the calendar — not 24 hours from right now.
   var el = document.getElementById('hero-countdown');
   if (el) {
-    var days = Math.ceil((EVENT - new Date()) / 86400000);
+    var today = new Date();
+    try {
+      // "2026-09-12" for whatever today is in Madison, wherever the visitor is
+      var chicago = new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'America/Chicago', year: 'numeric', month: '2-digit', day: '2-digit'
+      }).format(today).split('-');
+      today = Date.UTC(+chicago[0], +chicago[1] - 1, +chicago[2]);
+    } catch (err) {
+      today = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate());
+    }
+    var days = Math.round((Date.UTC(2026, 8, 13) - today) / 86400000);
     if (days > 1) {
       el.innerHTML = '🎉 Just <b>' + days + '</b> sleeps until the party!';
       el.hidden = false;
