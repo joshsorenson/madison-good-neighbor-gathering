@@ -10,6 +10,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@vercel/functions": "^3.9.7",
     "playwright": "^1.60.0"
   }
 }
