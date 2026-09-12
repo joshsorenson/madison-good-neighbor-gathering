@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Parking | Madison Good Neighbor Gathering 2026</title>
+  <meta name="description" content="Lot full? Free street parking is all around Brittingham Park. See the parking map for the Madison Good Neighbor Gathering, Sunday September 13.">
+  <link rel="canonical" href="https://madisongoodneighborgathering.org/parking.html">
+  <meta name="robots" content="index,follow">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://madisongoodneighborgathering.org/parking.html">
+  <meta property="og:title" content="Parking | Madison Good Neighbor Gathering">
+  <meta property="og:description" content="Lot full? Free street parking is all around Brittingham Park. Here's the map.">
+  <meta property="og:image" content="https://madisongoodneighborgathering.org/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="Madison Good Neighbor Gathering">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Parking | Madison Good Neighbor Gathering">
+  <meta name="twitter:description" content="Lot full? Free street parking is all around Brittingham Park. Here's the map.">
+  <meta name="twitter:image" content="https://madisongoodneighborgathering.org/og-image.jpg">
+
+  <link rel="preload" href="fonts/nunito-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/baloo-2-800-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="fonts.css">
+
+  <link rel="icon" href="logo-badge.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#F65472">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- MapLibre GL + OpenFreeMap (open data, no API key) -->
+  <link rel="preconnect" href="https://tiles.openfreemap.org" crossorigin>
+  <link href="https://unpkg.com/maplibre-gl@5.1.0/dist/maplibre-gl.css" rel="stylesheet">
+
+  <style>
+    /* ── Primary answer ── */
+    .lede {
+      max-width: 46rem; margin: 0 auto; text-align: center;
+    }
+    .lede h2 { font-size: clamp(1.8rem, 5.5vw, 2.6rem); margin-bottom: 0.6rem; }
+    .lede p { color: var(--ink-soft); font-size: 1.08rem; }
+
+    .street-grid {
+      display: grid; gap: 0.75rem; margin: 2rem auto 0;
+      max-width: 780px;
+      grid-template-columns: repeat(auto-fit, minmax(168px, 1fr));
+    }
+    .street-chip {
+      background: var(--white); border-radius: 16px;
+      padding: 0.85rem 1rem; text-align: center;
+      font-weight: 800; font-size: 1rem; color: var(--ink);
+      box-shadow: 0 3px 14px rgba(0,0,0,0.07);
+      border-bottom: 4px solid var(--blue);
+    }
+    .street-chip small {
+      display: block; font-weight: 600; font-size: 0.8rem;
+      color: var(--ink-soft); margin-top: 0.15rem;
+    }
+
+    .tips {
+      list-style: none; display: grid; gap: 0.85rem;
+      max-width: 640px; margin: 2.25rem auto 0;
+    }
+    .tips li {
+      display: flex; gap: 0.8rem; align-items: flex-start;
+      line-height: 1.55; text-align: left;
+    }
+    .tips .li-icon { flex-shrink: 0; font-size: 1.2rem; line-height: 1.4; }
+
+    /* ── Map + tabs ── */
+    .map-tabs {
+      display: flex; justify-content: center; gap: 0.5rem;
+      max-width: 1000px; margin: 0 auto 1.25rem; flex-wrap: wrap;
+    }
+    .map-tab {
+      font-family: 'Baloo 2', cursive; font-weight: 800; font-size: 0.98rem;
+      padding: 0.6rem 1.35rem; border-radius: 999px;
+      border: 3px solid var(--blue); background: var(--white); color: var(--ink);
+      cursor: pointer; transition: background 0.18s, color 0.18s, border-color 0.18s;
+    }
+    .map-tab:hover { background: var(--blue-pale); }
+    .map-tab[aria-selected="true"] { background: var(--blue); border-color: var(--blue); color: #fff; }
+    .map-tab.vol { border-color: var(--green); }
+    .map-tab.vol:hover { background: var(--green-pale); }
+    .map-tab.vol[aria-selected="true"] { background: var(--green); border-color: var(--green); color: #fff; }
+    .map-tab:focus-visible { outline: 3px solid var(--purple); outline-offset: 2px; }
+
+    .pmap-wrap {
+      position: relative; max-width: 1000px; margin: 0 auto;
+      border-radius: 24px; overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.10);
+      border: 4px solid var(--white);
+    }
+    #pmap { width: 100%; height: min(70vh, 560px); background: #eef1f4; }
+    .pmap-fallback {
+      position: absolute; inset: 0; display: none;
+      flex-direction: column; align-items: center; justify-content: center;
+      gap: 0.75rem; text-align: center; padding: 2rem;
+      background: var(--cream); color: var(--ink-soft);
+    }
+    .pmap-wrap.failed .pmap-fallback { display: flex; }
+    .pmap-caption {
+      max-width: 1000px; margin: 1.1rem auto 0; text-align: center;
+      color: var(--ink-soft); font-size: 0.97rem;
+    }
+    .pmap-legend[hidden] { display: none; }
+    .pmap-legend {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem;
+      max-width: 1000px; margin: 1rem auto 0;
+    }
+    .pmap-legend span {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      background: var(--white); border-radius: 999px;
+      padding: 0.4rem 0.95rem; font-size: 0.9rem; font-weight: 700;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    }
+    .legend-dot { width: 13px; height: 13px; border-radius: 50%; flex-shrink: 0; }
+    .legend-dot.pink  { background: var(--pink); }
+    .legend-dot.green { background: var(--green); }
+    .legend-bar { width: 24px; height: 6px; border-radius: 3px; flex-shrink: 0; }
+    .legend-bar.free { background: #3D9E3D; }
+    .legend-bar.no   { background: #E0454F; }
+    .legend-dash { width: 22px; height: 0; border-top: 3px dashed var(--purple); flex-shrink: 0; }
+
+    /* Map pins */
+    .pin { display: flex; flex-direction: column; align-items: center; cursor: pointer; line-height: 1; }
+    .pin-bubble {
+      font-family: 'Baloo 2', cursive; font-weight: 800;
+      font-size: 0.82rem; color: #fff; white-space: nowrap;
+      padding: 0.4rem 0.75rem; border-radius: 999px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.28); border: 2px solid #fff;
+    }
+    .pin-stem { width: 3px; height: 12px; margin-top: -1px; border-radius: 0 0 2px 2px; }
+    .pin-dot {
+      width: 15px; height: 15px; border-radius: 50%;
+      border: 3px solid #fff; margin-top: -2px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    .pin-event .pin-bubble, .pin-event .pin-stem, .pin-event .pin-dot { background: var(--pink); }
+    .pin-vol   .pin-bubble, .pin-vol   .pin-stem, .pin-vol   .pin-dot { background: var(--green); }
+    .maplibregl-ctrl-attrib { font-size: 10px; }
+
+    /* ── Volunteer strip ── */
+    .vol-strip {
+      max-width: 720px; margin: 0 auto;
+      background: var(--green-pale); border-radius: 22px;
+      padding: 1.6rem 1.5rem; text-align: center;
+      border: 3px dashed var(--green);
+    }
+    .vol-strip h3 { font-size: 1.3rem; margin-bottom: 0.35rem; }
+    .vol-strip p { color: var(--ink-soft); margin-bottom: 1rem; }
+
+    @media (max-width: 600px) {
+      #pmap { height: 62vh; }
+      .street-grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- ═══ NAV ═══ -->
+<header>
+  <nav id="main-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="Madison Good Neighbor Gathering, Home">
+        <img src="logo-badge.svg" alt="Madison Good Neighbor Gathering logo" width="200" height="200">
+      </a>
+      <button class="mobile-toggle" aria-label="Toggle navigation menu"
+        onclick="document.getElementById('main-nav').classList.toggle('open')">&#9776;</button>
+      <ul>
+        <li><a href="index.html#activities">Activities</a></li>
+        <li><a href="index.html#entertainment">Entertainment</a></li>
+        <li><a href="index.html#food">Food</a></li>
+        <li><a href="index.html#visit">Plan Your Visit</a></li>
+        <li><a href="parking.html" aria-current="page">Parking</a></li>
+        <li><a href="index.html#faq">FAQ</a></li>
+        <li><a href="get-involved.html">Get Involved</a></li>
+      </ul>
+      <div class="nav-social" aria-label="Social links">
+        <a href="https://www.instagram.com/madisongoodneighborgathering" target="_blank" rel="noopener" aria-label="Follow on Instagram">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/neighborhoodhousemadison" target="_blank" rel="noopener" aria-label="Follow on Facebook">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main id="main-content">
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" style="min-height:36vh;padding:4rem 1.5rem 2.5rem;" aria-label="Parking">
+  <div class="hero-blob blob-1" aria-hidden="true"></div>
+  <div class="hero-blob blob-2" aria-hidden="true"></div>
+  <div class="hero-content" style="padding-top:2rem;">
+    <h1 style="margin-bottom:0.5rem;">
+      <img src="logo.svg" alt="Madison Good Neighbor Gathering" width="480" height="137" fetchpriority="high" style="max-width:100%;height:auto;">
+    </h1>
+    <p class="hero-tagline" style="margin-bottom:0.35rem;">Parking</p>
+    <p style="font-size:1.1rem;color:var(--ink-soft);max-width:34rem;margin:0 auto;">
+      Lot full? There&rsquo;s plenty of free parking a short walk away.
+    </p>
+  </div>
+</section>
+
+<div class="wave-divider" style="background:var(--cream)" aria-hidden="true">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,30 C960,60 1200,20 1440,45 L1440,80 L0,80 Z" fill="var(--cream)"></path></svg>
+</div>
+
+<!-- ═══ STREET PARKING (primary) ═══ -->
+<section style="background:var(--cream);padding:1.5rem 1.5rem 3.5rem;">
+  <div class="lede">
+    <h2>Good news: it&rsquo;s a Sunday</h2>
+    <p>
+      Madison lifts its <strong>2&#8209;hour limits and residential permit rules on
+      Sundays and city holidays</strong>. So nearly every street around Brittingham
+      Park is free, unlimited parking during the Gathering. Park anywhere there
+      isn&rsquo;t a no&#8209;parking sign, and stay as long as you like.
+    </p>
+  </div>
+
+  <ul class="tips">
+    <li><span class="li-icon">&#9989;</span> <span><strong>Permit blocks are open today.</strong> Those &ldquo;RP3 / 2&nbsp;HR, 8A&ndash;6P&rdquo; signs all end with <em>Except Sun.</em>, so they don&rsquo;t apply.</span></li>
+    <li><span class="li-icon">&#128683;</span> <span><strong>Still off limits:</strong> anything marked <em>No Parking Any Time</em>, bus stops, alley mouths and corners.</span></li>
+    <li><span class="li-icon">&#9855;</span> <span><strong>Dropping someone off?</strong> The pavilion sits closest to the W&nbsp;Washington Ave side of the park, and the paths in are paved and flat.</span></li>
+    <li><span class="li-icon">&#128652;</span> <span><strong>Taking the bus?</strong> Metro Transit stops at S&nbsp;Park &amp; W&nbsp;Washington, about a 3&nbsp;minute walk from the pavilion.</span></li>
+    <li><span class="li-icon">&#128690;</span> <span><strong>Biking is easiest.</strong> Free bike racks at the park. The nearest BCycle stations are about a 6&nbsp;minute walk: W&nbsp;Washington &amp; Regent, or S&nbsp;Mills &amp; Mound.</span></li>
+  </ul>
+</section>
+
+<!-- ═══ MAP ═══ -->
+<section id="parking-map" style="background:var(--white);padding:3.5rem 1.5rem 4rem;">
+  <div style="text-align:center;max-width:42rem;margin:0 auto 1.75rem;">
+    <h2 style="font-size:clamp(1.7rem,5vw,2.4rem);margin-bottom:0.5rem;">The parking map</h2>
+    <p style="color:var(--ink-soft);">Green marks the stretches you can park on. Gaps are bus stops, hydrants and no-parking zones.</p>
+  </div>
+
+  <div class="map-tabs" role="tablist" aria-label="Parking map views">
+    <button class="map-tab" id="tab-street" role="tab" aria-selected="true" aria-controls="pmap" type="button">
+      &#128663; Street parking
+    </button>
+    <button class="map-tab vol" id="tab-vol" role="tab" aria-selected="false" aria-controls="pmap" type="button">
+      &#127895; Volunteer parking
+    </button>
+  </div>
+
+  <div class="pmap-wrap" id="pmap-wrap">
+    <div id="pmap" role="application" aria-label="Map of free street parking around Brittingham Park"></div>
+    <div class="pmap-fallback">
+      <p style="font-weight:800;color:var(--ink);">Map couldn&rsquo;t load</p>
+      <p>Park free on any street around Brittingham Park that isn&rsquo;t signed<br>
+         &ldquo;No Parking Any Time&rdquo;. Sunday permit and 2&nbsp;hour rules don&rsquo;t apply.</p>
+      <a class="btn btn-pink" href="https://www.google.com/maps/search/?api=1&query=Brittingham+Park+Madison+WI" target="_blank" rel="noopener">Open in Google Maps &#8594;</a>
+    </div>
+  </div>
+
+  <p class="pmap-caption" id="pmap-caption" aria-live="polite">
+    Every green stretch is within a 10&nbsp;minute walk of the pavilion.
+  </p>
+
+  <div class="pmap-legend" id="legend-street">
+    <span><i class="legend-bar free" aria-hidden="true"></i> Free parking along here</span>
+    <span><i class="legend-dot pink" aria-hidden="true"></i> Pavilion &middot; the Gathering</span>
+  </div>
+  <div class="pmap-legend" id="legend-vol" hidden>
+    <span><i class="legend-dot green" aria-hidden="true"></i> Volunteer parking</span>
+    <span><i class="legend-dash" aria-hidden="true"></i> Walking route &middot; 15 min</span>
+    <span><i class="legend-dot pink" aria-hidden="true"></i> Pavilion &middot; the Gathering</span>
+  </div>
+</section>
+
+<!-- ═══ VOLUNTEERS ═══ -->
+<section style="background:var(--cream);padding:3.5rem 1.5rem;">
+  <div class="vol-strip">
+    <h3>Volunteering today?</h3>
+    <p>
+      Please park at <strong>New Culture Church, 301 S Bedford St</strong>, about a
+      15&nbsp;minute walk, and leave the close-in street spots for neighbors
+      coming to the Gathering.
+    </p>
+    <div style="display:flex;flex-wrap:wrap;gap:0.6rem;justify-content:center;">
+      <a class="btn btn-green" href="https://www.google.com/maps/dir/?api=1&destination=301+S+Bedford+St,+Madison,+WI+53703&travelmode=driving" target="_blank" rel="noopener">Drive there &#8594;</a>
+      <a class="btn btn-outline" href="#parking-map" id="vol-map-link">See it on the map &#8594;</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ QUICK FACTS ═══ -->
+<section style="background:var(--white);padding:3.5rem 1.5rem 4rem;">
+  <div style="max-width:46rem;margin:0 auto;text-align:center;">
+    <h2 style="font-size:clamp(1.6rem,5vw,2.2rem);margin-bottom:0.75rem;">While you&rsquo;re here</h2>
+    <p style="color:var(--ink-soft);margin-bottom:1.5rem;">
+      Sunday, September 13, 2026 &middot; 12&ndash;4 PM &middot; Brittingham Park &middot; 100% free, all ages.
+    </p>
+    <div style="display:flex;flex-wrap:wrap;gap:0.6rem;justify-content:center;">
+      <a class="btn btn-pink" href="index.html">Event info &#8594;</a>
+      <a class="btn btn-outline" href="index.html#entertainment">Schedule &#8594;</a>
+      <a class="btn btn-outline" href="get-involved.html">Volunteer &#8594;</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <img src="logo-badge.svg" alt="Madison Good Neighbor Gathering" class="footer-logo" width="200" height="200">
+      <div class="footer-text">
+        <p class="footer-event"><strong>Sunday, September 13, 2026 &middot; 12 &ndash; 4 PM</strong></p>
+        <p>Brittingham Park &middot; 829 W Washington Ave, Madison, WI &middot; 100% Free &middot; All Ages</p>
+        <p style="margin-top:0.5rem;">
+          <a href="index.html">Back to event info</a> &middot;
+          <a href="thanks.html">Our Sponsors</a>
+        </p>
+        <p style="margin-top:0.5rem;">
+          Proudly organized by
+          <a href="https://www.neighborhoodhousemadison.org" target="_blank" rel="noopener">Neighborhood House Community Center</a>,
+          <a href="https://newculturechurch.com" target="_blank" rel="noopener">New Culture Church</a>,
+          <a href="index.html#community">District 13 Neighborhood Associations</a>,
+          <a href="https://trianglecommunityministry.org" target="_blank" rel="noopener">Triangle Ministries</a>,
+          <a href="https://www.unitypoint.org/locations/unitypoint-health---meriter-hospital" target="_blank" rel="noopener">UnityPoint Health &ndash; Meriter</a>,
+          and <a href="https://bayviewfoundation.org" target="_blank" rel="noopener">Bayview Foundation</a>
+        </p>
+      </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 Madison Good Neighbor Gathering &middot; Made with &#10084; in Madison, WI</p>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/maplibre-gl@5.1.0/dist/maplibre-gl.js"></script>
+<script>
+(function () {
+  var EVENT_PT  = [-89.39784, 43.06332];  // Brittingham Park shelter / pavilion
+  var VOL_PT    = [-89.38894, 43.06650];  // New Culture Church, 301 S Bedford St
+  var CANPARK   = {"type":"FeatureCollection","features":[{"type":"Feature","properties":{"name":"Lowell Street"},"geometry":{"type":"LineString","coordinates":[[-89.39516,43.05709],[-89.39517,43.05703],[-89.39517,43.05694],[-89.39517,43.05685],[-89.39518,43.05675],[-89.39518,43.05666],[-89.39518,43.05657],[-89.39519,43.05648],[-89.39519,43.05638]]}},{"type":"Feature","properties":{"name":"Milton Street"},"geometry":{"type":"LineString","coordinates":[[-89.40406,43.0664],[-89.40417,43.0664],[-89.40421,43.0664],[-89.40438,43.0664],[-89.40456,43.0664],[-89.40469,43.0664],[-89.40482,43.0664],[-89.40495,43.0664],[-89.40508,43.0664],[-89.40523,43.0664],[-89.40538,43.0664],[-89.40553,43.0664],[-89.40568,43.0664]]}},{"type":"Feature","properties":{"name":"Milton Street"},"geometry":{"type":"LineString","coordinates":[[-89.40588,43.0664],[-89.40601,43.0664],[-89.40614,43.0664],[-89.40626,43.0664],[-89.40639,43.0664],[-89.40652,43.0664],[-89.40664,43.0664],[-89.40677,43.0664]]}},{"type":"Feature","properties":{"name":"Bowen Court"},"geometry":{"type":"LineString","coordinates":[[-89.40406,43.06707],[-89.40417,43.06707],[-89.4043,43.06707],[-89.40442,43.06707],[-89.40455,43.06707],[-89.40468,43.06707],[-89.40481,43.06707],[-89.40493,43.06707],[-89.40506,43.06707],[-89.40519,43.06707],[-89.40532,43.06707],[-89.40545,43.06707],[-89.40557,43.06707],[-89.40559,43.06707]]}},{"type":"Feature","properties":{"name":"Bowen Court"},"geometry":{"type":"LineString","coordinates":[[-89.40569,43.06707],[-89.40579,43.06707],[-89.40594,43.06707],[-89.40609,43.06707],[-89.40621,43.06707]]}},{"type":"Feature","properties":{"name":"North Frances Street"},"geometry":{"type":"LineString","coordinates":[[-89.39593,43.06979],[-89.39593,43.06988],[-89.39593,43.06997],[-89.39592,43.07006],[-89.39592,43.07015]]}},{"type":"Feature","properties":{"name":"South Charter Street"},"geometry":{"type":"LineString","coordinates":[[-89.40564,43.06581],[-89.40564,43.06572],[-89.40564,43.06562],[-89.40564,43.06553],[-89.40564,43.06543],[-89.40564,43.06541],[-89.40564,43.06531]]}},{"type":"Feature","properties":{"name":"South Charter Street"},"geometry":{"type":"LineString","coordinates":[[-89.40564,43.0651],[-89.40564,43.06499],[-89.40564,43.06488],[-89.40564,43.06477],[-89.40563,43.06466],[-89.40563,43.06455],[-89.40563,43.06443],[-89.40563,43.06432],[-89.40563,43.06423],[-89.40563,43.06412],[-89.40563,43.06401],[-89.40563,43.0639],[-89.40563,43.06379],[-89.40563,43.06369],[-89.40563,43.06356],[-89.40563,43.06344],[-89.40563,43.06334],[-89.40562,43.06324],[-89.40562,43.06321],[-89.40563,43.06313],[-89.40562,43.06303],[-89.40562,43.06293],[-89.40562,43.06283],[-89.40562,43.06273],[-89.40562,43.06263]]}},{"type":"Feature","properties":{"name":"Drake Street"},"geometry":{"type":"LineString","coordinates":[[-89.40105,43.06207],[-89.40121,43.06207],[-89.40137,43.06207],[-89.40141,43.06207],[-89.40154,43.06207],[-89.40168,43.06207],[-89.40181,43.06207],[-89.40194,43.06207],[-89.40207,43.06207],[-89.40221,43.06207],[-89.40234,43.06206]]}},{"type":"Feature","properties":{"name":"Drake Street"},"geometry":{"type":"LineString","coordinates":[[-89.40255,43.06206],[-89.40268,43.06206],[-89.4028,43.06206],[-89.40293,43.06206],[-89.40305,43.06206],[-89.40318,43.06206],[-89.4033,43.06206],[-89.40343,43.06205],[-89.40355,43.06205],[-89.40368,43.06205],[-89.4038,43.06205],[-89.40393,43.06205]]}},{"type":"Feature","properties":{"name":"Emerald Street"},"geometry":{"type":"LineString","coordinates":[[-89.40068,43.06097],[-89.40086,43.06097],[-89.40096,43.06097],[-89.40098,43.06097],[-89.40111,43.06097],[-89.40125,43.06097],[-89.40139,43.06097],[-89.40153,43.06096],[-89.40166,43.06096],[-89.4018,43.06096],[-89.40192,43.06096],[-89.40205,43.06096],[-89.40217,43.06096],[-89.40229,43.06096],[-89.40232,43.06096],[-89.40243,43.06096]]}},{"type":"Feature","properties":{"name":"Emerald Street"},"geometry":{"type":"LineString","coordinates":[[-89.40271,43.06096],[-89.40284,43.06096],[-89.40297,43.06096],[-89.4031,43.06096],[-89.40323,43.06096],[-89.40337,43.06096],[-89.4035,43.06096],[-89.40363,43.06096],[-89.40376,43.06096],[-89.40389,43.06096],[-89.40393,43.06095],[-89.40403,43.06096],[-89.40414,43.06096],[-89.40417,43.06096],[-89.4043,43.06096],[-89.40442,43.06096],[-89.40455,43.06096],[-89.40468,43.06096],[-89.40481,43.06096],[-89.40493,43.06096],[-89.40506,43.06096],[-89.40519,43.06096],[-89.40532,43.06096],[-89.40544,43.06096],[-89.40557,43.06097],[-89.4057,43.06097],[-89.40583,43.06097],[-89.40595,43.06097],[-89.40608,43.06097],[-89.40621,43.06097],[-89.40634,43.06097],[-89.40646,43.06097],[-89.40659,43.06097],[-89.40672,43.06097],[-89.40685,43.06098],[-89.40692,43.06098]]}},{"type":"Feature","properties":{"name":"Fahrenbrook Court"},"geometry":{"type":"LineString","coordinates":[[-89.40259,43.06876],[-89.40272,43.06877],[-89.40284,43.06877],[-89.40297,43.06877],[-89.4031,43.06877],[-89.40323,43.06877],[-89.40335,43.06877],[-89.40348,43.06877],[-89.40361,43.06878],[-89.40377,43.06878],[-89.40394,43.06878],[-89.40396,43.06878],[-89.40406,43.06878]]}},{"type":"Feature","properties":{"name":"South Mills Street"},"geometry":{"type":"LineString","coordinates":[[-89.40405,43.0655],[-89.40405,43.06559],[-89.40405,43.06568],[-89.40405,43.06578],[-89.40405,43.06587],[-89.40405,43.06598],[-89.40405,43.06609],[-89.40406,43.0662],[-89.40406,43.06632],[-89.40406,43.0664]]}},{"type":"Feature","properties":{"name":"West Brittingham Place"},"geometry":{"type":"LineString","coordinates":[[-89.39126,43.06444],[-89.39137,43.06435],[-89.39146,43.06427],[-89.39158,43.06418],[-89.39165,43.06413],[-89.39175,43.06406],[-89.39184,43.06399],[-89.39194,43.06393],[-89.39207,43.06384],[-89.39217,43.06377],[-89.39228,43.06369],[-89.39239,43.06362],[-89.39241,43.0636],[-89.39243,43.06359]]}},{"type":"Feature","properties":{"name":"West Shore Drive"},"geometry":{"type":"LineString","coordinates":[[-89.39978,43.06315],[-89.39975,43.0631],[-89.39974,43.06303],[-89.39974,43.06294],[-89.39973,43.06284],[-89.39973,43.06274],[-89.39973,43.06265],[-89.39973,43.06255],[-89.39973,43.06246],[-89.39972,43.06236],[-89.39972,43.06226],[-89.39972,43.06217],[-89.39972,43.06207],[-89.39972,43.06198],[-89.39972,43.06189],[-89.39972,43.0618],[-89.39972,43.06171],[-89.39972,43.06162],[-89.39972,43.06153],[-89.39972,43.06143],[-89.39972,43.06134],[-89.39972,43.06125],[-89.39971,43.06116],[-89.39971,43.06107],[-89.39971,43.06098],[-89.39971,43.06089],[-89.39971,43.0608],[-89.39971,43.06071],[-89.39971,43.06062],[-89.39971,43.06053],[-89.39971,43.06044],[-89.39971,43.06035],[-89.39971,43.06026],[-89.39971,43.06017],[-89.39971,43.06008],[-89.39971,43.05999],[-89.39971,43.0599],[-89.3997,43.05976],[-89.39969,43.05968],[-89.39966,43.05958],[-89.39959,43.05946],[-89.39955,43.05941],[-89.39948,43.05932],[-89.39941,43.05923],[-89.39934,43.05914],[-89.39927,43.05905],[-89.3992,43.05896],[-89.39913,43.05887],[-89.39907,43.05879],[-89.399,43.05871],[-89.39893,43.05863],[-89.39887,43.05854],[-89.3988,43.05846],[-89.39873,43.05837],[-89.39867,43.05829],[-89.3986,43.05821],[-89.39855,43.05813],[-89.39849,43.05804],[-89.39844,43.05796],[-89.39838,43.05788],[-89.39833,43.0578],[-89.39827,43.05772],[-89.39818,43.05763],[-89.3981,43.05754],[-89.39802,43.05745],[-89.39791,43.05737],[-89.3978,43.05728]]}},{"type":"Feature","properties":{"name":"South Brittingham Place"},"geometry":{"type":"LineString","coordinates":[[-89.39527,43.06512],[-89.39526,43.06511],[-89.39515,43.06506],[-89.39505,43.065],[-89.39495,43.06494],[-89.39485,43.06489],[-89.39474,43.06483],[-89.39463,43.06477]]}},{"type":"Feature","properties":{"name":"South Brittingham Place"},"geometry":{"type":"LineString","coordinates":[[-89.39443,43.06466],[-89.39433,43.0646],[-89.39423,43.06455],[-89.39413,43.0645],[-89.39403,43.06444],[-89.39393,43.06439],[-89.39384,43.06433],[-89.39374,43.06428],[-89.39364,43.06422],[-89.39354,43.06417],[-89.39344,43.06412],[-89.39334,43.06406],[-89.39324,43.06401],[-89.39314,43.06395],[-89.39304,43.0639],[-89.39294,43.06384],[-89.39284,43.06379],[-89.39275,43.06374],[-89.39265,43.06368],[-89.39255,43.06363],[-89.39252,43.06361],[-89.3925,43.06361],[-89.39248,43.0636],[-89.39245,43.06359],[-89.39243,43.06359]]}},{"type":"Feature","properties":{"name":"Clark Court"},"geometry":{"type":"LineString","coordinates":[[-89.39375,43.06526],[-89.39387,43.06518],[-89.39398,43.0651],[-89.39407,43.06503],[-89.39417,43.06497],[-89.39426,43.0649],[-89.39435,43.06484],[-89.39444,43.06478],[-89.39445,43.06477]]}},{"type":"Feature","properties":{"name":"North Brooks Street"},"geometry":{"type":"LineString","coordinates":[[-89.40247,43.06768],[-89.40247,43.06778],[-89.40247,43.0678],[-89.40247,43.0679],[-89.40247,43.068],[-89.40247,43.0681],[-89.40247,43.06819],[-89.40247,43.06824]]}},{"type":"Feature","properties":{"name":"North Brooks Street"},"geometry":{"type":"LineString","coordinates":[[-89.40247,43.0683],[-89.40247,43.0684],[-89.40247,43.0685],[-89.40248,43.06861],[-89.40248,43.06872],[-89.40247,43.06876]]}},{"type":"Feature","properties":{"name":"South Shore Drive"},"geometry":{"type":"LineString","coordinates":[[-89.39516,43.05709],[-89.39529,43.05709],[-89.39541,43.05707],[-89.39553,43.05707],[-89.39566,43.05705],[-89.39579,43.05703],[-89.39592,43.05701],[-89.39605,43.057],[-89.39618,43.05698],[-89.39631,43.05696],[-89.39647,43.05695],[-89.39663,43.05694],[-89.3968,43.05692],[-89.39689,43.05692],[-89.39711,43.05695],[-89.39729,43.05699],[-89.39741,43.05703],[-89.39753,43.05709],[-89.39764,43.05716],[-89.3978,43.05728]]}},{"type":"Feature","properties":{"name":"Chandler Street"},"geometry":{"type":"LineString","coordinates":[[-89.40129,43.06424],[-89.40142,43.06424],[-89.40155,43.06424],[-89.40169,43.06424],[-89.40182,43.06424],[-89.40195,43.06424],[-89.40208,43.06424],[-89.40221,43.06424],[-89.40234,43.06424]]}},{"type":"Feature","properties":{"name":"Chandler Street"},"geometry":{"type":"LineString","coordinates":[[-89.40257,43.06424],[-89.40269,43.06424],[-89.40282,43.06424],[-89.40294,43.06424],[-89.40307,43.06424],[-89.40319,43.06424],[-89.40332,43.06423],[-89.40346,43.06423],[-89.40361,43.06423],[-89.40378,43.06423],[-89.40395,43.06423]]}},{"type":"Feature","properties":{"name":"Chandler Street"},"geometry":{"type":"LineString","coordinates":[[-89.40404,43.06423],[-89.40415,43.06423],[-89.40416,43.06423],[-89.40428,43.06423],[-89.40441,43.06423],[-89.40453,43.06423],[-89.40466,43.06423],[-89.40478,43.06423],[-89.40491,43.06423],[-89.40503,43.06423],[-89.40516,43.06423],[-89.40528,43.06423],[-89.4054,43.06423],[-89.40553,43.06423],[-89.40563,43.06423],[-89.40573,43.06423],[-89.40585,43.06423],[-89.40597,43.06423],[-89.4061,43.06423],[-89.40622,43.06423],[-89.40634,43.06422],[-89.40647,43.06422],[-89.40659,43.06422],[-89.40671,43.06422],[-89.40684,43.06422],[-89.40696,43.06422],[-89.40708,43.06422],[-89.40711,43.06422],[-89.4072,43.06422],[-89.40731,43.06422],[-89.40735,43.06422],[-89.40748,43.06422],[-89.4076,43.06422]]}},{"type":"Feature","properties":{"name":"High Street"},"geometry":{"type":"LineString","coordinates":[[-89.40297,43.05798],[-89.40293,43.05793],[-89.40291,43.05791],[-89.40284,43.05782],[-89.40277,43.05773],[-89.4027,43.05765],[-89.40263,43.05756],[-89.40255,43.05747]]}},{"type":"Feature","properties":{"name":"High Street"},"geometry":{"type":"LineString","coordinates":[[-89.40243,43.05731],[-89.40236,43.05723],[-89.4023,43.05715],[-89.40224,43.05707],[-89.40217,43.05699],[-89.40211,43.05691],[-89.40205,43.05683]]}},{"type":"Feature","properties":{"name":"Mound Street"},"geometry":{"type":"LineString","coordinates":[[-89.40247,43.06533],[-89.40257,43.06533],[-89.4026,43.06533],[-89.40274,43.06533],[-89.40288,43.06532],[-89.40303,43.06532],[-89.40317,43.06532],[-89.40331,43.06532],[-89.40339,43.06532],[-89.40354,43.06532],[-89.40368,43.06532],[-89.40382,43.06532],[-89.40396,43.06532]]}},{"type":"Feature","properties":{"name":"South Bedford Street"},"geometry":{"type":"LineString","coordinates":[[-89.3923,43.06871],[-89.39222,43.06865],[-89.39213,43.06858],[-89.39205,43.06852],[-89.39196,43.06845],[-89.39186,43.06837],[-89.39175,43.06829],[-89.39164,43.06821],[-89.39154,43.06813],[-89.39143,43.06805]]}},{"type":"Feature","properties":{"name":"South Bedford Street"},"geometry":{"type":"LineString","coordinates":[[-89.39109,43.06779],[-89.39099,43.06771],[-89.39096,43.06769],[-89.39094,43.06767],[-89.39091,43.06766],[-89.39077,43.06755],[-89.39067,43.06747],[-89.39057,43.06739],[-89.39049,43.06734],[-89.39042,43.06728],[-89.39032,43.06721],[-89.39023,43.06713],[-89.39014,43.06706],[-89.39003,43.06698],[-89.38992,43.0669],[-89.38982,43.06682],[-89.38971,43.06674],[-89.38964,43.06667]]}},{"type":"Feature","properties":{"name":"South Bedford Street"},"geometry":{"type":"LineString","coordinates":[[-89.38954,43.06659],[-89.38945,43.06653],[-89.38936,43.06646],[-89.38927,43.06639],[-89.38918,43.06633],[-89.38906,43.06624],[-89.389,43.06619],[-89.38891,43.06613],[-89.38882,43.06606],[-89.3888,43.06604],[-89.3887,43.06598]]}},{"type":"Feature","properties":{"name":"Vilas Avenue"},"geometry":{"type":"LineString","coordinates":[[-89.40132,43.06316],[-89.40137,43.06316],[-89.40151,43.06316],[-89.40165,43.06316],[-89.40178,43.06316],[-89.40192,43.06315],[-89.40206,43.06315],[-89.4022,43.06315],[-89.40234,43.06315]]}},{"type":"Feature","properties":{"name":"Vilas Avenue"},"geometry":{"type":"LineString","coordinates":[[-89.40413,43.06313],[-89.40416,43.06313],[-89.40429,43.06313],[-89.40441,43.06313],[-89.40454,43.06313],[-89.40467,43.06313],[-89.4048,43.06313],[-89.40493,43.06313],[-89.40506,43.06313],[-89.40519,43.06313],[-89.40536,43.06313],[-89.40554,43.06313],[-89.40563,43.06313],[-89.40572,43.06313],[-89.40585,43.06313],[-89.40598,43.06313],[-89.4061,43.06313],[-89.40623,43.06313],[-89.40635,43.06313],[-89.40648,43.06313],[-89.4066,43.06313],[-89.40673,43.06313],[-89.40685,43.06313],[-89.40698,43.06313],[-89.4071,43.06313],[-89.4072,43.06313],[-89.40731,43.06313],[-89.40744,43.06313],[-89.40757,43.06313],[-89.40769,43.06313]]}},{"type":"Feature","properties":{"name":"West Wilson Street"},"geometry":{"type":"LineString","coordinates":[[-89.38979,43.06657],[-89.38988,43.0665],[-89.38998,43.06643],[-89.39007,43.06637],[-89.39016,43.0663],[-89.39025,43.06624],[-89.39035,43.06617],[-89.39044,43.06611]]}},{"type":"Feature","properties":{"name":"West Doty Street"},"geometry":{"type":"LineString","coordinates":[[-89.39049,43.06734],[-89.39057,43.06728],[-89.39067,43.06721],[-89.39077,43.06714],[-89.39087,43.06707],[-89.39098,43.06699]]}},{"type":"Feature","properties":{"name":"Lorillard Court"},"geometry":{"type":"LineString","coordinates":[[-89.39235,43.06506],[-89.39216,43.06498],[-89.39207,43.06494],[-89.39203,43.06493],[-89.39199,43.06493]]}},{"type":"Feature","properties":{"name":"St James Court"},"geometry":{"type":"LineString","coordinates":[[-89.40508,43.06586],[-89.40523,43.06586],[-89.40539,43.06586],[-89.40554,43.06586],[-89.40564,43.06586]]}},{"type":"Feature","properties":{"name":"Regent Street"},"geometry":{"type":"LineString","coordinates":[[-89.40458,43.06771],[-89.40469,43.06771],[-89.40478,43.06771],[-89.40491,43.06771],[-89.40503,43.06771],[-89.40507,43.06771],[-89.40521,43.06772],[-89.40534,43.06772],[-89.40547,43.06772],[-89.40559,43.06772]]}},{"type":"Feature","properties":{"name":"South Park Street"},"geometry":{"type":"LineString","coordinates":[[-89.40087,43.06295],[-89.40087,43.06284],[-89.40087,43.06273],[-89.40087,43.06262],[-89.40087,43.06251],[-89.40087,43.06239],[-89.40087,43.06228],[-89.40087,43.06217]]}},{"type":"Feature","properties":{"name":"South Park Street"},"geometry":{"type":"LineString","coordinates":[[-89.40087,43.06188],[-89.40088,43.06179],[-89.40088,43.0617],[-89.40088,43.06161],[-89.40088,43.06152],[-89.40088,43.06141],[-89.40087,43.0613],[-89.40087,43.06119],[-89.40087,43.06108],[-89.40086,43.06097]]}},{"type":"Feature","properties":{"name":"South Park Street"},"geometry":{"type":"LineString","coordinates":[[-89.40086,43.06088],[-89.40086,43.06076],[-89.40086,43.06064],[-89.40086,43.06052],[-89.40085,43.06042],[-89.40084,43.06029]]}},{"type":"Feature","properties":{"name":"South Park Street"},"geometry":{"type":"LineString","coordinates":[[-89.40015,43.05838],[-89.40007,43.0583],[-89.39999,43.05821],[-89.39992,43.05812],[-89.39985,43.05803],[-89.39978,43.05794],[-89.39971,43.05785],[-89.39964,43.05775],[-89.39956,43.05766],[-89.39949,43.05757],[-89.39941,43.05747]]}},{"type":"Feature","properties":{"name":"West Main Street"},"geometry":{"type":"LineString","coordinates":[[-89.39083,43.06836],[-89.39094,43.06828],[-89.39099,43.06824],[-89.39102,43.06822],[-89.39117,43.06812],[-89.39127,43.06805]]}},{"type":"Feature","properties":{"name":"West Main Street"},"geometry":{"type":"LineString","coordinates":[[-89.39136,43.06799],[-89.39143,43.06794],[-89.39153,43.06787],[-89.39164,43.0678],[-89.39174,43.06772],[-89.39184,43.06765],[-89.39195,43.06758],[-89.39205,43.06751],[-89.39215,43.06744],[-89.39222,43.06738],[-89.39229,43.06733],[-89.39241,43.06724],[-89.39254,43.06715]]}},{"type":"Feature","properties":{"name":"West Main Street"},"geometry":{"type":"LineString","coordinates":[[-89.3927,43.06704],[-89.39283,43.06695],[-89.39292,43.06688],[-89.39302,43.06681],[-89.39311,43.06674],[-89.39321,43.06667],[-89.39331,43.0666],[-89.39341,43.06653]]}},{"type":"Feature","properties":{"name":"Braxton Place"},"geometry":{"type":"LineString","coordinates":[[-89.40014,43.06634],[-89.40026,43.06633],[-89.40039,43.06633],[-89.40052,43.06633],[-89.40065,43.06633]]}},{"type":"Feature","properties":{"name":"Proudfit Street"},"geometry":{"type":"LineString","coordinates":[[-89.3915,43.06459],[-89.39158,43.06466],[-89.39166,43.06473],[-89.39174,43.0648],[-89.39183,43.06487],[-89.39191,43.06493],[-89.39197,43.06498],[-89.39205,43.06505],[-89.39214,43.06511],[-89.39223,43.06518],[-89.39231,43.06525],[-89.3924,43.06531],[-89.39249,43.06538],[-89.39257,43.06544],[-89.39266,43.06551],[-89.39275,43.06557],[-89.39283,43.06564]]}},{"type":"Feature","properties":{"name":"Proudfit Street"},"geometry":{"type":"LineString","coordinates":[[-89.39302,43.06578],[-89.39311,43.06585],[-89.3932,43.06592],[-89.39329,43.06599],[-89.39339,43.06606]]}},{"type":"Feature","properties":{"name":"Erin Street"},"geometry":{"type":"LineString","coordinates":[[-89.40112,43.05989],[-89.4013,43.05989],[-89.40144,43.05988],[-89.40158,43.05988],[-89.40172,43.05988],[-89.40187,43.05988],[-89.40198,43.05988],[-89.40215,43.05988],[-89.40232,43.05988],[-89.40242,43.05988]]}},{"type":"Feature","properties":{"name":"Erin Street"},"geometry":{"type":"LineString","coordinates":[[-89.40275,43.05988],[-89.40291,43.05987],[-89.40306,43.05987],[-89.40321,43.05987],[-89.40337,43.05987],[-89.4035,43.05987],[-89.40364,43.05987],[-89.40378,43.05987]]}},{"type":"Feature","properties":{"name":"Haywood Drive"},"geometry":{"type":"LineString","coordinates":[[-89.40052,43.05822],[-89.40068,43.05815],[-89.40072,43.05813],[-89.40083,43.05809],[-89.40094,43.05804],[-89.40106,43.05799],[-89.40117,43.05795],[-89.40128,43.0579],[-89.40139,43.05785]]}},{"type":"Feature","properties":{"name":"South Brooks Street"},"geometry":{"type":"LineString","coordinates":[[-89.40142,43.05774],[-89.4014,43.05772],[-89.40134,43.05764],[-89.40128,43.05756],[-89.40121,43.05748],[-89.40115,43.0574],[-89.40109,43.05732],[-89.40102,43.05724],[-89.40096,43.05716],[-89.4009,43.05708],[-89.40083,43.057],[-89.40077,43.05692],[-89.40071,43.05684],[-89.40064,43.05676],[-89.40058,43.05668],[-89.40052,43.0566],[-89.40045,43.05653],[-89.40038,43.05644]]}},{"type":"Feature","properties":{"name":"Haywood Drive"},"geometry":{"type":"LineString","coordinates":[[-89.40158,43.05777],[-89.40172,43.05771],[-89.40186,43.05765],[-89.402,43.05759],[-89.40214,43.05754],[-89.40227,43.05748],[-89.4024,43.05742]]}},{"type":"Feature","properties":{"name":"Haywood Drive"},"geometry":{"type":"LineString","coordinates":[[-89.40249,43.05738],[-89.40257,43.05735],[-89.40268,43.0573],[-89.4028,43.05725],[-89.40291,43.0572]]}},{"type":"Feature","properties":{"name":"South Mills Street"},"geometry":{"type":"LineString","coordinates":[[-89.40405,43.06522],[-89.40405,43.06513],[-89.40405,43.06504],[-89.40405,43.06494],[-89.40405,43.06485],[-89.40405,43.06476],[-89.40405,43.06465],[-89.40405,43.06454],[-89.40404,43.06444],[-89.40404,43.06433],[-89.40404,43.06423]]}},{"type":"Feature","properties":{"name":"South Mills Street"},"geometry":{"type":"LineString","coordinates":[[-89.40404,43.06304],[-89.40404,43.06293],[-89.40404,43.06282],[-89.40404,43.06271],[-89.40403,43.0626],[-89.40404,43.06248],[-89.40404,43.06237],[-89.40404,43.06226]]}},{"type":"Feature","properties":{"name":"Mound Street"},"geometry":{"type":"LineString","coordinates":[[-89.40405,43.06532],[-89.40416,43.06532],[-89.40429,43.06532],[-89.40441,43.06532],[-89.40454,43.06531],[-89.40466,43.06531],[-89.40479,43.06531],[-89.40491,43.06531],[-89.40504,43.06531],[-89.40516,43.06531],[-89.40529,43.06531],[-89.40541,43.06531],[-89.40554,43.06531],[-89.40564,43.06531],[-89.40574,43.06531],[-89.40585,43.06531],[-89.40599,43.06531],[-89.40612,43.06531],[-89.40625,43.06531],[-89.40637,43.06531],[-89.40649,43.06531],[-89.40662,43.06531],[-89.40674,43.06531],[-89.40687,43.06531],[-89.40699,43.06531],[-89.40711,43.06531],[-89.40722,43.06531],[-89.40731,43.06531]]}},{"type":"Feature","properties":{"name":"West Washington Avenue"},"geometry":{"type":"LineString","coordinates":[[-89.39276,43.06863],[-89.39287,43.06855],[-89.39301,43.06846],[-89.39314,43.06837],[-89.39325,43.0683],[-89.39335,43.06823],[-89.39346,43.06816],[-89.39356,43.06809],[-89.39359,43.06807]]}},{"type":"Feature","properties":{"name":"West Washington Avenue"},"geometry":{"type":"LineString","coordinates":[[-89.39584,43.0666],[-89.39594,43.06653],[-89.39604,43.06646],[-89.39614,43.06639],[-89.39624,43.06632],[-89.39634,43.06625],[-89.39644,43.06618],[-89.39653,43.06612],[-89.39662,43.06605],[-89.39672,43.06599],[-89.39681,43.06592],[-89.3969,43.06586],[-89.39699,43.06579],[-89.39709,43.06572],[-89.39718,43.06566],[-89.39727,43.06559],[-89.39737,43.06553],[-89.39746,43.06546],[-89.39755,43.0654],[-89.39759,43.06537],[-89.39768,43.06531],[-89.39777,43.06525],[-89.39786,43.06518]]}},{"type":"Feature","properties":{"name":"West Washington Avenue"},"geometry":{"type":"LineString","coordinates":[[-89.39883,43.0645],[-89.39893,43.06443],[-89.39902,43.06437],[-89.39912,43.0643],[-89.39921,43.06423],[-89.3993,43.06417],[-89.3994,43.0641],[-89.39949,43.06404],[-89.39959,43.06397],[-89.39968,43.0639],[-89.39978,43.06383],[-89.39987,43.06377]]}},{"type":"Feature","properties":{"name":"West Washington Avenue"},"geometry":{"type":"LineString","coordinates":[[-89.39899,43.06418],[-89.3989,43.06424],[-89.39881,43.06431],[-89.39872,43.06437],[-89.39862,43.06444],[-89.39853,43.0645],[-89.39844,43.06457],[-89.39835,43.06463],[-89.39826,43.06469],[-89.39817,43.06476],[-89.39808,43.06482]]}},{"type":"Feature","properties":{"name":"West Washington Avenue"},"geometry":{"type":"LineString","coordinates":[[-89.39767,43.06511],[-89.39756,43.06518],[-89.39745,43.06526],[-89.39735,43.06533],[-89.39725,43.0654],[-89.39715,43.06547],[-89.39705,43.06554],[-89.39695,43.06561],[-89.39685,43.06568],[-89.39675,43.06575],[-89.39666,43.06582]]}},{"type":"Feature","properties":{"name":"West Doty Street"},"geometry":{"type":"LineString","coordinates":[[-89.38997,43.0677],[-89.39012,43.0676],[-89.39022,43.06753],[-89.39031,43.06746],[-89.39041,43.06739],[-89.39049,43.06734]]}},{"type":"Feature","properties":{"name":"South Park Street"},"geometry":{"type":"LineString","coordinates":[[-89.40071,43.06288],[-89.40071,43.06306],[-89.40071,43.06316]]}},{"type":"Feature","properties":{"name":"South Brooks Street"},"geometry":{"type":"LineString","coordinates":[[-89.40242,43.05988],[-89.40242,43.05997],[-89.40242,43.06],[-89.40243,43.06011],[-89.40243,43.06023],[-89.40243,43.06034],[-89.40243,43.06042],[-89.40243,43.06053],[-89.40243,43.06064],[-89.40243,43.06075],[-89.40243,43.06086],[-89.40243,43.06096],[-89.40243,43.06106],[-89.40243,43.06115],[-89.40243,43.06124],[-89.40243,43.06133],[-89.40243,43.06142],[-89.40243,43.06151],[-89.40243,43.06161],[-89.40244,43.06172],[-89.40244,43.06182],[-89.40244,43.06193],[-89.40244,43.06196]]}},{"type":"Feature","properties":{"name":"South Brooks Street"},"geometry":{"type":"LineString","coordinates":[[-89.40244,43.06206],[-89.40244,43.06216],[-89.40244,43.0622],[-89.40244,43.0623],[-89.40244,43.0624],[-89.40244,43.0625],[-89.40244,43.06261],[-89.40244,43.06272],[-89.40244,43.06283],[-89.40244,43.06294],[-89.40244,43.06304],[-89.40244,43.06306],[-89.40244,43.06315],[-89.40244,43.06325],[-89.40244,43.06336],[-89.40244,43.06347],[-89.40244,43.06358],[-89.40244,43.06369],[-89.40245,43.06379],[-89.40245,43.0639],[-89.40246,43.06401],[-89.40246,43.06411],[-89.40246,43.06413],[-89.40247,43.06424]]}},{"type":"Feature","properties":{"name":"South Park Street"},"geometry":{"type":"LineString","coordinates":[[-89.39894,43.05718],[-89.399,43.05726],[-89.39907,43.05735],[-89.39913,43.05743],[-89.39916,43.05746],[-89.39923,43.05755],[-89.3993,43.05765],[-89.39937,43.05773],[-89.39943,43.05781],[-89.3995,43.05789],[-89.39957,43.05797],[-89.39964,43.05805],[-89.3997,43.05813],[-89.39977,43.05822],[-89.39984,43.0583],[-89.39991,43.05838]]}},{"type":"Feature","properties":{"name":"South Park Street"},"geometry":{"type":"LineString","coordinates":[[-89.40083,43.05967],[-89.40082,43.05955],[-89.40081,43.05943],[-89.40078,43.05932],[-89.40074,43.0592],[-89.40067,43.05909]]}},{"type":"Feature","properties":{"name":"Erin Street"},"geometry":{"type":"LineString","coordinates":[[-89.39971,43.0599],[-89.39978,43.0599],[-89.39992,43.05989],[-89.40005,43.05989],[-89.40018,43.05989],[-89.40023,43.05989],[-89.4004,43.05989],[-89.40057,43.05989]]}},{"type":"Feature","properties":{"name":"Erin Street"},"geometry":{"type":"LineString","coordinates":[[-89.40404,43.05987],[-89.40413,43.05987],[-89.40427,43.05987],[-89.4044,43.05987],[-89.40453,43.05987],[-89.40467,43.05987],[-89.4048,43.05987],[-89.40493,43.05987],[-89.40506,43.05987],[-89.4052,43.05987],[-89.40533,43.05987],[-89.40546,43.05987],[-89.40559,43.05988],[-89.40571,43.05988],[-89.40584,43.05988],[-89.40596,43.05988],[-89.40609,43.05988]]}},{"type":"Feature","properties":{"name":"North Mills Street"},"geometry":{"type":"LineString","coordinates":[[-89.40406,43.06888],[-89.40406,43.06878],[-89.40406,43.06868],[-89.40406,43.06858],[-89.40406,43.06847],[-89.40406,43.06837],[-89.40406,43.06827]]}},{"type":"Feature","properties":{"name":"Regent Street"},"geometry":{"type":"LineString","coordinates":[[-89.40197,43.06767],[-89.40184,43.06767],[-89.40172,43.06767],[-89.40159,43.06767],[-89.40146,43.06767]]}},{"type":"Feature","properties":{"name":"South Park Street"},"geometry":{"type":"LineString","coordinates":[[-89.40061,43.05898],[-89.40054,43.05889],[-89.40047,43.0588],[-89.4004,43.05871],[-89.40033,43.05862],[-89.40026,43.05853]]}},{"type":"Feature","properties":{"name":"South Brooks Street"},"geometry":{"type":"LineString","coordinates":[[-89.40148,43.05782],[-89.40153,43.05787],[-89.40154,43.05789],[-89.4016,43.05797],[-89.40167,43.05805],[-89.40173,43.05813],[-89.4018,43.05821],[-89.40186,43.05829],[-89.40193,43.05838],[-89.40195,43.05841]]}},{"type":"Feature","properties":{"name":"Lorillard Court"},"geometry":{"type":"LineString","coordinates":[[-89.39102,43.06552],[-89.39107,43.06556],[-89.39109,43.0656],[-89.39111,43.06562],[-89.39113,43.06564],[-89.39124,43.06573],[-89.39135,43.06582],[-89.39144,43.06592],[-89.39153,43.06601]]}},{"type":"Feature","properties":{"name":"South Park Street"},"geometry":{"type":"LineString","coordinates":[[-89.40066,43.06015],[-89.40066,43.06025],[-89.40066,43.06036],[-89.40067,43.06047],[-89.40067,43.06058],[-89.40067,43.06068],[-89.40067,43.06078],[-89.40067,43.06088],[-89.40068,43.06097]]}},{"type":"Feature","properties":{"name":"South Park Street"},"geometry":{"type":"LineString","coordinates":[[-89.40068,43.06108],[-89.40068,43.0612],[-89.40068,43.06133],[-89.40068,43.06143],[-89.40069,43.06152],[-89.40069,43.06162],[-89.40069,43.06172],[-89.40069,43.06184],[-89.40069,43.06197]]}},{"type":"Feature","properties":{"name":"South Park Street"},"geometry":{"type":"LineString","coordinates":[[-89.40084,43.06029],[-89.40084,43.06018],[-89.40084,43.06008],[-89.40084,43.05997],[-89.40084,43.05989]]}},{"type":"Feature","properties":{"name":"Drake Street"},"geometry":{"type":"LineString","coordinates":[[-89.39972,43.06207],[-89.39982,43.06207],[-89.39997,43.06207],[-89.40013,43.06207],[-89.40029,43.06207]]}},{"type":"Feature","properties":{"name":"South Park Street"},"geometry":{"type":"LineString","coordinates":[[-89.40071,43.06326],[-89.40071,43.06334],[-89.40071,43.0634],[-89.40071,43.06349]]}},{"type":"Feature","properties":{"name":"Drake Street"},"geometry":{"type":"LineString","coordinates":[[-89.40404,43.06205],[-89.40414,43.06205],[-89.40426,43.06205],[-89.40439,43.06205],[-89.40452,43.06205],[-89.40465,43.06205],[-89.40477,43.06205],[-89.4049,43.06205],[-89.40503,43.06205],[-89.40515,43.06205],[-89.40528,43.06205],[-89.40541,43.06205],[-89.40553,43.06205],[-89.40566,43.06205],[-89.40579,43.06205],[-89.40592,43.06205],[-89.40604,43.06205],[-89.40617,43.06205],[-89.4063,43.06205],[-89.40642,43.06205],[-89.40655,43.06205],[-89.40668,43.06205],[-89.4068,43.06205],[-89.40693,43.06205],[-89.407,43.06205]]}},{"type":"Feature","properties":{"name":"La Mariposa Lane"},"geometry":{"type":"LineString","coordinates":[[-89.39759,43.06537],[-89.39768,43.06544],[-89.3978,43.06554],[-89.39782,43.06555],[-89.39784,43.06557],[-89.39786,43.06559],[-89.39787,43.06561],[-89.39789,43.06563],[-89.3979,43.06565],[-89.39792,43.06568],[-89.39793,43.06571],[-89.39794,43.06574],[-89.39795,43.06577],[-89.39795,43.0658],[-89.39795,43.06591],[-89.39796,43.06602],[-89.39796,43.06613],[-89.39796,43.06623]]}},{"type":"Feature","properties":{"name":"West Main Street"},"geometry":{"type":"LineString","coordinates":[[-89.39341,43.06653],[-89.39351,43.06645],[-89.39362,43.06638],[-89.39364,43.06636]]}},{"type":"Feature","properties":{"name":"West Main Street"},"geometry":{"type":"LineString","coordinates":[[-89.39384,43.06622],[-89.39392,43.06616],[-89.39395,43.06615],[-89.39405,43.06607],[-89.39415,43.066],[-89.39427,43.06592],[-89.39437,43.06585],[-89.39446,43.06579],[-89.39455,43.06572],[-89.39464,43.06566],[-89.39473,43.0656],[-89.39482,43.06553],[-89.39491,43.06547],[-89.39503,43.06538],[-89.39514,43.06531],[-89.39524,43.06523]]}},{"type":"Feature","properties":{"name":"Proudfit Street"},"geometry":{"type":"LineString","coordinates":[[-89.39384,43.06622],[-89.39377,43.06616],[-89.39366,43.06608],[-89.39362,43.06604],[-89.39353,43.06597],[-89.39344,43.0659],[-89.39335,43.06583],[-89.39326,43.06576],[-89.39317,43.06569],[-89.39308,43.06562],[-89.39299,43.06555],[-89.39289,43.06548],[-89.3928,43.06541],[-89.39271,43.06534],[-89.39262,43.06527],[-89.39253,43.0652],[-89.39244,43.06513],[-89.39235,43.06506],[-89.39226,43.065],[-89.39217,43.06493],[-89.39208,43.06487],[-89.39199,43.06481],[-89.3919,43.06474],[-89.39181,43.06468],[-89.39172,43.06461],[-89.39164,43.06455],[-89.39155,43.06448],[-89.39144,43.0644]]}},{"type":"Feature","properties":{"name":"Emerald Street"},"geometry":{"type":"LineString","coordinates":[[-89.39971,43.06098],[-89.3998,43.06098],[-89.39996,43.06098],[-89.40011,43.06098],[-89.40026,43.06097],[-89.40041,43.06097],[-89.40047,43.06097],[-89.40053,43.06097]]}},{"type":"Feature","properties":{"name":"Milton Street"},"geometry":{"type":"LineString","coordinates":[[-89.40257,43.06641],[-89.40262,43.06641],[-89.40275,43.06641],[-89.40288,43.06641],[-89.40302,43.06641],[-89.40322,43.06641],[-89.40327,43.06641],[-89.40335,43.06641],[-89.4035,43.06641],[-89.40365,43.06641],[-89.40379,43.0664],[-89.40393,43.0664],[-89.40395,43.0664],[-89.40406,43.0664]]}},{"type":"Feature","properties":{"name":"West Washington Avenue"},"geometry":{"type":"LineString","coordinates":[[-89.40041,43.0634],[-89.40053,43.06332],[-89.40057,43.06331],[-89.40071,43.06326]]}},{"type":"Feature","properties":{"name":"Lorillard Court"},"geometry":{"type":"LineString","coordinates":[[-89.39147,43.06524],[-89.39136,43.06531],[-89.39126,43.06537],[-89.39107,43.06549],[-89.39102,43.06552]]}},{"type":"Feature","properties":{"name":"Braxton Place"},"geometry":{"type":"LineString","coordinates":[[-89.39849,43.06647],[-89.39865,43.06646],[-89.3988,43.06646],[-89.39895,43.06646],[-89.3991,43.06646],[-89.39917,43.06646],[-89.3993,43.06645],[-89.39942,43.06645],[-89.39962,43.06642],[-89.39975,43.0664],[-89.39988,43.06638],[-89.40001,43.06636],[-89.40014,43.06634],[-89.39998,43.06633],[-89.39983,43.06632],[-89.39974,43.06631],[-89.39953,43.06629],[-89.3994,43.06627],[-89.39925,43.06627],[-89.3991,43.06627],[-89.39903,43.06627],[-89.3989,43.06627],[-89.39876,43.06628],[-89.39863,43.06628],[-89.39849,43.06629]]}}]};  // streets you can park on, Sunday rules applied
+  var WALK      = [[-89.38909,43.06638],[-89.3912,43.06799],[-89.39135,43.06789],[-89.39149,43.06799],[-89.39397,43.06627],[-89.39423,43.06605],[-89.3956,43.0651],[-89.39581,43.06508],[-89.39663,43.06509],[-89.39775,43.06488],[-89.39779,43.06489],[-89.39881,43.06417],[-89.39866,43.06406],[-89.39865,43.06397],[-89.39856,43.06385],[-89.39841,43.06377],[-89.39844,43.06374],[-89.39844,43.06367],[-89.39842,43.06365],[-89.39833,43.06365],[-89.39826,43.06358],[-89.39818,43.06359],[-89.39823,43.0635],[-89.39831,43.06343],[-89.39819,43.06338],[-89.39799,43.06334]];       // church -> pavilion, foot route
+
+  var CAPTION = {
+    street: 'Every green stretch is within a 10 minute walk of the pavilion. Gaps are bus stops, hydrants and no-parking zones.',
+    vol:    'Volunteers: park at New Culture Church, 301 S Bedford St. The dashed line is the 15 minute walk to the pavilion.'
+  };
+
+  var wrap    = document.getElementById('pmap-wrap');
+  var caption = document.getElementById('pmap-caption');
+  var tabS    = document.getElementById('tab-street');
+  var tabV    = document.getElementById('tab-vol');
+  var legS    = document.getElementById('legend-street');
+  var legV    = document.getElementById('legend-vol');
+
+  function fail() { wrap.classList.add('failed'); }
+
+  // maplibre-gl v5 dropped the old supported() helper; "script loaded" is the gate,
+  // and the try/catch below covers anything the browser can't actually do.
+  if (typeof maplibregl === 'undefined') { fail(); return; }
+
+  function pin(cls, label) {
+    var el = document.createElement('div');
+    el.className = 'pin ' + cls;
+    el.innerHTML = '<div class="pin-bubble"></div><div class="pin-stem"></div><div class="pin-dot"></div>';
+    el.querySelector('.pin-bubble').textContent = label;
+    return el;
+  }
+
+  try {
+    var map = new maplibregl.Map({
+      container: 'pmap',
+      style: 'https://tiles.openfreemap.org/styles/positron',
+      center: EVENT_PT,
+      zoom: 14.6,
+      attributionControl: {
+        compact: true,
+        customAttribution: 'Parking rules: <a href="https://data-cityofmadison.opendata.arcgis.com/" target="_blank" rel="noopener">City of Madison</a>'
+      }
+    });
+
+    map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
+    map.addControl(new maplibregl.FullscreenControl(), 'top-right');
+    map.addControl(new maplibregl.GeolocateControl({
+      positionOptions: { enableHighAccuracy: true },
+      trackUserLocation: true
+    }), 'top-right');
+
+    map.on('error', function (e) {
+      if (e && e.error && e.error.status === 404 && !map.isStyleLoaded()) fail();
+    });
+
+    var volMarker = new maplibregl.Marker({ element: pin('pin-vol', 'Volunteer parking'), anchor: 'bottom' })
+      .setLngLat(VOL_PT)
+      .setPopup(new maplibregl.Popup({ offset: 18 }).setHTML(
+        '<strong>New Culture Church</strong><br>301 S Bedford St<br>15 min walk to the pavilion'
+      ));
+
+    var eventMarker = new maplibregl.Marker({ element: pin('pin-event', 'The Gathering'), anchor: 'bottom' })
+      .setLngLat(EVENT_PT)
+      .setPopup(new maplibregl.Popup({ offset: 18 }).setHTML(
+        '<strong>Brittingham Park pavilion</strong><br>829 W Washington Ave<br>12&ndash;4 PM'
+      ));
+
+    function near(c, p, deg) {
+      return Math.abs(c[0] - p[0]) < deg * 1.4 && Math.abs(c[1] - p[1]) < deg;
+    }
+
+    function pad(extraRight) {
+      var narrow = map.getContainer().clientWidth < 560;
+      return narrow
+        ? { top: 70, bottom: 60, left: 40, right: extraRight ? 95 : 40 }
+        : { top: 90, bottom: 60, left: 60, right: extraRight ? 95 : 60 };
+    }
+
+    var ready = false, pending = null;
+
+    function show(view) {
+      if (!ready) { pending = view; return; }
+      var street = view === 'street';
+
+      tabS.setAttribute('aria-selected', String(street));
+      tabV.setAttribute('aria-selected', String(!street));
+      legS.hidden = !street;
+      legV.hidden = street;
+      caption.textContent = street ? CAPTION.street : CAPTION.vol;
+      document.getElementById('pmap').setAttribute('aria-label', street
+        ? 'Map of free street parking around Brittingham Park'
+        : 'Map of volunteer parking at New Culture Church and the walking route to the pavilion');
+
+      ['street-casing', 'street-line'].forEach(function (id) {
+        map.setLayoutProperty(id, 'visibility', street ? 'visible' : 'none');
+      });
+      ['walk-casing', 'walk-line'].forEach(function (id) {
+        map.setLayoutProperty(id, 'visibility', street ? 'none' : 'visible');
+      });
+
+      var b = new maplibregl.LngLatBounds();
+      if (street) {
+        volMarker.remove();
+        // Fit to the walkable ring around the pavilion, not the whole data extent.
+        CANPARK.features.forEach(function (f) {
+          f.geometry.coordinates.forEach(function (c) {
+            if (near(c, EVENT_PT, 0.0075)) b.extend(c);
+          });
+        });
+        b.extend(EVENT_PT);
+      } else {
+        volMarker.addTo(map);
+        WALK.forEach(function (c) { b.extend(c); });
+        b.extend(EVENT_PT); b.extend(VOL_PT);
+      }
+      map.fitBounds(b, { padding: pad(!street), duration: 450 });
+    }
+
+    map.on('load', function () {
+      map.addSource('canpark', { type: 'geojson', data: CANPARK });
+      map.addLayer({
+        id: 'street-casing', type: 'line', source: 'canpark',
+        layout: { 'line-cap': 'round', 'line-join': 'round' },
+        paint: { 'line-color': '#ffffff', 'line-width': 11, 'line-opacity': 0.9 }
+      });
+      map.addLayer({
+        id: 'street-line', type: 'line', source: 'canpark',
+        layout: { 'line-cap': 'round', 'line-join': 'round' },
+        paint: { 'line-color': '#3D9E3D', 'line-width': 6, 'line-opacity': 0.95 }
+      });
+
+      map.addSource('walk', {
+        type: 'geojson',
+        data: { type: 'Feature', geometry: { type: 'LineString', coordinates: WALK } }
+      });
+      map.addLayer({
+        id: 'walk-casing', type: 'line', source: 'walk',
+        layout: { 'line-cap': 'round', 'line-join': 'round', visibility: 'none' },
+        paint: { 'line-color': '#ffffff', 'line-width': 9, 'line-opacity': 0.9 }
+      });
+      map.addLayer({
+        id: 'walk-line', type: 'line', source: 'walk',
+        layout: { 'line-cap': 'round', 'line-join': 'round', visibility: 'none' },
+        paint: { 'line-color': '#9A50A5', 'line-width': 4.5, 'line-dasharray': [1.6, 1.2] }
+      });
+
+      eventMarker.addTo(map);
+      ready = true;
+      show(pending || 'street');
+    });
+
+    tabS.addEventListener('click', function () { show('street'); });
+    tabV.addEventListener('click', function () { show('vol'); });
+
+    // "See it on the map" in the volunteer strip flips the tab for you.
+    var volLink = document.getElementById('vol-map-link');
+    if (volLink) {
+      volLink.addEventListener('click', function () {
+        show('vol');
+      });
+    }
+  } catch (err) {
+    fail();
+  }
+})();
+</script>
+</body>
+</html>
