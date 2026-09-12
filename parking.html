@@ -33,9 +33,9 @@
   <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="styles.css">
 
-  <!-- MapLibre GL + OpenFreeMap (open data, no API key) -->
+  <!-- MapLibre GL v5.1.0, self-hosted (see vendor/). Tiles from OpenFreeMap, no API key. -->
   <link rel="preconnect" href="https://tiles.openfreemap.org" crossorigin>
-  <link href="https://unpkg.com/maplibre-gl@5.1.0/dist/maplibre-gl.css" rel="stylesheet">
+  <link href="vendor/maplibre-gl.css" rel="stylesheet">
 
   <style>
     /* ── Primary answer ── */
@@ -338,7 +338,7 @@
   </div>
 </footer>
 
-<script src="https://unpkg.com/maplibre-gl@5.1.0/dist/maplibre-gl.js"></script>
+<script src="vendor/maplibre-gl.js"></script>
 <script>
 (function () {
   var EVENT_PT  = [-89.39784, 43.06332];  // Brittingham Park shelter / pavilion
