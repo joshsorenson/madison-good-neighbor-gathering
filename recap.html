@@ -85,6 +85,31 @@
     }
     .r-stat-label { color: var(--ink-soft); font-size: 1.02rem; margin-top: 0.2rem; }
 
+    /* ── Donate band ── */
+    .r-donate {
+      background: var(--pink-pale);
+      padding: 2.5rem 1.25rem;
+      text-align: center;
+      border-top: 4px solid var(--pink);
+      border-bottom: 4px solid var(--pink);
+    }
+    .r-donate-inner { max-width: 34rem; margin: 0 auto; }
+    .r-donate h2 {
+      font-size: clamp(1.4rem, 5vw, 1.9rem);
+      margin-bottom: 0.6rem;
+    }
+    .r-donate p {
+      color: var(--ink-soft);
+      font-size: 1.04rem;
+      margin-bottom: 1.35rem;
+    }
+    .r-donate-sub {
+      display: block;
+      font-size: 0.92rem;
+      color: var(--ink-soft);
+      margin-top: 0.9rem;
+    }
+
     /* ── Sections ── */
     .r-sec { padding: 3rem 1.25rem; }
     .r-inner { max-width: 46rem; margin: 0 auto; }
@@ -189,6 +214,24 @@
     <div class="r-stat" hidden>
       <div class="r-stat-num">000</div>
       <div class="r-stat-label">neighbors came out this year</div>
+    </div>
+  </section>
+
+  <!-- ═══ DONATE ═══ -->
+  <section class="r-donate" aria-labelledby="r-donate-h">
+    <div class="r-donate-inner">
+      <h2 id="r-donate-h">&#128149; Want to keep it free?</h2>
+      <p>
+        The Gathering costs nothing to attend because Neighborhood House makes it
+        that way. They have been serving Madison families since 1916, with youth
+        programs, adult education and a food pantry running all year long.
+      </p>
+      <a class="btn btn-pink"
+         href="https://secure.givelively.org/donate/neighborhood-house-communinity-center-inc/gng"
+         target="_blank" rel="noopener">
+        Donate to Neighborhood House &#8594;
+      </a>
+      <span class="r-donate-sub">Every gift goes back into the neighborhood.</span>
     </div>
   </section>
 
