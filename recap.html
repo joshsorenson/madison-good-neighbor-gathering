@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Thank You | Madison Good Neighbor Gathering</title>
+  <meta name="description" content="Thank you to everyone who came out to the Madison Good Neighbor Gathering at Brittingham Park. The Gathering returns to the park next September.">
+
+  <!-- Served at / after the event, so no noindex here. The canonical points at
+       the homepage this page stands in for. -->
+  <link rel="canonical" href="https://madisongoodneighborgathering.org/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://madisongoodneighborgathering.org/">
+  <meta property="og:title" content="Thank You | Madison Good Neighbor Gathering">
+  <meta property="og:description" content="Thank you to everyone who came out to Brittingham Park. The Gathering returns next September.">
+  <meta property="og:image" content="https://madisongoodneighborgathering.org/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="Madison Good Neighbor Gathering">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Thank You | Madison Good Neighbor Gathering">
+  <meta name="twitter:description" content="Thank you to everyone who came out to Brittingham Park.">
+  <meta name="twitter:image" content="https://madisongoodneighborgathering.org/og-image.jpg">
+
+  <link rel="preload" href="fonts/nunito-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/baloo-2-800-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="fonts.css">
+
+  <link rel="icon" href="logo-badge.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#F65472">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    /* ─────────────────────────────────────────────────────────
+       POST-EVENT PAGE
+       Served at / from the day after the Gathering until a new
+       year's homepage replaces it. Classes are r- prefixed.
+    ───────────────────────────────────────────────────────── */
+
+    body { background: var(--cream); }
+
+    /* ── Hero ── */
+    .r-hero {
+      text-align: center;
+      padding: 3.5rem 1.25rem 3rem;
+      background:
+        radial-gradient(circle at 18% 0%, var(--yellow-pale) 0%, transparent 55%),
+        radial-gradient(circle at 82% 12%, var(--pink-pale) 0%, transparent 55%),
+        var(--cream);
+    }
+    .r-hero img.r-logo { width: min(360px, 82vw); height: auto; }
+    .r-h1 {
+      font-family: 'Baloo 2', cursive;
+      font-size: clamp(2.1rem, 8vw, 3.3rem);
+      line-height: 1.1;
+      margin: 1.15rem 0 0.55rem;
+    }
+    .r-lede {
+      color: var(--ink-soft);
+      font-size: 1.12rem;
+      max-width: 32rem;
+      margin: 0 auto;
+    }
+
+    /* ── Optional headline number ── */
+    .r-stat {
+      max-width: 24rem;
+      margin: 2rem auto 0;
+      background: #fff;
+      border-radius: 22px;
+      padding: 1.5rem 1.25rem;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.09);
+      border-bottom: 5px solid var(--pink);
+    }
+    .r-stat-num {
+      font-family: 'Baloo 2', cursive;
+      font-size: clamp(2.6rem, 11vw, 3.6rem);
+      line-height: 1;
+      color: var(--pink);
+    }
+    .r-stat-label { color: var(--ink-soft); font-size: 1.02rem; margin-top: 0.2rem; }
+
+    /* ── Sections ── */
+    .r-sec { padding: 3rem 1.25rem; }
+    .r-inner { max-width: 46rem; margin: 0 auto; }
+    .r-h2 {
+      font-size: clamp(1.55rem, 5.5vw, 2.1rem);
+      text-align: center;
+      margin-bottom: 1.35rem;
+    }
+    .r-sec p { color: var(--ink-soft); }
+
+    /* ── Photo grid ── */
+    .r-photos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 0.6rem;
+      max-width: 52rem;
+      margin: 0 auto;
+    }
+    .r-photos img {
+      width: 100%; height: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 14px;
+      display: block;
+      box-shadow: 0 3px 14px rgba(0,0,0,0.1);
+    }
+
+    /* ── Sponsors ── */
+    .r-sponsors { background: var(--ink); color: #fff; }
+    .r-sponsors .r-h2 { color: var(--yellow); }
+    .r-sponsors p { color: rgba(255,255,255,0.85); }
+    .r-sponsor-names {
+      display: flex; flex-wrap: wrap;
+      justify-content: center; gap: 0.5rem;
+      max-width: 40rem; margin: 1.25rem auto 0;
+    }
+    .r-sponsor-names span {
+      background: rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 0.45rem 1rem;
+      font-size: 0.93rem;
+      color: #fff;
+    }
+    .r-sponsors .btn-outline { color: #fff; border-color: rgba(255,255,255,0.45); }
+
+    /* ── Next year ── */
+    .r-next-cards {
+      display: grid; gap: 0.85rem;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      margin-top: 1.5rem;
+    }
+    .r-card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 1.4rem 1.25rem;
+      box-shadow: 0 3px 14px rgba(0,0,0,0.07);
+      border-bottom: 4px solid var(--blue);
+      text-align: center;
+    }
+    .r-card.c-green { border-bottom-color: var(--green); }
+    .r-card.c-purple { border-bottom-color: var(--purple); }
+    .r-card h3 { font-size: 1.15rem; margin-bottom: 0.4rem; }
+    .r-card p { font-size: 0.97rem; margin-bottom: 0.9rem; }
+
+    .r-foot {
+      text-align: center;
+      padding: 2.5rem 1.25rem 3rem;
+      color: var(--ink-soft);
+      font-size: 0.93rem;
+      background: var(--cream);
+    }
+    .r-foot img { width: 76px; height: auto; margin-bottom: 0.75rem; }
+    .r-foot p + p { margin-top: 0.4rem; }
+  </style>
+</head>
+<body>
+
+<a href="#r-main" class="skip-link">Skip to main content</a>
+
+<main id="r-main">
+
+  <!-- ═══ HERO ═══ -->
+  <section class="r-hero" aria-label="Thank you">
+    <img src="logo.svg" alt="Madison Good Neighbor Gathering" class="r-logo" width="480" height="137" fetchpriority="high">
+
+    <h1 class="r-h1">That&rsquo;s a wrap</h1>
+    <p class="r-lede">
+      Thank you for spending the afternoon at Brittingham Park with your neighbors.
+      The music, the food, the kids running around: that was all of you.
+    </p>
+
+    <!--
+      ═══════════════════════════════════════════════════════════
+      OPTIONAL HEADLINE NUMBER
+
+      Once you have a turnout figure you're confident in, delete the
+      hidden attribute below and put the number in. Leave it hidden
+      and the block simply doesn't render, which is the right call
+      until someone has actually counted.
+      ═══════════════════════════════════════════════════════════
+    -->
+    <div class="r-stat" hidden>
+      <div class="r-stat-num">000</div>
+      <div class="r-stat-label">neighbors came out this year</div>
+    </div>
+  </section>
+
+  <!-- ═══ PHOTOS ═══ -->
+  <section class="r-sec" style="background:var(--white);" aria-labelledby="r-photos-h">
+    <div class="r-inner" style="max-width:52rem;">
+      <h2 class="r-h2" id="r-photos-h">From past Gatherings</h2>
+      <p style="text-align:center;margin-bottom:1.5rem;">
+        Swap these for this year&rsquo;s photos once they&rsquo;re off the camera.
+      </p>
+      <div class="r-photos">
+        <img src="photos/joy.jpg" alt="A child laughing at the Gathering" loading="lazy">
+        <img src="photos/taiko.jpg" alt="Taiko drummers performing" loading="lazy">
+        <img src="photos/hmong-dance.jpg" alt="Hmong dancers performing in traditional dress" loading="lazy">
+        <img src="photos/climbing-wall.jpg" alt="A child on the climbing wall" loading="lazy">
+        <img src="photos/ice-cream.jpg" alt="A child eating ice cream" loading="lazy">
+        <img src="photos/ballet-red.jpg" alt="A ballet performance in red costume" loading="lazy">
+        <img src="photos/crowd-watching.jpg" alt="Neighbors watching a performance on the lawn" loading="lazy">
+        <img src="photos/kids-science.jpg" alt="Kids at a hands-on science table" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SPONSORS ═══ -->
+  <section class="r-sec r-sponsors" aria-labelledby="r-sponsors-h">
+    <div class="r-inner">
+      <h2 class="r-h2" id="r-sponsors-h">It was free because of them</h2>
+      <p style="text-align:center;max-width:34rem;margin:0 auto 1.85rem;">
+        Every part of the day was paid for by neighbors and local businesses.
+        Please support the ones who support your neighborhood.
+      </p>
+
+      <div class="sponsor-grid">
+        <div class="sponsor-tile sp-tall" data-name="Neuhauser Pharmacy" style="--sp-h:91px;"><img src="photos/sponsors/neuhauser-pharmacy-logo.png" alt="Neuhauser Pharmacy" loading="lazy"></div>
+        <div class="sponsor-tile" data-name="Tallard Apartments" style="--sp-h:59px;"><img src="photos/sponsors/tallard-apartments.png" alt="Tallard Apartments" loading="lazy"></div>
+        <div class="sponsor-tile" data-name="Sprinkman Real Estate" style="--sp-h:55px;"><img src="photos/sponsors/sprinkman-real-estate.png" alt="Sprinkman Real Estate, Jeff Drengler" loading="lazy"></div>
+        <div class="sponsor-tile sp-tall sp-onbrand" data-name="Dane Arts" style="--sp-h:88px;"><img src="photos/sponsors/dane-arts.png" alt="Dane Arts" loading="lazy"></div>
+        <div class="sponsor-tile" data-name="Dudgeon-Monroe Neighborhood Association" style="--sp-h:52px;"><img src="photos/sponsors/dudgeon-monroe.png" alt="Dudgeon-Monroe Neighborhood Association" loading="lazy"></div>
+        <a href="https://newculturechurch.com" target="_blank" rel="noopener" class="sponsor-tile" data-name="New Culture Church" style="--sp-h:40px;" aria-label="New Culture Church (opens in new tab)"><img src="photos/sponsors/new-culture-church.png" alt="New Culture Church" loading="lazy"></a>
+        <div class="sponsor-tile sp-wide" data-name="Buttonwood Partners, Inc." style="--sp-h:35px;"><img src="photos/sponsors/buttonwood-partners.png" alt="Buttonwood Partners, Inc." loading="lazy"></div>
+        <a href="https://bayviewfoundation.org" target="_blank" rel="noopener" class="sponsor-tile sp-wide" data-name="Bayview Foundation" style="--sp-h:48px;" aria-label="Bayview Foundation (opens in new tab)"><img src="photos/sponsors/bayview.png" alt="Bayview Foundation" loading="lazy"></a>
+        <a href="https://www.unitypoint.org/locations/unitypoint-health---meriter-hospital" target="_blank" rel="noopener" class="sponsor-tile" data-name="Unity Point Meriter" style="--sp-h:37px;" aria-label="Unity Point Meriter (opens in new tab)"><img src="photos/sponsors/unitypoint-health.png" alt="Unity Point Meriter" loading="lazy"></a>
+        <div class="sponsor-tile" data-name="Madison Upper Cervical Center" style="--sp-h:60px;"><img src="photos/sponsors/madison-upper-cervical-center.png" alt="Madison Upper Cervical Center" loading="lazy"></div>
+        <div class="sponsor-tile" data-name="Orange Tree Imports" style="--sp-h:63px;"><img src="photos/sponsors/orange-tree-imports.png" alt="Orange Tree Imports" loading="lazy"></div>
+        <div class="sponsor-tile" data-name="Findorff" style="--sp-h:49px;"><img src="photos/sponsors/findorff.png" alt="Findorff" loading="lazy"></div>
+        <div class="sponsor-tile" data-name="Alvarado Group" style="--sp-h:44px;"><img src="photos/sponsors/alvarado-group.png" alt="Alvarado Group" loading="lazy"></div>
+        <div class="sponsor-tile" data-name="Summit Credit Union" style="--sp-h:52px;"><img src="photos/sponsors/summit-credit-union.png" alt="Summit Credit Union" loading="lazy"></div>
+        <div class="sponsor-tile" data-name="Madison Boats" style="--sp-h:52px;"><img src="photos/sponsors/madison-boats.png" alt="Madison Boats" loading="lazy"></div>
+        <div class="sponsor-tile" data-name="Budds Auto" style="--sp-h:56px;"><img src="photos/sponsors/budds-auto-repair.png" alt="Budds Auto" loading="lazy"></div>
+        <div class="sponsor-tile" data-name="Transformation Center" style="--sp-h:57px;"><img src="photos/sponsors/transformation-center.png" alt="Transformation Center" loading="lazy"></div>
+      </div>
+
+      <div class="r-sponsor-names">
+        <span>Burnie&rsquo;s Rock Shop</span>
+        <span>Nails 4U</span>
+        <span>Sistas Chicken and Fish</span>
+        <span>Madison Chocolate</span>
+        <span>Taj Indian Cuisine</span>
+        <span>White Bison Tattoo</span>
+        <span>Paleo Mama Bakery</span>
+        <span>Cargo Coffee</span>
+        <span>Rasta Barista</span>
+        <span>Quality Hardware</span>
+        <span>Taqueria Guadalajara</span>
+        <span>Cordial Tavern</span>
+        <span>Movin&rsquo; Shoes</span>
+        <span>BP</span>
+        <span>Oishi</span>
+        <span>SunnyPho</span>
+        <span>Vilas Neighborhood Association</span>
+        <span>O&rsquo;Kuehling Fund</span>
+        <span>Rachel Bennett</span>
+        <span>Alison Filippelli</span>
+        <span>Anonymous</span>
+      </div>
+
+      <p style="text-align:center;margin-top:1.75rem;">
+        <a href="thanks.html" class="btn btn-outline" style="display:inline-flex;">See everyone who made it happen &#8594;</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══ NEXT YEAR ═══ -->
+  <section class="r-sec" aria-labelledby="r-next-h">
+    <div class="r-inner">
+      <h2 class="r-h2" id="r-next-h">See you next September</h2>
+      <p style="text-align:center;max-width:34rem;margin:0 auto;">
+        The Gathering happens every September at Brittingham Park. Next year&rsquo;s date
+        hasn&rsquo;t been set yet. When it is, it will be posted here and on Instagram.
+      </p>
+
+      <div class="r-next-cards">
+        <div class="r-card c-purple">
+          <h3>&#128247; Hear it first</h3>
+          <p>Follow along and you&rsquo;ll know the date as soon as we do.</p>
+          <a class="btn btn-sm btn-purple" href="https://www.instagram.com/madisongoodneighborgathering" target="_blank" rel="noopener">Follow on Instagram</a>
+        </div>
+        <div class="r-card c-green">
+          <h3>&#129309; Help next year</h3>
+          <p>Volunteering or sponsoring is what keeps the day free for everyone.</p>
+          <a class="btn btn-sm btn-green" href="get-involved.html">Get involved</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <div class="r-foot">
+    <img src="logo-badge.svg" alt="" width="200" height="200">
+    <p><strong>Madison Good Neighbor Gathering</strong></p>
+    <p>Brittingham Park &middot; 829 W Washington Ave, Madison, WI</p>
+    <p style="margin-top:0.75rem;">
+      <a href="index.html">Event info</a> &middot;
+      <a href="thanks.html">Our sponsors</a> &middot;
+      <a href="get-involved.html">Get involved</a>
+    </p>
+    <p style="margin-top:0.75rem;">
+      Organized by
+      <a href="https://www.neighborhoodhousemadison.org" target="_blank" rel="noopener">Neighborhood House Community Center</a>,
+      <a href="https://newculturechurch.com" target="_blank" rel="noopener">New Culture Church</a>,
+      and the neighborhood associations of District 13.
+    </p>
+  </div>
+
+</main>
+
+</body>
+</html>

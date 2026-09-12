@@ -7,8 +7,11 @@
   <title>Happening Today | Madison Good Neighbor Gathering</title>
   <meta name="description" content="Everything you need while you're at the Gathering: what's on stage right now, where to park, and how to find us.">
 
-  <!-- Unlinked day-of page. Keep noindex until (or unless) this becomes the homepage. -->
-  <meta name="robots" content="noindex,nofollow">
+  <!-- This page is served at / on event day, so it must not carry noindex:
+       that would tell Google to drop the homepage. It stays effectively
+       unlinked by being absent from the nav and the sitemap, and the canonical
+       below points at the homepage it stands in for. -->
+  <link rel="canonical" href="https://madisongoodneighborgathering.org/">
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Happening Today | Madison Good Neighbor Gathering">
