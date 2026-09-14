@@ -123,10 +123,16 @@
     /* ── Photo grid ── */
     .r-photos {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      grid-template-columns: repeat(4, 1fr);
       gap: 0.6rem;
       max-width: 52rem;
       margin: 0 auto;
+    }
+    /* The aerial anchors the grid at two-by-two; the other four fill the rest
+       of the block so the set lands as a clean rectangle. */
+    .r-photos .r-photo-lead { grid-column: span 2; grid-row: span 2; }
+    @media (max-width: 640px) {
+      .r-photos { grid-template-columns: repeat(2, 1fr); }
     }
     .r-photos img {
       width: 100%; height: 100%;
@@ -238,18 +244,13 @@
   <!-- ═══ PHOTOS ═══ -->
   <section class="r-sec" style="background:var(--white);" aria-labelledby="r-photos-h">
     <div class="r-inner" style="max-width:52rem;">
-      <h2 class="r-h2" id="r-photos-h">From past Gatherings</h2>
-      <!-- Swap these for this year's photos once they're off the camera, and
-           change the heading above to "From this year" when you do. -->
+      <h2 class="r-h2" id="r-photos-h">From this year</h2>
       <div class="r-photos" style="margin-top:0.5rem;">
-        <img src="photos/joy.jpg" alt="A child laughing at the Gathering" loading="lazy">
-        <img src="photos/taiko.jpg" alt="Taiko drummers performing" loading="lazy">
-        <img src="photos/hmong-dance.jpg" alt="Hmong dancers performing in traditional dress" loading="lazy">
-        <img src="photos/climbing-wall.jpg" alt="A child on the climbing wall" loading="lazy">
-        <img src="photos/ice-cream.jpg" alt="A child eating ice cream" loading="lazy">
-        <img src="photos/ballet-red.jpg" alt="A ballet performance in red costume" loading="lazy">
-        <img src="photos/crowd-watching.jpg" alt="Neighbors watching a performance on the lawn" loading="lazy">
-        <img src="photos/kids-science.jpg" alt="Kids at a hands-on science table" loading="lazy">
+        <img class="r-photo-lead" src="photos/2026-aerial.jpg" alt="The Gathering from above: tents, a stage, and neighbors spread across the lawn at Brittingham Park" loading="lazy">
+        <img src="photos/2026-ballet-folklorico.jpg" alt="Ballet folkl&oacute;rico dancers spinning in pink, green, and blue dresses" loading="lazy">
+        <img src="photos/2026-singer.jpg" alt="A singer performing on the lakeside stage" loading="lazy">
+        <img src="photos/2026-juggler.jpg" alt="A juggler in an orange bowler hat tossing clubs" loading="lazy">
+        <img src="photos/2026-kona-ice.jpg" alt="Kids waiting at the shaved ice truck under the trees" loading="lazy">
       </div>
     </div>
   </section>
