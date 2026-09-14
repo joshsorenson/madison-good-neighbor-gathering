@@ -53,7 +53,8 @@
   <!-- Self-hosted fonts (no third-party requests) -->
   <link rel="preload" href="fonts/nunito-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/baloo-2-800-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="fonts.css">
+  <link rel="preload" href="fonts/satoshi-variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="fonts.css?v=2027">
 
   <!-- Favicon -->
   <link rel="icon" href="logo-badge.svg" type="image/svg+xml">
@@ -61,7 +62,7 @@
   <!-- Mobile browser chrome color -->
   <meta name="theme-color" content="#F65472">
   <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=2027">
 </head>
 <body>
 
@@ -78,10 +79,9 @@
         onclick="document.getElementById('main-nav').classList.toggle('open')">&#9776;</button>
       <ul>
         <li><a href="index.html#activities">Activities</a></li>
-        <li><a href="index.html#entertainment">Entertainment</a></li>
+        <li><a href="index.html#recap2026">2026</a></li>
         <li><a href="index.html#food">Food</a></li>
         <li><a href="index.html#visit">Plan Your Visit</a></li>
-        <li><a href="parking.html">Parking</a></li>
         <li><a href="index.html#location">Location</a></li>
         <li><a href="index.html#faq">FAQ</a></li>
         <li><a href="index.html#community">Community</a></li>
@@ -102,10 +102,10 @@
 <main id="main-content">
 
 <!-- ═══ THANKS HERO ═══ -->
-<section class="hero" style="min-height:40vh;padding:4rem 1.5rem;" aria-label="Thank you to our sponsors">
+<section class="hero sheet" aria-label="Thank you to our sponsors">
   <div class="hero-blob blob-1" aria-hidden="true"></div>
   <div class="hero-blob blob-2" aria-hidden="true"></div>
-  <div class="hero-content" style="padding-top:2rem;">
+  <div class="hero-content">
     <h1 style="margin-bottom:0.5rem;">
       <img src="logo.svg" alt="Madison Good Neighbor Gathering" width="480" height="137" fetchpriority="high" style="max-width:100%;height:auto;">
     </h1>
@@ -113,13 +113,8 @@
   </div>
 </section>
 
-<!-- Wave into content -->
-<div class="wave-divider" style="background:var(--cream)" aria-hidden="true">
-  <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,30 C480,0 960,60 1440,20 L1440,60 L0,60 Z" fill="#1A1A2E"/></svg>
-</div>
-
 <!-- ═══ INTRO ═══ -->
-<section style="background:#1A1A2E;color:#fff;padding:4rem 1.5rem 2rem;" aria-labelledby="thanks-heading">
+<section class="sheet sheet-ink" aria-labelledby="thanks-heading">
   <div style="max-width:720px;margin:0 auto;text-align:center;">
     <h2 id="thanks-heading" style="font-family:'Baloo 2',cursive;font-size:2rem;color:var(--yellow);margin-bottom:1rem;">A Heartfelt Thank You</h2>
     <p style="font-size:1.1rem;line-height:1.6;color:rgba(255,255,255,0.9);margin-bottom:1rem;">
@@ -132,7 +127,7 @@
 </section>
 
 <!-- ═══ 2026 SPONSORS ═══ -->
-<section style="background:#1A1A2E;color:#fff;padding:1rem 1.5rem 3rem;" aria-labelledby="sponsors-2026-heading">
+<section class="sheet sheet-ink" aria-labelledby="sponsors-2026-heading">
   <div style="max-width:960px;margin:0 auto;text-align:center;">
     <h2 id="sponsors-2026-heading" style="font-family:'Baloo 2',cursive;font-size:1.6rem;color:var(--yellow);margin-bottom:1.5rem;">2026 Sponsors &amp; Donors</h2>
       <div class="sponsor-grid">
@@ -182,7 +177,7 @@
 </section>
 
 <!-- ═══ ORGANIZING PARTNERS ═══ -->
-<section style="background:#1A1A2E;color:#fff;padding:4rem 1.5rem;" aria-labelledby="partners-heading">
+<section class="sheet sheet-ink" aria-labelledby="partners-heading">
   <div style="max-width:720px;margin:0 auto;text-align:center;">
     <h2 id="partners-heading" style="font-family:'Baloo 2',cursive;font-size:1.6rem;color:var(--yellow);margin-bottom:1.5rem;">Organizing Partners</h2>
     <p style="font-size:1.05rem;line-height:1.6;color:rgba(255,255,255,0.9);margin-bottom:1.5rem;">
@@ -195,13 +190,8 @@
   </div>
 </section>
 
-<!-- Wave into link-back -->
-<div class="wave-divider" style="background:#1A1A2E" aria-hidden="true">
-  <svg viewBox="0 0 1440 55" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,25 C480,50 960,0 1440,25 L1440,55 L0,55 Z" fill="var(--cream)"/></svg>
-</div>
-
 <!-- ═══ SPONSOR LINK-BACK KIT ═══ -->
-<section style="background:var(--cream);padding:4rem 1.5rem;" aria-labelledby="linkback-heading">
+<section class="sheet" aria-labelledby="linkback-heading">
   <div style="max-width:720px;margin:0 auto;text-align:center;">
     <h2 id="linkback-heading" style="font-family:'Baloo 2',cursive;font-size:1.6rem;color:var(--purple);margin-bottom:1rem;">Sponsors: Show Your Support Online</h2>
     <p style="font-size:1.05rem;line-height:1.6;color:var(--ink);margin-bottom:1.5rem;">
@@ -214,11 +204,6 @@
     <a href="get-involved.html" class="btn btn-pink">&#128140; Become a 2026 Sponsor</a>
   </div>
 </section>
-
-<!-- Wave into footer -->
-<div class="wave-divider" style="background:var(--cream)" aria-hidden="true">
-  <svg viewBox="0 0 1440 50" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,25 C480,0 960,50 1440,25 L1440,50 L0,50 Z" fill="#1A1A2E"/></svg>
-</div>
 
 </main>
 

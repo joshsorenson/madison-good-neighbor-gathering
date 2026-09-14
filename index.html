@@ -5,16 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Primary SEO -->
-  <title>Madison Good Neighbor Gathering 2026 | Free Family Festival · Sept 13 · Brittingham Park</title>
-  <meta name="description" content="Over 700 neighbors came last year. Join us Sunday, September 13, 2026 at Brittingham Park for the Madison Good Neighbor Gathering: a FREE family festival with live music, bouncy houses, food trucks, a climbing wall, and more. All ages welcome.">
-  <meta name="keywords" content="Madison Good Neighbor Gathering, Madison family events, free Madison events 2026, Brittingham Park festival, Madison community events, family festival Madison WI, District 13 Madison">
+  <title>Madison Good Neighbor Gathering 2027 | Free Family Festival · Brittingham Park, Madison</title>
+  <meta name="description" content="The Madison Good Neighbor Gathering returns to Brittingham Park in 2027. The 2027 date will be announced soon. A free family festival with live music, cultural performances, food trucks, bouncy structures, a climbing wall and more. All ages welcome.">
+  <meta name="keywords" content="Madison Good Neighbor Gathering, Madison family events, free Madison events 2027, Brittingham Park festival, Madison community events, family festival Madison WI, District 13 Madison">
   <link rel="canonical" href="https://madisongoodneighborgathering.org/">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://madisongoodneighborgathering.org/">
-  <meta property="og:title" content="Madison Good Neighbor Gathering: Free Festival with Live Music, Food Trucks &amp; Kids Activities">
-  <meta property="og:description" content="Over 700 neighbors came last year. FREE community festival Sept 13, 2026 at Brittingham Park. Live music, bouncy houses, food trucks, climbing wall & more. All ages welcome!">
+  <meta property="og:title" content="Madison Good Neighbor Gathering 2027: Free Festival with Live Music, Food Trucks &amp; Kids Activities">
+  <meta property="og:description" content="Back in 2027 at Brittingham Park. Date announced soon. FREE community festival: live music, bouncy houses, food trucks, climbing wall and more. All ages welcome!">
   <meta property="og:image" content="https://madisongoodneighborgathering.org/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -24,8 +24,8 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Madison Good Neighbor Gathering: Free Festival with Live Music, Food Trucks &amp; Kids Activities">
-  <meta name="twitter:description" content="Over 700 neighbors came last year. FREE community festival Sept 13, 2026 at Brittingham Park. Live music, bouncy houses, food trucks & more. All ages welcome!">
+  <meta name="twitter:title" content="Madison Good Neighbor Gathering 2027: Free Festival with Live Music, Food Trucks &amp; Kids Activities">
+  <meta name="twitter:description" content="Back in 2027 at Brittingham Park. Date announced soon. FREE community festival: live music, food trucks, kids activities and more. All ages welcome!">
   <meta name="twitter:image" content="https://madisongoodneighborgathering.org/og-image.jpg">
 
   <!-- Structured Data: Event -->
@@ -33,11 +33,10 @@
   {
     "@context": "https://schema.org",
     "@type": "Event",
-    "name": "Madison Good Neighbor Gathering 2026",
-    "description": "A free annual outdoor community festival celebrating neighborhood culture with live music, dance performances, family activities, food trucks, and community resources.",
-    "image": "https://madisongoodneighborgathering.org/photos/joy.jpg",
-    "startDate": "2026-09-13T12:00",
-    "endDate": "2026-09-13T16:00",
+    "name": "Madison Good Neighbor Gathering 2027",
+    "description": "A free annual outdoor community festival celebrating neighborhood culture with live music, dance performances, family activities, food trucks, and community resources. The 2027 date will be announced soon.",
+    "image": "https://madisongoodneighborgathering.org/photos/2026/folklorico-blue.webp",
+    "startDate": "2027",
     "eventStatus": "https://schema.org/EventScheduled",
     "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
     "isAccessibleForFree": true,
@@ -81,7 +80,7 @@
       "price": "0",
       "priceCurrency": "USD",
       "availability": "https://schema.org/InStock",
-      "validFrom": "2026-01-01"
+      "validFrom": "2027-01-01"
     }
   }
   </script>
@@ -156,7 +155,10 @@
   <!-- Self-hosted fonts (no third-party requests) -->
   <link rel="preload" href="fonts/nunito-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/baloo-2-800-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="fonts.css">
+  <link rel="preconnect" href="https://tiles.openfreemap.org" crossorigin>
+  <link href="vendor/maplibre-gl.css" rel="stylesheet">
+  <link rel="preload" href="fonts/satoshi-variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="fonts.css?v=2027">
 
   <!-- Favicon -->
   <link rel="icon" href="logo-badge.svg" type="image/svg+xml">
@@ -165,7 +167,7 @@
   <meta name="theme-color" content="#F65472">
 
   <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=2027">
 </head>
 <body>
 
@@ -182,10 +184,9 @@
         onclick="document.getElementById('main-nav').classList.toggle('open')">&#9776;</button>
       <ul>
         <li><a href="#activities">Activities</a></li>
-        <li><a href="#entertainment">Entertainment</a></li>
+        <li><a href="#recap2026">2026</a></li>
         <li><a href="#food">Food</a></li>
         <li><a href="#visit">Plan Your Visit</a></li>
-        <li><a href="parking.html">Parking</a></li>
         <li><a href="#location">Location</a></li>
         <li><a href="#faq">FAQ</a></li>
         <li><a href="#community">Community</a></li>
@@ -206,16 +207,19 @@
 <main id="main-content">
 
 <!-- ═══ HERO ═══ -->
-<section class="hero" aria-label="Event overview">
+<section class="hero hero-split sheet" aria-label="Event overview">
+  <!-- Ornaments. Two half-discs bleed off the sheet edges and the
+       spiky asterisks punctuate the gutters; all decorative, all
+       hidden from assistive tech. -->
   <div class="hero-blob blob-1" aria-hidden="true"></div>
   <div class="hero-blob blob-2" aria-hidden="true"></div>
-  <div class="hero-blob blob-3" aria-hidden="true"></div>
   <div class="hero-blob blob-4" aria-hidden="true"></div>
-  <div class="hero-confetti" aria-hidden="true"></div>
-  <span class="star" style="top:14%;left:8%" aria-hidden="true">&#10022;</span>
-  <span class="star" style="top:22%;right:10%;color:var(--orange)" aria-hidden="true">&#9733;</span>
-  <span class="star" style="bottom:28%;left:12%;color:var(--green)" aria-hidden="true">&#10022;</span>
-  <span class="star" style="bottom:18%;right:8%;color:var(--purple)" aria-hidden="true">&#9733;</span>
+  <span class="star" style="top:8%;left:4%" aria-hidden="true"></span>
+  <span class="star" style="top:20%;right:5%;color:var(--orange)" aria-hidden="true"></span>
+  <span class="star" style="bottom:22%;left:7%;color:var(--green)" aria-hidden="true"></span>
+  <span class="star" style="bottom:10%;right:4%;color:var(--purple)" aria-hidden="true"></span>
+  <span class="hero-flower" aria-hidden="true"></span>
+  <span class="hero-buddy sh-blob sh-face" aria-hidden="true"></span>
 
   <div class="hero-content">
     <div class="hero-logo-wrap">
@@ -224,28 +228,13 @@
         <img src="logo.svg" alt="Madison Good Neighbor Gathering" width="245" height="70" fetchpriority="high">
       </h1>
     </div>
-    <p class="hero-tagline">Your District 13 neighbors are throwing a party. And everyone's invited.</p>
-    <p class="hero-proof"><strong>Over 700 neighbors</strong> came last year. Come be one of them.</p>
-    <p class="hero-authority">Hosted by Neighborhood House &mdash; serving Madison families since 1916.</p>
-    <div class="hero-chips" role="list" aria-label="Event details">
-      <span class="chip chip-pink" role="listitem">&#128197; Sunday, Sept 13, 2026</span>
-      <span class="chip chip-blue" role="listitem">&#9200; 12:00 &ndash; 4:00 PM</span>
-      <span class="chip chip-green" role="listitem">&#127795; Brittingham Park, Madison</span>
-      <span class="chip chip-purple" role="listitem">&#127881; 100% Free!</span>
-      <span class="chip chip-yellow" role="listitem">&#127881; All Ages Welcome</span>
-    </div>
-    <p class="hero-countdown" id="hero-countdown" aria-live="polite" hidden></p>
+    <p class="hero-tagline">Your District 13 neighbors are throwing a party. And everyone&rsquo;s invited.</p>
+    <p class="hero-proof"><strong>The 2027 date will be announced soon.</strong></p>
     <div class="hero-cta">
-      <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Madison+Good+Neighbor+Gathering&dates=20260913T170000Z/20260913T210000Z&details=Free+community+festival!+Live+music,+cultural+performances,+food+trucks,+kids+activities+%26+more.+No+tickets+needed.&location=829+W+Washington+Ave,+Madison,+WI+53715&ctz=America%2FChicago" target="_blank" rel="noopener" class="btn btn-pink">&#128197; Add to Calendar</a>
-      <a href="event.ics" download class="btn btn-sm btn-outline">Apple / iCal</a>
-    </div>
-    <p class="hero-loss">One afternoon a year. Miss it and the next one is 12 months out.</p>
-    <div class="hero-cta hero-cta-secondary">
-      <a href="#activities" class="btn btn-sm btn-blue">See What's Happening &#8594;</a>
-      <a href="#" onclick="openKidsRsvpModal();return false;" class="btn btn-sm btn-yellow gng-celebrate">&#127881; RSVP Your Kids</a>
+      <a href="https://www.instagram.com/madisongoodneighborgathering" target="_blank" rel="noopener" class="btn btn-pink">&#128247; Follow for the date</a>
+      <a href="get-involved.html" class="btn btn-sm btn-outline">Get involved &#8594;</a>
     </div>
     <div class="hero-share" aria-label="Share this event">
-      <span class="share-label">Know someone who'd love this?</span>
       <button class="share-pill share-pill-main" id="btn-share-main" aria-label="Share event">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
         Share Event
@@ -259,31 +248,33 @@
         Copy Link
       </button>
     </div>
-    <p class="hero-rain-note">No tickets. No registration. <span>Just show up and have fun.</span></p>
-    <p class="hero-involved-link"><a href="get-involved.html">Want to help make it happen? Get involved &#8594;</a></p>
+  </div>
+
+  <!-- Decorative: every face here is also represented in the gallery
+       below, which carries the descriptive alt text. -->
+  <div class="hero-mosaic" aria-hidden="true">
+    <div class="hm-tile hm-purple"><img src="photos/2026/folklorico-blue.webp" alt="" loading="eager" fetchpriority="high"></div>
+    <div class="hm-tile hm-orange"><img src="photos/2026/folklorico-red.webp" alt="" loading="eager"></div>
+    <div class="hm-tile hm-pink"><img src="photos/2026/kid-props.webp" alt="" loading="lazy"></div>
+    <div class="hm-tile hm-blue"><img src="photos/2026/juggler-kid.webp" alt="" loading="lazy"></div>
   </div>
 </section>
 
-<!-- Wave: hero (cream) → facts bar (dark) -->
-<div class="wave-divider" style="background:var(--cream)" aria-hidden="true">
-  <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,30 C480,0 960,60 1440,20 L1440,60 L0,60 Z" fill="#1A1A2E"/></svg>
-</div>
-
 <!-- Quick facts bar -->
-<div class="facts-bar" aria-label="Event quick facts">
+<div class="facts-bar sheet sheet-flush" aria-label="Event quick facts">
   <div class="facts-inner">
     <div class="fact-item">
       <div class="fact-icon" style="background:var(--pink-pale)">&#128197;</div>
       <div>
         <span class="fact-label">Date</span>
-        <span class="fact-value">Sunday, Sept 13, 2026</span>
+        <span class="fact-value">Announced soon</span>
       </div>
     </div>
     <div class="fact-item">
       <div class="fact-icon" style="background:var(--blue-pale)">&#9200;</div>
       <div>
         <span class="fact-label">Time</span>
-        <span class="fact-value">12:00 – 4:00 PM</span>
+        <span class="fact-value">Sunday afternoon</span>
       </div>
     </div>
     <div class="fact-item">
@@ -294,259 +285,159 @@
       </div>
     </div>
     <div class="fact-item">
-      <div class="fact-icon" style="background:var(--yellow-pale)">&#127881;</div>
+      <div class="fact-icon" style="background:rgba(255,255,255,0.35)">&#127881;</div>
       <div>
         <span class="fact-label">Admission</span>
-        <span class="fact-value">FREE for All Ages</span>
+        <span class="fact-value">Free, all ages</span>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Wave from facts bar into photo strip -->
-<div class="wave-divider" style="background:#1A1A2E" aria-hidden="true">
-  <svg viewBox="0 0 1440 50" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,25 C360,50 1080,0 1440,30 L1440,50 L0,50 Z" fill="#ffffff"/></svg>
-</div>
-
 <!-- ═══ PHOTO STRIP ═══ -->
-<div class="photo-strip" aria-label="Photos from past Good Neighbor Gatherings">
+<div class="photo-strip sheet sheet-flush" aria-label="Photos from past Good Neighbor Gatherings">
 
   <div class="strip-track" aria-hidden="true">
     <!-- Set 1 -->
-    <div class="strip-photo"><img src="photos/aerial.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/ballet-lace.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/taiko.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/hmong-dance.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/taiko-closeup.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/bouncy-castle.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/ballet-red.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/ice-cream.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/guitarist.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/ballet-folklorico-white.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/kids-science.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/native-dancer.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/hmong-dance-wide.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/climbing-wall.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/food-truck.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/joy.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/taiko-group.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/ballet-folklorico-blue.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/kids-crown.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/overview.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/host.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/crafts.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/crowd-watching.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/banner.jpg" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/folklorico-swirl.webp" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/juggler.webp" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/hula-line.webp" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/climbing-wall.webp" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/folklorico-arms.webp" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/kid-props.webp" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/food-truck.webp" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/folklorico-pair.webp" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/juggler-kid.webp" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/singer.webp" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/aerial-park.webp" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/hula-pair.webp" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/kid-dog.webp" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/performer.webp" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/folklorico-red.webp" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/stage-group.webp" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/juggler-crowd.webp" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/folklorico-shawl.webp" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/stage-banner.webp" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/kids-trio.webp" alt="" loading="lazy"></div>
     <!-- Set 2 — duplicate for seamless loop -->
-    <div class="strip-photo"><img src="photos/aerial.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/ballet-lace.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/taiko.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/hmong-dance.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/taiko-closeup.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/bouncy-castle.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/ballet-red.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/ice-cream.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/guitarist.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/ballet-folklorico-white.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/kids-science.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/native-dancer.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/hmong-dance-wide.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/climbing-wall.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/food-truck.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/joy.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/taiko-group.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/ballet-folklorico-blue.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/kids-crown.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/overview.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/host.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/crafts.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/crowd-watching.jpg" alt="" loading="lazy"></div>
-    <div class="strip-photo"><img src="photos/banner.jpg" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/folklorico-swirl.webp" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/juggler.webp" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/hula-line.webp" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/climbing-wall.webp" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/folklorico-arms.webp" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/kid-props.webp" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/food-truck.webp" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/folklorico-pair.webp" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/juggler-kid.webp" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/singer.webp" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/aerial-park.webp" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/hula-pair.webp" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/kid-dog.webp" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/performer.webp" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/folklorico-red.webp" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/stage-group.webp" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/juggler-crowd.webp" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/folklorico-shawl.webp" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/stage-banner.webp" alt="" loading="lazy"></div>
+    <div class="strip-photo"><img src="photos/2026/kids-trio.webp" alt="" loading="lazy"></div>
   </div>
 </div>
 
-<!-- Wave into activities -->
-<div class="wave-divider" style="background:#fff" aria-hidden="true">
-  <svg viewBox="0 0 1440 70" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,35 C240,70 480,0 720,35 C960,70 1200,10 1440,45 L1440,70 L0,70 Z" fill="var(--cream)"/></svg>
-</div>
-
 <!-- ═══ ACTIVITIES ═══ -->
-<section id="activities" aria-labelledby="activities-heading">
-  <svg style="position:absolute;top:0;right:0;opacity:.08;pointer-events:none" width="220" height="220" viewBox="0 0 220 220" aria-hidden="true"><circle cx="110" cy="110" r="110" fill="#F07F1B"/></svg>
-  <svg style="position:absolute;bottom:0;left:0;opacity:.07;pointer-events:none" width="180" height="180" viewBox="0 0 180 180" aria-hidden="true"><circle cx="90" cy="90" r="90" fill="#8CC63E"/></svg>
+<section id="activities" class="sheet" aria-labelledby="activities-heading">
+  <!-- Two faint discs became solid marks hung off the sheet edges. -->
+  <span class="sec-mark sec-mark-a" aria-hidden="true"></span>
+  <span class="sec-mark sec-mark-b" aria-hidden="true"></span>
 
   <div class="section-header">
     <div class="section-eyebrow ey-orange">Hands-On &amp; Heart-On</div>
     <h2 class="section-h2" id="activities-heading">Fun for the <span class="c-orange">Whole Family</span></h2>
-    <p class="section-sub">Something exciting for every age: interactive, hands-on, and totally free. <em>Lineup based on past years; 2026 details coming soon.</em></p>
+    <p class="section-sub">Based on past years.</p>
   </div>
   <div class="activities-scatter">
     <article class="act-card">
       <div class="act-top-stripe" style="background:var(--pink)" aria-hidden="true"></div>
       <div class="act-card-icon" style="background:var(--pink-pale)" aria-hidden="true">&#128733;</div>
       <h3>Bouncy Structures</h3>
-      <p>Jump, bounce, and play on giant inflatables. A kids' favorite every year!</p>
     </article>
     <article class="act-card">
       <div class="act-top-stripe" style="background:var(--blue)" aria-hidden="true"></div>
       <div class="act-card-icon" style="background:var(--blue-pale)" aria-hidden="true">&#129495;</div>
       <h3>Climbing Wall</h3>
-      <p>Scale a full rock climbing wall. Great for kids and adventurous adults!</p>
     </article>
     <article class="act-card">
       <div class="act-top-stripe" style="background:var(--green)" aria-hidden="true"></div>
       <div class="act-card-icon" style="background:var(--green-pale)" aria-hidden="true">&#128300;</div>
       <h3>Science &amp; Discovery</h3>
-      <p>Hands-on experiments from the Wisconsin Science Festival &amp; Dane County Trash Lab.</p>
+      <p>With the Wisconsin Science Festival</p>
     </article>
     <article class="act-card">
       <div class="act-top-stripe" style="background:var(--purple)" aria-hidden="true"></div>
       <div class="act-card-icon" style="background:var(--purple-pale)" aria-hidden="true">&#127912;</div>
-      <h3>Children's Museum</h3>
-      <p>Hands-on play, creative chaos, and big imagination. Powered by Madison Children's Museum.</p>
+      <h3>Children&rsquo;s Museum</h3>
+      <p>With Madison Children&rsquo;s Museum</p>
     </article>
     <article class="act-card">
       <div class="act-top-stripe" style="background:var(--orange)" aria-hidden="true"></div>
       <div class="act-card-icon" style="background:var(--orange-pale)" aria-hidden="true">&#128055;</div>
       <h3>Vilas Zoo</h3>
-      <p>Learn about amazing animals through Henry Vilas Zoo's interactive wildlife education.</p>
+      <p>With Henry Vilas Zoo</p>
     </article>
     <article class="act-card">
       <div class="act-top-stripe" style="background:var(--blue)" aria-hidden="true"></div>
       <div class="act-card-icon" style="background:var(--blue-pale)" aria-hidden="true">&#128203;</div>
       <h3>Community Resource Tables</h3>
-      <p>Local orgs, helpful resources, and neighbors ready to connect, all in one place.</p>
     </article>
     <article class="act-card">
       <div class="act-top-stripe" style="background:var(--pink)" aria-hidden="true"></div>
       <div class="act-card-icon" style="background:var(--pink-pale)" aria-hidden="true">&#128247;</div>
       <h3>Free Family Photos</h3>
-      <p>Free photo opportunities in front of a colorful GNG backdrop. A perfect memory maker.</p>
     </article>
   </div>
-  <div class="age-note" aria-label="Age and accessibility information">
-    <span class="age-badge">&#128100; Ages 0–100 welcome</span>
-    <span class="age-badge">&#9855; Stroller &amp; wheelchair accessible</span>
-    <span class="age-badge">&#128682; Alcohol-free event</span>
-  </div>
 </section>
 
-<!-- Wave into kids rsvp -->
-<div class="wave-divider" style="background:var(--cream)" aria-hidden="true">
-  <svg viewBox="0 0 1440 50" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,25 C480,50 960,0 1440,25 L1440,50 L0,50 Z" fill="#1A1A2E"/></svg>
-</div>
-
-<!-- ═══ KIDS RSVP ═══ -->
-<section id="kids-rsvp" style="background:#1A1A2E;color:#fff;padding:3.5rem 1.5rem;" aria-labelledby="kids-rsvp-home-heading">
-  <div style="max-width:680px;margin:0 auto;text-align:center;">
-    <h2 id="kids-rsvp-home-heading" style="font-family:'Baloo 2',cursive;font-size:1.75rem;color:var(--yellow);margin-bottom:1rem;">&#127881; Kids RSVP</h2>
-    <p style="font-size:1.05rem;line-height:1.6;color:rgba(255,255,255,0.9);margin-bottom:2rem;">
-      Bringing kids? RSVP for event updates and a spot in the prize drawings. Prize drawings are only open to kids who RSVP ahead of time.
-    </p>
-    <a href="#" onclick="openKidsRsvpModal();return false;" class="btn btn-pink gng-celebrate">&#127881; RSVP for Kids</a>
+<!-- ═══ 2026 RECAP ═══ -->
+<!-- Until there is a 2027 date, last year's Gathering is the clearest
+     answer to "what is this?" — so it gets a full sheet rather than a
+     link to an archive page. -->
+<section id="recap2026" class="sheet" aria-labelledby="recap2026-heading">
+  <div class="section-header">
+    <div class="section-eyebrow ey-purple">Last Year</div>
+    <h2 class="section-h2" id="recap2026-heading">What the 2026 <span class="c-purple">Gathering</span> looked like</h2>
+    <p class="section-sub">A taste of what to expect in 2027.</p>
   </div>
-</section>
 
-<!-- Wave into entertainment -->
-<div class="wave-divider" style="background:#1A1A2E" aria-hidden="true">
-  <svg viewBox="0 0 1440 70" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,0 C360,70 1080,0 1440,50 L1440,70 L0,70 Z" fill="#1A1A2E"/></svg>
-</div>
-
-<!-- ═══ ENTERTAINMENT ═══ -->
-<section id="entertainment" aria-labelledby="entertainment-heading">
-  <div class="ent-inner">
-    <div class="ent-eyebrow">Live on Stage</div>
-    <h2 class="ent-h2" id="entertainment-heading">Music. Dance. Culture.</h2>
-    <p class="ent-sub">Celebrating the traditions that make Madison's neighborhoods so alive. Here's this year's lineup.</p>
-    <ol class="sched-list" aria-label="Performance schedule">
-      <li class="sched-item">
-        <div class="sched-time">12:00 PM</div>
-        <div class="sched-line"><span class="sched-dot" style="background:var(--pink)"></span></div>
-        <div class="sched-info">
-          <span class="ent-name">Japanese Drumming</span>
-          <span class="ent-type">Taiko Performance</span>
-        </div>
-      </li>
-      <li class="sched-item">
-        <div class="sched-time">12:30 PM</div>
-        <div class="sched-line"><span class="sched-dot" style="background:var(--purple)"></span></div>
-        <div class="sched-info">
-          <span class="ent-name">Welcome</span>
-          <span class="ent-type">Opening Remarks</span>
-        </div>
-      </li>
-      <li class="sched-item">
-        <div class="sched-time">12:45 PM</div>
-        <div class="sched-line"><span class="sched-dot" style="background:var(--orange)"></span></div>
-        <div class="sched-info">
-          <span class="ent-name">Hmong Dancers</span>
-          <span class="ent-type">Traditional Dance</span>
-        </div>
-      </li>
-      <li class="sched-item">
-        <div class="sched-time">1:00 PM</div>
-        <div class="sched-line"><span class="sched-dot" style="background:var(--green)"></span></div>
-        <div class="sched-info">
-          <span class="ent-name">Rael The Artist</span>
-          <span class="ent-type">Live Music</span>
-        </div>
-      </li>
-      <li class="sched-item">
-        <div class="sched-time">2:00 PM</div>
-        <div class="sched-line"><span class="sched-dot" style="background:var(--yellow)"></span></div>
-        <div class="sched-info">
-          <span class="ent-name">Ballet</span>
-          <span class="ent-type">Dance Performance</span>
-        </div>
-      </li>
-      <li class="sched-item">
-        <div class="sched-time">3:00 PM</div>
-        <div class="sched-line"><span class="sched-dot" style="background:var(--pink)"></span></div>
-        <div class="sched-info">
-          <span class="ent-name">Juggler</span>
-          <span class="ent-type">Family Entertainment</span>
-        </div>
-      </li>
-      <li class="sched-item">
-        <div class="sched-time">3:30 PM</div>
-        <div class="sched-line"><span class="sched-dot" style="background:var(--purple)"></span></div>
-        <div class="sched-info">
-          <span class="ent-name">Francis Medrano</span>
-          <span class="ent-type">Afro-Peruvian Dance Party</span>
-        </div>
-      </li>
-      <li class="sched-item">
-        <div class="sched-time">4:00 PM</div>
-        <div class="sched-line"><span class="sched-dot" style="background:var(--orange)"></span></div>
-        <div class="sched-info">
-          <span class="ent-name">End of Event</span>
-          <span class="ent-type">See you next year!</span>
-        </div>
-      </li>
-    </ol>
-    <p class="sched-note">&#9432; Times are approximate. Check back or follow us on Instagram for updates.</p>
+  <div class="recap-stats" role="list">
+    <div class="recap-stat" role="listitem"><span class="rs-num">700+</span><span class="rs-label">Neighbors</span></div>
+    <div class="recap-stat" role="listitem"><span class="rs-num">40</span><span class="rs-label">Sponsors &amp; donors</span></div>
+    <div class="recap-stat" role="listitem"><span class="rs-num">4</span><span class="rs-label">Hours, all free</span></div>
+    <div class="recap-stat" role="listitem"><span class="rs-num">$0</span><span class="rs-label">Cost to attend</span></div>
   </div>
-</section>
 
-<!-- Wave into food -->
-<div class="wave-divider" style="background:#1A1A2E" aria-hidden="true">
-  <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,30 C480,60 960,0 1440,30 L1440,60 L0,60 Z" fill="var(--orange-pale)"/></svg>
-</div>
+  <!-- Photographs and flat color cells share one grid, so the colors
+       read as part of the picture set rather than as background. -->
+  <div class="recap-mosaic">
+    <figure class="rm-tile rm-a"><img src="photos/2026/folklorico-swirl.webp" alt="Ballet Folklórico dancers swirling wide skirts of red, green and gold on stage" loading="lazy"></figure>
+    <div class="rm-fill rm-orange" aria-hidden="true"></div>
+    <figure class="rm-tile rm-b"><img src="photos/2026/juggler.webp" alt="A juggler in a red hat and plaid shirt performing beside Monona Bay" loading="lazy"></figure>
+    <figure class="rm-tile rm-c"><img src="photos/2026/hula-line.webp" alt="A line of young dancers in pink costumes performing on the lawn" loading="lazy"></figure>
+    <div class="rm-fill rm-flower" aria-hidden="true"><span class="rm-flower-mark"></span></div>
+    <figure class="rm-tile rm-d"><img src="photos/2026/aerial-park.webp" alt="Aerial view of the Gathering filling Brittingham Park beside Monona Bay" loading="lazy"></figure>
+    <figure class="rm-tile rm-e"><img src="photos/2026/climbing-wall.webp" alt="A child climbing the rock wall set up in the park" loading="lazy"></figure>
+    <div class="rm-fill rm-blue" aria-hidden="true"></div>
+    <figure class="rm-tile rm-f"><img src="photos/2026/stage-banner.webp" alt="Performers gathered on stage in front of the Good Neighbor Gathering banner" loading="lazy"></figure>
+  </div>
+
+  <p class="recap-more"><a href="recap.html">See the full 2026 recap &#8594;</a></p>
+</section>
 
 <!-- ═══ FOOD ═══ -->
-<section id="food" aria-labelledby="food-heading">
+<section id="food" class="sheet" aria-labelledby="food-heading">
   <div class="food-inner">
     <div class="food-text">
       <div class="section-eyebrow ey-orange" style="margin-bottom:0.75rem">Eat &amp; Drink</div>
       <h2 class="section-h2" id="food-heading"><span class="c-orange">Food Trucks</span> &amp; Carts</h2>
-      <p>Hungry? A lineup of local food carts brings the flavor: diverse, delicious, and perfect for the whole crew.</p>
-      <p>Cash and card both welcome. No outside food restrictions. Pack a picnic, grab a blanket, and claim your spot on the lawn.</p>
-      <div class="food-chips">
-        <span class="food-chip">&#128179; Cash &amp; card accepted</span>
-        <span class="food-chip">&#127828; Multiple vendors</span>
-        <span class="food-chip">&#127823; Global flavors</span>
-        <span class="food-chip">&#127967; Picnics welcome</span>
-      </div>
+      <p>Local food carts, cash and card both welcome. Or pack a picnic, grab a blanket and claim a spot on the lawn.</p>
     </div>
     <div class="food-visual" aria-hidden="true">
       <div class="food-card"><div class="food-emoji">&#127829;</div><p>Food Trucks</p></div>
@@ -557,106 +448,41 @@
   </div>
 </section>
 
-<!-- Wave into about -->
-<div class="wave-divider" style="background:var(--orange-pale)" aria-hidden="true">
-  <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,20 C480,60 960,0 1440,40 L1440,60 L0,60 Z" fill="#ffffff"/></svg>
-</div>
-
 <!-- ═══ ABOUT ═══ -->
-<section id="about" aria-labelledby="about-heading">
+<section id="about" class="sheet" aria-labelledby="about-heading">
   <div class="about-inner">
     <div class="about-text">
       <div class="about-eyebrow">Our Story</div>
       <h2 class="about-h2" id="about-heading">Building a <em>Stronger, More Loving</em> Community</h2>
-      <p>Every September, hundreds of Madison families pour into Brittingham Park for a day of music, dancing, food, and connection. All completely free. This is what it looks like when a community celebrates itself.</p>
-      <p>What started as a simple idea to connect neighbors has grown into something bigger every year: live performances, hands-on kids' activities, local food, and community resources, all in one beautiful park on the shores of Monona Bay.</p>
-      <p>Organized by neighbors, for neighbors. This event is a love letter to Madison's District 13 community.</p>
-      <div class="org-list">
-        <div class="org-list-label">Proudly organized by</div>
-        <a href="https://www.neighborhoodhousemadison.org" target="_blank" rel="noopener" class="org-tag">
-          <span class="org-swatch" style="background:var(--purple-pale)">&#127968;</span>
-          Neighborhood House Community Center
-        </a>
-        <a href="https://newculturechurch.com" target="_blank" rel="noopener" class="org-tag">
-          <span class="org-swatch" style="background:var(--orange-pale)">&#9829;</span>
-          New Culture Church
-        </a>
-        <a href="#community" class="org-tag">
-          <span class="org-swatch" style="background:var(--blue-pale)">&#127963;</span>
-          District 13 Neighborhood Associations
-        </a>
-        <a href="https://trianglecommunityministry.org" target="_blank" rel="noopener" class="org-tag">
-          <span class="org-swatch" style="background:var(--green-pale)">&#129309;</span>
-          Triangle Ministries
-        </a>
-        <a href="https://www.unitypoint.org/locations/unitypoint-health---meriter-hospital" target="_blank" rel="noopener" class="org-tag">
-          <span class="org-swatch" style="background:var(--pink-pale)">&#127973;</span>
-          UnityPoint Health – Meriter
-        </a>
-        <a href="https://bayviewfoundation.org" target="_blank" rel="noopener" class="org-tag">
-          <span class="org-swatch" style="background:var(--purple-pale)">&#127968;</span>
-          Bayview Foundation
-        </a>
-      </div>
+      <p>Every September, hundreds of Madison families pour into Brittingham Park for music, dancing, food and connection. Organized by neighbors, for neighbors.</p>
     </div>
     <div class="about-visual">
       <div class="about-float-star" aria-hidden="true">&#10022;</div>
       <div class="about-img-wrap">
-        <img src="photos/banner.jpg" alt="The colorful Madison Good Neighbor Gathering banner with Lake Monona in the background" loading="lazy" width="1400" height="933">
+        <img src="photos/2026/stage-group.webp" alt="Neighbors gathered on stage together at the Good Neighbor Gathering" loading="lazy">
       </div>
       <div class="about-badge" aria-label="Event location">&#127795; Brittingham Park · Madison, WI</div>
     </div>
   </div>
 </section>
 
-<!-- Wave into gallery -->
-<div class="wave-divider" style="background:#fff" aria-hidden="true">
-  <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,30 C360,0 1080,60 1440,20 L1440,60 L0,60 Z" fill="var(--blue-pale)"/></svg>
-</div>
-
-<!-- ═══ GALLERY ═══ -->
-<section id="gallery" aria-labelledby="gallery-heading">
-  <div style="max-width:1100px;margin:0 auto;position:relative;z-index:1;">
-    <div class="section-header">
-      <div class="section-eyebrow ey-blue">See the Joy</div>
-      <h2 class="section-h2" id="gallery-heading">From Past <span class="c-blue">Gatherings</span></h2>
-      <p class="section-sub">Every year, the whole neighborhood shows up. This year, we hope you will too.</p>
-    </div>
-    <div class="gallery-collage" role="list" aria-label="Photo gallery from previous Good Neighbor Gatherings">
-      <div class="gcol-item" role="listitem"><img src="photos/ballet-lace.jpg" alt="Ballet Folklórico dancer in flowing white lace arms outstretched, smiling on stage" loading="lazy" width="1400" height="933"></div>
-      <div class="gcol-item" role="listitem"><img src="photos/native-dancer.jpg" alt="Native American dancer in full traditional regalia performing at the Good Neighbor Gathering" loading="lazy" width="1400" height="933"></div>
-      <div class="gcol-item" role="listitem"><img src="photos/joy.jpg" alt="Community member giving a joyful thumbs-up in front of colorful GNG streamers and balloons" loading="lazy" width="1400" height="933"></div>
-      <div class="gcol-item" role="listitem"><img src="photos/hmong-dance.jpg" alt="Hmong children in vibrant pink traditional costumes performing a cultural dance on stage" loading="lazy" width="1400" height="933"></div>
-      <div class="gcol-item" role="listitem"><img src="photos/aerial.jpg" alt="Drone aerial view of the full Good Neighbor Gathering event at Brittingham Park beside the lake" loading="lazy" width="1400" height="786"></div>
-    </div>
-  </div>
-</section>
-
-<!-- Wave into plan your visit -->
-<div class="wave-divider" style="background:var(--blue-pale)" aria-hidden="true">
-  <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,40 C360,0 1080,60 1440,20 L1440,60 L0,60 Z" fill="var(--cream)"/></svg>
-</div>
-
 <!-- ═══ PLAN YOUR VISIT ═══ -->
-<section id="visit" aria-labelledby="visit-heading">
+<section id="visit" class="sheet" aria-labelledby="visit-heading">
   <div class="visit-inner">
     <div class="section-header">
       <div class="section-eyebrow ey-green">Get Ready</div>
       <h2 class="section-h2" id="visit-heading">Plan Your <span class="c-green">Visit</span></h2>
-      <p class="section-sub">Everything you need for a great day at the Gathering.</p>
+      <p class="section-sub">What to pack, and how to get there.</p>
     </div>
     <div class="visit-grid">
-      <div class="visit-col-left">
         <!-- What to Bring -->
         <div class="visit-card vc-yellow">
-          <h3>&#127929; What to Bring</h3>
+          <h3>&#129530; What to Bring</h3>
           <ul class="bring-list">
             <li><span class="bring-check" style="background:var(--green)">&#10003;</span> Blanket or lawn chairs for seating</li>
             <li><span class="bring-check" style="background:var(--blue)">&#10003;</span> Sunscreen &amp; sunglasses</li>
-            <li><span class="bring-check" style="background:var(--orange)">&#10003;</span> Water bottle (stay hydrated!)</li>
-            <li><span class="bring-check" style="background:var(--purple)">&#10003;</span> Cash or card for food vendors</li>
-            <li><span class="bring-check" style="background:var(--pink)">&#10003;</span> Jacket (just in case)</li>
-            <li><span class="bring-check" style="background:var(--green)">&#10003;</span> Good vibes and an open heart &#128149;</li>
+            <li><span class="bring-check" style="background:var(--orange)">&#10003;</span> Water bottle</li>
+            <li><span class="bring-check" style="background:var(--purple)">&#10003;</span> Cash or card for food carts</li>
           </ul>
           <div class="access-note">
             <span>&#9855;</span>
@@ -668,76 +494,26 @@
         <div class="visit-card vc-blue">
           <h3>&#128205; Getting There</h3>
           <ul>
-            <li><span class="li-icon">&#128663;</span> <span><strong>Address:</strong> 829 W. Washington Ave., Madison, WI 53715. Free street parking on surrounding streets</span></li>
-            <li><span class="li-icon">&#128652;</span> <span>Accessible by <strong>Metro Transit</strong>. Multiple routes stop nearby</span></li>
-            <li><span class="li-icon">&#128690;</span> <span>Very bike-friendly! <strong>BCycle</strong> docking stations are a short ride away</span></li>
-            <li><span class="li-icon">&#128337;</span> <span>Plan to arrive 15 min early. Parking fills up fast on sunny days</span></li>
-          </ul>
-          <p style="margin-top:1rem;">
-            <a href="https://maps.google.com/?q=Brittingham+Park+Madison+WI" target="_blank" rel="noopener">Open in Google Maps &#8594;</a>
-          </p>
-        </div>
-      </div>
-
-      <div class="visit-col-right">
-        <!-- Event Info -->
-        <div class="visit-card vc-green">
-          <h3>&#128221; Good to Know</h3>
-          <ul>
-            <li><span class="li-icon">&#127881;</span> <span><strong>100% free</strong> admission. No tickets, no registration needed</span></li>
-            <li><span class="li-icon">&#127774;</span> <span>Event is only cancelled for severe weather. Check Instagram for updates</span></li>
-            <li><span class="li-icon">&#128682;</span> <span>Alcohol-free, family-friendly event</span></li>
-            <li><span class="li-icon">&#128054;</span> <span>Dogs on leash are welcome at Brittingham Park</span></li>
-            <li><span class="li-icon">&#128247;</span> <span>Photography encouraged. Tag us on Instagram!</span></li>
-            <li><span class="li-icon">&#128203;</span> <span>Community resource tables with local organizations</span></li>
+            <li><span class="li-icon">&#128663;</span> <span>Free street parking on the surrounding streets. Arrive 15 minutes early on sunny days.</span></li>
+            <li><span class="li-icon">&#128652;</span> <span>Several <strong>Metro Transit</strong> routes stop nearby, and <strong>BCycle</strong> docks are a short ride away.</span></li>
           </ul>
         </div>
-
-        <!-- Contact -->
-        <div class="visit-card vc-pink">
-          <h3>&#128231; Contact &amp; Follow</h3>
-          <p style="margin-bottom:0.85rem;">
-            <strong>Neighborhood House Community Center</strong><br>
-            29 S Mills St, Madison, WI 53715
-          </p>
-          <p style="margin-bottom:0.5rem;">
-            <a href="mailto:info@neighborhoodhousemadison.org">info@neighborhoodhousemadison.org</a>
-          </p>
-          <p style="margin-bottom:1rem;">
-            <a href="tel:6082555337">(608) 255-5337</a>
-          </p>
-          <p style="margin-bottom:0.4rem;">
-            <a href="https://www.instagram.com/madisongoodneighborgathering" target="_blank" rel="noopener">&#128247; @madisongoodneighborgathering</a>
-          </p>
-          <p>
-            <a href="https://linktr.ee/madisongoodneighborgathering" target="_blank" rel="noopener">&#128279; linktr.ee/madisongoodneighborgathering</a>
-          </p>
-        </div>
-      </div>
     </div>
   </div>
 </section>
 
-<!-- Wave: visit (cream) → location (white) -->
-<div class="wave-divider" style="background:var(--cream)" aria-hidden="true">
-  <svg viewBox="0 0 1440 70" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,35 C360,70 720,0 1080,45 C1260,65 1380,20 1440,35 L1440,70 L0,70 Z" fill="#ffffff"/></svg>
-</div>
-
 <!-- ═══ LOCATION MAP ═══ -->
-<section id="location" aria-labelledby="location-heading">
+<section id="location" class="sheet" aria-labelledby="location-heading">
   <div style="max-width:1100px;margin:0 auto;text-align:center;position:relative;z-index:1;">
     <div class="section-eyebrow ey-pink">Find Us</div>
     <h2 class="section-h2" id="location-heading">We're at <span class="c-pink">Brittingham Park</span></h2>
-    <p class="section-sub">829 W. Washington Ave, Madison, WI 53715 &mdash; right on the shore of Monona Bay.</p>
-    <div class="map-wrap">
-      <iframe
-        src="https://maps.google.com/maps?q=Brittingham+Park+Madison+WI+53715&t=&z=15&ie=UTF8&iwloc=&output=embed"
-        width="100%" height="420"
-        loading="lazy"
-        allowfullscreen
-        referrerpolicy="no-referrer-when-downgrade"
-        title="Brittingham Park location map, 829 W Washington Ave, Madison WI 53715"
-        aria-label="Google map showing Brittingham Park in Madison, Wisconsin"></iframe>
+    <p class="section-sub">829 W. Washington Ave, on the shore of Monona Bay.</p>
+    <div class="map-wrap" id="lmap-wrap">
+      <div id="lmap" role="application" aria-label="Map of Brittingham Park, Madison"></div>
+      <div class="lmap-fallback">
+        <p>The map didn&rsquo;t load.</p>
+        <a class="btn btn-pink" href="https://www.google.com/maps/search/?api=1&query=Brittingham+Park+Madison+WI" target="_blank" rel="noopener">Open in Google Maps &#8594;</a>
+      </div>
     </div>
     <div class="map-chips">
       <span class="map-chip">&#128663; Free street parking</span>
@@ -747,87 +523,27 @@
       <span class="map-chip">&#128054; Dogs on leash welcome</span>
     </div>
     <p style="margin-top:1.5rem;">
-      <a href="https://maps.google.com/?q=Brittingham+Park+Madison+WI" target="_blank" rel="noopener" class="btn btn-pink" style="display:inline-flex;">Open in Google Maps &#8594;</a>
+      <a href="https://www.google.com/maps/dir/?api=1&destination=829+W+Washington+Ave,+Madison,+WI+53715" target="_blank" rel="noopener" class="btn btn-pink" style="display:inline-flex;">Get directions &#8594;</a>
     </p>
   </div>
 </section>
 
-<!-- Wave: location (cream) → invite (dark) -->
-<div class="wave-divider" style="background:#FFFDF5" aria-hidden="true">
-  <svg viewBox="0 0 1440 55" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,40 C480,0 960,55 1440,20 L1440,55 L0,55 Z" fill="#1A1A2E"/></svg>
-</div>
-
-<!-- ═══ INVITE A NEIGHBOR ═══ -->
-<section class="invite-section" aria-labelledby="invite-heading">
-  <div class="invite-inner">
-    <div class="ent-eyebrow">Spread the Word</div>
-    <h2 class="invite-h2" id="invite-heading">Know a neighbor who'd <span class="c-pink">love this?</span></h2>
-    <p class="invite-sub">Most neighbors hear about this from another neighbor, not an ad. You already know who needs this invite. Copy the message and send it.</p>
-
-    <div class="invite-card">
-      <p class="invite-msg" id="invite-msg-text">Hey! There's a free community festival in Madison on Sunday, September 13th: the Good Neighbor Gathering at Brittingham Park.
-
-Over 700 neighbors came last year. Live music, cultural performances, food trucks, bouncy structures, kids activities, and more. All completely free, no tickets needed. 12–4 PM.
-
-Hope you can make it! 🎉</p>
-      <button class="invite-copy-btn" id="btn-copy-msg">Copy Message</button>
-    </div>
-
-    <div class="invite-downloads">
-      <p class="invite-share-label">Download graphics to share on Instagram:</p>
-      <div class="invite-dl-cards">
-        <a href="share-square.jpg" download class="invite-dl-card">
-          <img src="share-square.jpg" alt="Square Instagram post graphic" class="invite-dl-thumb invite-dl-thumb-sq">
-          <span class="invite-dl-label">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Square Post
-          </span>
-        </a>
-        <a href="share-story.jpg" download class="invite-dl-card">
-          <img src="share-story.jpg" alt="Instagram Story graphic" class="invite-dl-thumb invite-dl-thumb-story">
-          <span class="invite-dl-label">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Story
-          </span>
-        </a>
-      </div>
-    </div>
-
-    <div class="invite-share-row">
-      <span class="invite-share-label">Or share directly:</span>
-      <a class="invite-share-pill invite-share-fb" id="invite-fb-link" href="#" target="_blank" rel="noopener">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-        Facebook
-      </a>
-      <button class="invite-share-pill invite-share-native" id="invite-native-btn">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-        More Options
-      </button>
-    </div>
-  </div>
-</section>
-
-<!-- Wave: invite (dark) → FAQ (cream) -->
-<div class="wave-divider" style="background:#1A1A2E" aria-hidden="true">
-  <svg viewBox="0 0 1440 55" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,20 C480,55 960,0 1440,35 L1440,55 L0,55 Z" fill="#FFFDF5"/></svg>
-</div>
-
 <!-- ═══ FAQ ═══ -->
-<section id="faq" aria-labelledby="faq-heading">
+<section id="faq" class="sheet" aria-labelledby="faq-heading">
   <div class="faq-inner">
     <div class="section-header">
       <div class="section-eyebrow ey-purple">Got Questions?</div>
       <h2 class="section-h2" id="faq-heading">Frequently Asked <span class="c-purple">Questions</span></h2>
-      <p class="section-sub">Everything families usually want to know before heading out.</p>
+
     </div>
     <div class="faq-list">
       <details>
         <summary>Is the Good Neighbor Gathering really free?</summary>
-        <div class="faq-answer">Yes, 100% free! There are no tickets to buy, no registration to fill out, and no hidden fees. Just show up with your family and have fun. The entire event (activities, entertainment, and community resources) is completely free of charge.</div>
+        <div class="faq-answer">Yes. No tickets, no registration, no hidden fees. Just show up.</div>
       </details>
       <details>
-        <summary>What time does the event run?</summary>
-        <div class="faq-answer">The Madison Good Neighbor Gathering runs from <strong>12:00 PM to 4:00 PM</strong> on <strong>Sunday, September 13, 2026</strong>. Arrive anytime during those hours. There's no set schedule you have to follow.</div>
+        <summary>When is the 2027 Gathering?</summary>
+        <div class="faq-answer">The 2027 date hasn&rsquo;t been announced yet. It lands on a Sunday afternoon in early fall, and it has run 12:00 to 4:00 PM in past years. Follow us on <a href="https://www.instagram.com/madisongoodneighborgathering" target="_blank" rel="noopener">Instagram</a> and we&rsquo;ll post the date as soon as it&rsquo;s set.</div>
       </details>
       <details>
         <summary>What about severe weather?</summary>
@@ -835,78 +551,65 @@ Hope you can make it! 🎉</p>
       </details>
       <details>
         <summary>Is there parking nearby?</summary>
-        <div class="faq-answer">Yes! Free street parking is available on the streets surrounding Brittingham Park. Parking can fill up on nice days, so arriving a bit early or taking the bus or biking is a great option. Metro Transit has several routes nearby, and BCycle docking stations are close to the park.</div>
-      </details>
-      <details>
-        <summary>Is the event stroller and wheelchair accessible?</summary>
-        <div class="faq-answer">Absolutely! Brittingham Park has paved paths throughout, making it easy to navigate with strollers, wheelchairs, or other mobility devices. All event activities are set up with accessibility in mind.</div>
+        <div class="faq-answer">Free street parking surrounds the park, and it fills up on nice days. Metro Transit and BCycle are both good alternatives. <a href="parking.html">See the parking map &#8594;</a></div>
       </details>
       <details>
         <summary>Can I bring my dog?</summary>
-        <div class="faq-answer">Yes! Dogs on a leash are welcome at Brittingham Park. Just be sure to clean up after your pup and keep them comfortable in the crowd.</div>
-      </details>
-      <details>
-        <summary>Is there food available?</summary>
-        <div class="faq-answer">Yes! Multiple food carts will be on-site offering a variety of family-friendly and diverse food options. Food vendors accept both cash and card. No ATM on site, so plan ahead. You're also welcome to bring your own picnic. Just grab a blanket and find a spot on the lawn!</div>
+        <div class="faq-answer">Yes, on a leash. Clean up after them and keep them comfortable in the crowd.</div>
       </details>
       <details>
         <summary>How can I volunteer or sponsor the event?</summary>
-        <div class="faq-answer">We'd love your support! Visit our <a href="get-involved.html">Get Involved page</a> to sign up to volunteer or learn about sponsorship. Your support helps keep this community event free and growing each year.</div>
+        <div class="faq-answer">Head to the <a href="get-involved.html">Get Involved page</a>. Volunteers and sponsors are what keep it free.</div>
       </details>
     </div>
   </div>
 </section>
 
-<!-- Wave: FAQ (cream) → community (purple) -->
-<div class="wave-divider" style="background:var(--cream)" aria-hidden="true">
-  <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,40 C360,0 1080,60 1440,20 L1440,60 L0,60 Z" fill="#6B2B8E"/></svg>
-</div>
-
 <!-- ═══ COMMUNITY ═══ -->
-<section id="community" aria-labelledby="community-heading">
+<section id="community" class="sheet" aria-labelledby="community-heading">
   <div class="community-inner">
     <div class="section-eyebrow">Our Community</div>
     <h2 class="section-h2" id="community-heading">Built by Neighbors,<br>for Neighbors</h2>
-    <p class="section-sub" style="color:rgba(255,255,255,0.72);max-width:600px;margin:0.5rem auto 0;">This event is a labor of love, organized by community members who care deeply about Madison's near west side.</p>
+    
     <div class="comm-orgs">
       <div class="comm-org-card">
         <div class="comm-org-icon">&#127968;</div>
         <h3>Neighborhood House</h3>
-        <p>Serving Madison families since 1916. <a href="https://www.neighborhoodhousemadison.org" target="_blank" rel="noopener">neighborhoodhousemadison.org</a></p>
+        <p>Serving Madison families since 1916. <a href="https://www.neighborhoodhousemadison.org" target="_blank" rel="noopener">Visit &#8594;</a></p>
       </div>
       <div class="comm-org-card">
         <div class="comm-org-icon">&#9829;&#65039;</div>
         <h3>New Culture Church</h3>
-        <p>An authentic faith community helping people experience Jesus in a way that's welcoming and transformative: a space for the questioning, the new to Madison, and anyone who doesn't have it all figured out. <a href="https://newculturechurch.com" target="_blank" rel="noopener">newculturechurch.com</a></p>
+        <p>A welcoming faith community. <a href="https://newculturechurch.com" target="_blank" rel="noopener">Visit &#8594;</a></p>
       </div>
       <div class="comm-org-card">
         <div class="comm-org-icon">&#127963;&#65039;</div>
         <h3>District 13</h3>
-        <p>Six neighborhood associations uniting to celebrate and strengthen our community.</p>
+        <p>Six neighborhood associations, one celebration.</p>
       </div>
       <div class="comm-org-card">
         <div class="comm-org-icon">&#129309;</div>
         <h3>Triangle Ministries</h3>
-        <p>Serving residents of Madison's Triangle Neighborhood since 1978 with holistic health services, food programs, and community-building support. <a href="https://trianglecommunityministry.org" target="_blank" rel="noopener">trianglecommunityministry.org</a></p>
+        <p>Health, food and support in the Triangle. <a href="https://trianglecommunityministry.org" target="_blank" rel="noopener">Visit &#8594;</a></p>
       </div>
       <div class="comm-org-card">
         <div class="comm-org-icon">&#127973;</div>
         <h3>UnityPoint Health – Meriter</h3>
-        <p>A UW Health partner providing personal, community-centered care in Madison, including primary and specialty services. <a href="https://www.unitypoint.org/locations/unitypoint-health---meriter-hospital" target="_blank" rel="noopener">unitypoint.org</a></p>
+        <p>Community-centered care in Madison. <a href="https://www.unitypoint.org/locations/unitypoint-health---meriter-hospital" target="_blank" rel="noopener">Visit &#8594;</a></p>
       </div>
       <div class="comm-org-card">
         <div class="comm-org-icon">&#127968;</div>
         <h3>Bayview Foundation</h3>
-        <p>Providing affordable housing and supportive community services to culturally diverse, low-income families in Madison since 1966. <a href="https://bayviewfoundation.org" target="_blank" rel="noopener">bayviewfoundation.org</a></p>
+        <p>Affordable housing and services since 1966. <a href="https://bayviewfoundation.org" target="_blank" rel="noopener">Visit &#8594;</a></p>
       </div>
       <div class="comm-org-card">
         <div class="comm-org-icon">&#129309;</div>
         <h3>You!</h3>
-        <p>Volunteer, donate, or sponsor. Everyone who shows up makes this event possible.</p>
+        <p>Volunteer, donate or sponsor.</p>
       </div>
     </div>
     <div class="sponsors-thanks" style="margin-bottom:2rem;text-align:center;">
-      <h3 style="color:var(--yellow);font-size:1.1rem;margin-bottom:0.5rem;">Thank you to our 2026 sponsors &amp; donors!</h3>
+      <h3 style="color:var(--yellow);font-size:1.1rem;margin-bottom:0.5rem;">Our 2026 sponsors</h3>
         <div class="sponsor-grid">
           <div class="sponsor-tile sp-tall" data-name="Neuhauser Pharmacy" style="--sp-h:91px;"><img src="photos/sponsors/neuhauser-pharmacy-logo.png" alt="Neuhauser Pharmacy" loading="lazy"></div>
           <div class="sponsor-tile" data-name="Tallard Apartments" style="--sp-h:59px;"><img src="photos/sponsors/tallard-apartments.png" alt="Tallard Apartments" loading="lazy"></div>
@@ -926,50 +629,19 @@ Hope you can make it! 🎉</p>
           <div class="sponsor-tile" data-name="Budds Auto" style="--sp-h:56px;"><img src="photos/sponsors/budds-auto-repair.png" alt="Budds Auto" loading="lazy"></div>
           <div class="sponsor-tile" data-name="Transformation Center" style="--sp-h:57px;"><img src="photos/sponsors/transformation-center.png" alt="Transformation Center" loading="lazy"></div>
         </div>
-      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.5rem;max-width:820px;margin:0 auto 1rem;">
-        <span style="background:rgba(255,255,255,0.1);border-radius:20px;padding:0.4rem 0.95rem;font-size:0.9rem;color:#fff;">Burnie's Rock Shop</span>
-        <span style="background:rgba(255,255,255,0.1);border-radius:20px;padding:0.4rem 0.95rem;font-size:0.9rem;color:#fff;">Nails 4U</span>
-        <span style="background:rgba(255,255,255,0.1);border-radius:20px;padding:0.4rem 0.95rem;font-size:0.9rem;color:#fff;">Sistas Chicken and Fish</span>
-        <span style="background:rgba(255,255,255,0.1);border-radius:20px;padding:0.4rem 0.95rem;font-size:0.9rem;color:#fff;">Madison Chocolate</span>
-        <span style="background:rgba(255,255,255,0.1);border-radius:20px;padding:0.4rem 0.95rem;font-size:0.9rem;color:#fff;">Taj Indian Cuisine</span>
-        <span style="background:rgba(255,255,255,0.1);border-radius:20px;padding:0.4rem 0.95rem;font-size:0.9rem;color:#fff;">White Bison Tattoo</span>
-        <span style="background:rgba(255,255,255,0.1);border-radius:20px;padding:0.4rem 0.95rem;font-size:0.9rem;color:#fff;">Paleo Mama Bakery</span>
-        <span style="background:rgba(255,255,255,0.1);border-radius:20px;padding:0.4rem 0.95rem;font-size:0.9rem;color:#fff;">Cargo Coffee</span>
-        <span style="background:rgba(255,255,255,0.1);border-radius:20px;padding:0.4rem 0.95rem;font-size:0.9rem;color:#fff;">Rasta Barista</span>
-        <span style="background:rgba(255,255,255,0.1);border-radius:20px;padding:0.4rem 0.95rem;font-size:0.9rem;color:#fff;">Quality Hardware</span>
-        <span style="background:rgba(255,255,255,0.1);border-radius:20px;padding:0.4rem 0.95rem;font-size:0.9rem;color:#fff;">Taqueria Guadalajara</span>
-        <span style="background:rgba(255,255,255,0.1);border-radius:20px;padding:0.4rem 0.95rem;font-size:0.9rem;color:#fff;">Cordial Tavern</span>
-        <span style="background:rgba(255,255,255,0.1);border-radius:20px;padding:0.4rem 0.95rem;font-size:0.9rem;color:#fff;">Movin' Shoes</span>
-        <span style="background:rgba(255,255,255,0.1);border-radius:20px;padding:0.4rem 0.95rem;font-size:0.9rem;color:#fff;">BP</span>
-        <span style="background:rgba(255,255,255,0.1);border-radius:20px;padding:0.4rem 0.95rem;font-size:0.9rem;color:#fff;">Oishi</span>
-        <span style="background:rgba(255,255,255,0.1);border-radius:20px;padding:0.4rem 0.95rem;font-size:0.9rem;color:#fff;">SunnyPho</span>
-        <span style="background:rgba(255,255,255,0.1);border-radius:20px;padding:0.4rem 0.95rem;font-size:0.9rem;color:#fff;">Vilas Neighborhood Association</span>
-        <span style="background:rgba(255,255,255,0.1);border-radius:20px;padding:0.4rem 0.95rem;font-size:0.9rem;color:#fff;">O'Kuehling Fund</span>
-        <span style="background:rgba(255,255,255,0.1);border-radius:20px;padding:0.4rem 0.95rem;font-size:0.9rem;color:#fff;">Rachel Bennett</span>
-        <span style="background:rgba(255,255,255,0.1);border-radius:20px;padding:0.4rem 0.95rem;font-size:0.9rem;color:#fff;">Alison Filippelli</span>
-        <span style="background:rgba(255,255,255,0.1);border-radius:20px;padding:0.4rem 0.95rem;font-size:0.9rem;color:#fff;">Anonymous</span>
-      </div>
-      <p style="color:rgba(255,255,255,0.9);font-size:0.95rem;max-width:560px;margin:0 auto 1rem;">Nearly forty local businesses, organizations, and neighbors sponsored the 2026 Gathering. Sponsors get a logo on this page, a link from our sponsor page, and a badge for their own website. To add your name, contact <a href="mailto:laura@neighborhoodhousemadison.org" style="color:var(--yellow);font-weight:700;">laura@neighborhoodhousemadison.org</a>.</p>
+      <p style="color:rgba(255,255,255,0.9);font-size:0.95rem;max-width:60ch;margin:0 0 1rem;">Nearly forty businesses and neighbors backed 2026. Sponsorship for 2027 is open &mdash; <a href="mailto:laura@neighborhoodhousemadison.org" style="color:var(--yellow);font-weight:700;">laura@neighborhoodhousemadison.org</a>.</p>
     </div>
-    <p style="text-align:center;margin-bottom:1.5rem;"><a href="thanks.html" style="color:var(--yellow);font-weight:700;">See all our sponsors &amp; partners &#8594;</a></p>
+    <p style="margin-bottom:1.5rem;"><a href="thanks.html" style="color:var(--yellow);font-weight:700;">See every sponsor &#8594;</a></p>
     <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;margin-bottom:1.75rem;">
       <a href="get-involved.html" class="btn btn-yellow">&#128140; Get Involved / Sponsor</a>
       <a href="https://www.neighborhoodhousemadison.org" target="_blank" rel="noopener" class="btn btn-blue">Support Neighborhood House &#8594;</a>
     </div>
-    <div class="donate-note">
-      <strong>Want to support the mission year-round?</strong> Neighborhood House Community Center has served Madison families since 1916 with youth programs, adult education, a food pantry, and much more. Your donation keeps these doors open. <a href="https://www.neighborhoodhousemadison.org" target="_blank" rel="noopener">Learn more &#8594;</a>
-    </div>
     <div class="closing-note">
       <p class="closing-line">One Sunday afternoon. Seven hundred neighbors. One park.<span>Good neighbors show up.</span></p>
-      <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Madison+Good+Neighbor+Gathering&dates=20260913T170000Z/20260913T210000Z&details=Free+community+festival!+Live+music,+cultural+performances,+food+trucks,+kids+activities+%26+more.+No+tickets+needed.&location=829+W+Washington+Ave,+Madison,+WI+53715&ctz=America%2FChicago" target="_blank" rel="noopener" class="btn btn-yellow">&#128197; Add Sept 13 to Your Calendar</a>
+      <a href="https://www.instagram.com/madisongoodneighborgathering" target="_blank" rel="noopener" class="btn btn-yellow">&#128247; Follow for the 2027 date</a>
     </div>
   </div>
 </section>
-
-<!-- Wave into footer -->
-<div class="wave-divider" style="background:#6B2B8E" aria-hidden="true">
-  <svg viewBox="0 0 1440 50" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,25 C480,50 960,0 1440,25 L1440,50 L0,50 Z" fill="#1A1A2E"/></svg>
-</div>
 
 </main>
 
@@ -981,19 +653,10 @@ Hope you can make it! 🎉</p>
     <div class="footer-top">
       <img src="logo-badge.svg" alt="Madison Good Neighbor Gathering" class="footer-logo" width="200" height="200">
       <div class="footer-text">
-        <p class="footer-event"><strong>Sunday, September 13, 2026 &middot; 12 &ndash; 4 PM</strong></p>
+        <p class="footer-event"><strong>Back in 2027 &middot; Date announced soon</strong></p>
         <p>Brittingham Park &middot; 829 W Washington Ave, Madison, WI &middot; 100% Free &middot; All Ages</p>
         <p style="margin-top:0.5rem;">
-          <a href="thanks.html">Our Sponsors</a>
-        </p>
-        <p style="margin-top:0.5rem;">
-          Proudly organized by
-          <a href="https://www.neighborhoodhousemadison.org" target="_blank" rel="noopener">Neighborhood House Community Center</a>,
-          <a href="https://newculturechurch.com" target="_blank" rel="noopener">New Culture Church</a>,
-          <a href="#community">District 13 Neighborhood Associations</a>,
-          <a href="https://trianglecommunityministry.org" target="_blank" rel="noopener">Triangle Ministries</a>,
-          <a href="https://www.unitypoint.org/locations/unitypoint-health---meriter-hospital" target="_blank" rel="noopener">UnityPoint Health &ndash; Meriter</a>,
-          and <a href="https://bayviewfoundation.org" target="_blank" rel="noopener">Bayview Foundation</a>
+          Organized by <a href="#community">six neighborhood partners</a> &middot; <a href="thanks.html">Our sponsors</a>
         </p>
       </div>
     </div>
@@ -1017,7 +680,7 @@ Hope you can make it! 🎉</p>
         </a>
     </div>
 
-    <p class="footer-copy">&copy; 2026 Madison Good Neighbor Gathering &middot; Made with &#10084; in Madison, WI</p>
+    <p class="footer-copy">&copy; 2027 Madison Good Neighbor Gathering &middot; Made with &#10084; in Madison, WI</p>
 
   </div>
 </footer>
@@ -1026,13 +689,12 @@ Hope you can make it! 🎉</p>
 (function () {
   var PAGE_URL = window.location.href;
   var SHARE_TITLE = 'Madison Good Neighbor Gathering';
-  var SHARE_TEXT = 'Over 700 neighbors came last year! Free festival in Madison: live music, food trucks, bouncy structures & kids activities. Sept 13, 12-4 PM at Brittingham Park. All ages, no tickets needed!';
-  var INVITE_MSG = 'Hey! There\'s a free community festival in Madison on Sunday, September 13th: the Good Neighbor Gathering at Brittingham Park.\n\nOver 700 neighbors came last year. Live music, cultural performances, food trucks, bouncy structures, kids activities, and more. All completely free, no tickets needed. 12-4 PM.\n\nHope you can make it! \uD83C\uDF89\n\n' + PAGE_URL;
+  var SHARE_TEXT = 'The Madison Good Neighbor Gathering is back in 2027 at Brittingham Park. Free festival: live music, food trucks, bouncy structures & kids activities. All ages, no tickets needed. Date announced soon!';
 
   function fbUrl() { return 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(PAGE_URL); }
 
   function setLinks() {
-    ['btn-share-fb', 'invite-fb-link'].forEach(function(id) {
+    ['btn-share-fb'].forEach(function(id) {
       var el = document.getElementById(id); if (el) el.href = fbUrl();
     });
   }
@@ -1060,79 +722,94 @@ Hope you can make it! 🎉</p>
     var el;
     el = document.getElementById('btn-share-main'); if (el) el.addEventListener('click', doShare);
     el = document.getElementById('btn-copy-link');  if (el) el.addEventListener('click', function() { doCopy(PAGE_URL, 'btn-copy-link', 'Link copied!'); });
-    el = document.getElementById('btn-copy-msg');   if (el) el.addEventListener('click', function() { doCopy(INVITE_MSG, 'btn-copy-msg', 'Copied!'); });
-    el = document.getElementById('invite-native-btn'); if (el) el.addEventListener('click', doShare);
   });
 }());
 </script>
 
 
+
+<!-- Location map — same provider and tiles as /parking, so the two pages
+     agree. MapLibre is self-hosted in vendor/ and OpenFreeMap needs no
+     key, which also means no third-party tracking on the homepage. -->
+<script src="vendor/maplibre-gl.js"></script>
+<script>
+(function () {
+  var el = document.getElementById('lmap');
+  if (!el || !window.maplibregl) return;
+
+  // Brittingham Park boundary, shared with the parking page.
+  var PARK = [[-89.39994,43.06343],[-89.39969,43.06309],[-89.39966,43.06066],[-89.39957,43.06067],[-89.39952,43.06246],[-89.39929,43.06276],[-89.39889,43.06305],[-89.39764,43.06306],[-89.3972,43.06375],[-89.39655,43.0641],[-89.39588,43.06425],[-89.39531,43.06427],[-89.39436,43.06416],[-89.39244,43.06333],[-89.39195,43.06321],[-89.39108,43.06329],[-89.39001,43.06383],[-89.38947,43.06391],[-89.38981,43.06431],[-89.39053,43.06413],[-89.39141,43.06424],[-89.39246,43.06355],[-89.39532,43.06509],[-89.39552,43.06503],[-89.39565,43.0651],[-89.39661,43.0651],[-89.39712,43.06501],[-89.3974,43.06522],[-89.39994,43.06343]];
+  var EVENT_PT = [-89.3959, 43.06396];
+  var wrap = document.getElementById('lmap-wrap');
+
+  function fail() { if (wrap) wrap.classList.add('failed'); }
+
+  function pin() {
+    var p = document.createElement('div');
+    p.className = 'pin pin-event';
+    p.innerHTML = '<div class="pin-bubble"></div><div class="pin-stem"></div><div class="pin-dot"></div>';
+    p.querySelector('.pin-bubble').textContent = 'The Gathering';
+    return p;
+  }
+
+  try {
+    var map = new maplibregl.Map({
+      container: 'lmap',
+      style: 'https://tiles.openfreemap.org/styles/positron',
+      center: EVENT_PT,
+      zoom: 14.1,
+      attributionControl: { compact: true }
+    });
+
+    map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
+    map.addControl(new maplibregl.FullscreenControl(), 'top-right');
+
+    map.on('error', function (e) {
+      if (e && e.error && e.error.status === 404 && !map.isStyleLoaded()) fail();
+    });
+
+    map.on('load', function () {
+      // The festival fills the whole park, so the park is the mark.
+      map.addSource('park', {
+        type: 'geojson',
+        data: { type: 'Feature', geometry: { type: 'Polygon', coordinates: [PARK] } }
+      });
+      map.addLayer({
+        id: 'park-fill', type: 'fill', source: 'park',
+        paint: { 'fill-color': '#F65472', 'fill-opacity': 0.18 }
+      });
+      map.addLayer({
+        id: 'park-outline', type: 'line', source: 'park',
+        paint: { 'line-color': '#F65472', 'line-width': 3, 'line-opacity': 0.9 }
+      });
+
+      new maplibregl.Marker({ element: pin(), anchor: 'bottom' })
+        .setLngLat(EVENT_PT)
+        .setPopup(new maplibregl.Popup({ offset: 18 }).setHTML(
+          '<strong>Brittingham Park</strong><br>829 W Washington Ave<br>The festival fills the whole park'
+        ))
+        .addTo(map);
+
+      var b = new maplibregl.LngLatBounds();
+      PARK.forEach(function (c) { b.extend(c); });
+      map.fitBounds(b, { padding: { top: 70, right: 50, bottom: 40, left: 50 }, duration: 0 });
+    });
+  } catch (err) {
+    fail();
+  }
+}());
+</script>
+
 <!-- ═══ STICKY MOBILE QUICK-ACTION BAR ═══ -->
 <div class="mobile-cta-bar" id="mobile-cta-bar" aria-label="Quick actions">
-  <span class="mcb-date" aria-hidden="true">&#128197; Sept 13</span>
-  <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Madison+Good+Neighbor+Gathering&dates=20260913T170000Z/20260913T210000Z&details=Free+community+festival!+Live+music,+cultural+performances,+food+trucks,+kids+activities+%26+more.+No+tickets+needed.&location=829+W+Washington+Ave,+Madison,+WI+53715&ctz=America%2FChicago" target="_blank" rel="noopener" class="mcb-btn mcb-cal">Add to Calendar</a>
-  <a href="#" onclick="openKidsRsvpModal();return false;" class="mcb-btn mcb-rsvp gng-celebrate">&#127881; RSVP</a>
+  <span class="mcb-date" aria-hidden="true">&#128197; 2027</span>
+  <a href="https://www.instagram.com/madisongoodneighborgathering" target="_blank" rel="noopener" class="mcb-btn mcb-cal">Follow for the date</a>
+  <a href="get-involved.html" class="mcb-btn mcb-rsvp">Get involved</a>
 </div>
-
-<!-- ═══ KIDS RSVP MODAL ═══ -->
-<div id="kids-rsvp-modal" role="dialog" aria-modal="true" aria-labelledby="krsvp-title">
-  <div class="krsvp-inner">
-    <div class="krsvp-header">
-      <span class="krsvp-title" id="krsvp-title">&#127881; Kids RSVP &mdash; Updates &amp; Prizes</span>
-      <button class="krsvp-close" onclick="closeKidsRsvpModal()" aria-label="Close form">&#10005;</button>
-    </div>
-    <iframe class="krsvp-frame"
-      src="https://docs.google.com/forms/d/e/1FAIpQLSdieg_Eyvdv0OCqE2VsMWvu3zp5BCEfnnJUx7UjIUMjyrLANQ/viewform?embedded=true"
-      title="Kids RSVP Form">Loading form&hellip;</iframe>
-  </div>
-</div>
-<script>
-function openKidsRsvpModal(){
-  document.getElementById('kids-rsvp-modal').classList.add('open');
-  document.body.style.overflow='hidden';
-}
-function closeKidsRsvpModal(){
-  document.getElementById('kids-rsvp-modal').classList.remove('open');
-  document.body.style.overflow='';
-}
-document.addEventListener('DOMContentLoaded',function(){
-  var m=document.getElementById('kids-rsvp-modal');
-  m.addEventListener('click',function(e){ if(e.target===m) closeKidsRsvpModal(); });
-  document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeKidsRsvpModal(); });
-});
-</script>
 
 <!-- Countdown + confetti -->
 <script>
 (function(){
-  // ── Countdown to the event ──
-  // Counted in whole calendar days in Madison's timezone, so "tomorrow" means
-  // tomorrow on the calendar — not 24 hours from right now.
-  var el = document.getElementById('hero-countdown');
-  if (el) {
-    var today = new Date();
-    try {
-      // "2026-09-12" for whatever today is in Madison, wherever the visitor is
-      var chicago = new Intl.DateTimeFormat('en-CA', {
-        timeZone: 'America/Chicago', year: 'numeric', month: '2-digit', day: '2-digit'
-      }).format(today).split('-');
-      today = Date.UTC(+chicago[0], +chicago[1] - 1, +chicago[2]);
-    } catch (err) {
-      today = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate());
-    }
-    var days = Math.round((Date.UTC(2026, 8, 13) - today) / 86400000);
-    if (days > 1) {
-      el.innerHTML = '🎉 Just <b>' + days + '</b> sleeps until the party!';
-      el.hidden = false;
-    } else if (days === 1) {
-      el.innerHTML = '🎉 The party is <b>tomorrow</b>!';
-      el.hidden = false;
-    } else if (days === 0) {
-      el.innerHTML = '🎉 The party is <b>today</b> — see you there!';
-      el.hidden = false;
-    }
-  }
-
   // ── Confetti burst ──
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var COLORS = ['#F65472','#69CFED','#8CC63E','#F07F1B','#9A50A5','#FFD93D'];

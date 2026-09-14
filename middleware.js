@@ -17,8 +17,13 @@ const DAY_CLOSES = Date.UTC(2026, 8, 14, 5, 0, 0); // Mon Sep 14, 00:00 Madison
  * The post-event page stays up until next year's homepage replaces it, which
  * is a deliberate edit rather than a date. Set this to false to hand the
  * homepage straight back to index.html.
+ *
+ * Turned off for the 2027 cycle: index.html is now the 2027 page, and it
+ * carries its own 2026 recap section, so the homepage should serve it
+ * rather than last year's thank-you page. /recap.html is still reachable
+ * directly and from the 2026 section's "full recap" link.
  */
-const RECAP_AFTER = true;
+const RECAP_AFTER = false;
 
 /**
  * Hands the homepage to the recap right now, without waiting for the day

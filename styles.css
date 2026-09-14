@@ -11,6 +11,8 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
+      /* Palette carried over unchanged from 2026 — the colors are the
+         one thing neighbors already recognize on a flyer. */
       --pink:    #F65472;
       --blue:    #69CFED;
       --green:   #8CC63E;
@@ -27,143 +29,473 @@
       --purple-pale: #F2E6F8;
       --orange-pale: #FEF0E0;
       --yellow-pale: #FFFBE5;
+
+      /* Deeper cousins of the brights. The pale tints above are for
+         section grounds; these are for solid geometric shapes and for
+         text that has to clear 4.5:1 on cream, which --blue and
+         --yellow never do. */
+      --blue-deep:   #2E93B8;
+      --green-deep:  #5A8F1A;
+      --yellow-deep: #B8860B;
+
+      /* ── Type ──────────────────────────────────────────────
+         Satoshi carries both display and body. One family at two
+         very different weights reads as more deliberate than two
+         families, and its flat geometric bones are what make the
+         2027 shapes look intentional rather than decorative. */
+      --font-display: 'Satoshi', 'Baloo 2', system-ui, sans-serif;
+      --font-body:    'Satoshi', 'Nunito', system-ui, sans-serif;
+      /* Baloo 2 stays on for the hand-lettered accents — the chips and
+         badges that keep this feeling like a block party. */
+      --font-accent:  'Baloo 2', 'Satoshi', cursive;
+
+      --w-black: 900;
+      --w-bold:  700;
+      --w-med:   500;
+
+      /* Display type is set tight; the counters in Satoshi Black are
+         small enough that default tracking looks loose at size. */
+      --track-display: -0.035em;
+      --track-eyebrow: 0.14em;
+
+      /* ── Shape ─────────────────────────────────────────────
+         The 2027 vocabulary: arches, pills, circles and quarter
+         rounds, all cut from the same radius scale so a card and a
+         background shape look like the same system. */
+      --r-arch:    999px 999px 0 0;
+      --r-arch-d:  0 0 999px 999px;
+      --r-pill:    999px;
+      --r-leaf:    999px 0 999px 0;
+      --r-leaf-alt: 0 999px 0 999px;
+      --r-quarter: 999px 0 0 0;
+      --r-card:    28px;
+      --r-card-lg: 40px;
+      --r-tile:    14px;
+      --r-sheet:   18px;
+
+      /* The saturated field the cream sheets float on. Brand yellow,
+         unchanged — it is the one brand color with enough body to
+         hold a full page and still let ink text sit on cream above it. */
+      --ground: var(--yellow);
+      --gutter: clamp(10px, 1.6vw, 22px);
+      /* Height of the floating nav bar. The first sheet clears it, and
+         anchored sections scroll clear of it, from this one number. */
+      --nav-h: 70px;
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; background: var(--ground); }
     body {
-      font-family: 'Nunito', sans-serif;
+      font-family: var(--font-body);
+      font-weight: var(--w-med);
       color: var(--ink);
-      background: var(--cream);
+      /* The ground is a saturated field, not a page color. Everything
+         readable rides on a cream sheet above it; the ground only ever
+         shows as the gutter between sheets. */
+      background: var(--ground);
       line-height: 1.6;
       overflow-x: hidden;
+      position: relative;
     }
-    h1, h2, h3, h4 { font-family: 'Baloo 2', cursive; line-height: 1.15; text-wrap: balance; }
+
+    /* ── Sheets ────────────────────────────────────────────────
+       Every section is a cream panel floating on the ground with a
+       fixed gutter around it. This is the structural move of the
+       2027 layout: the page reads as a stack of printed sheets
+       rather than as full-bleed bands butted against each other,
+       which is what the wave dividers were there to soften. */
+    .sheet {
+      max-width: 1180px;
+      margin: var(--gutter) auto;
+      background: var(--cream);
+      border-radius: var(--r-sheet);
+      padding: clamp(2.25rem, 5vw, 4rem) clamp(1.25rem, 4vw, 3.5rem);
+      position: relative;
+      /* Shapes are hung off the sheet edges and must not add scroll. */
+      overflow: hidden;
+      /* Sheets sit above the ground-level ornaments. */
+      z-index: 1;
+    }
+    .sheet-ink   { background: var(--ink); color: #fff; }
+    .sheet-white { background: var(--white); }
+    /* Full-bleed sheets (photo strip, map) keep the sheet silhouette
+       but drop the inner padding so the content reaches the corners. */
+    .sheet-flush { padding: 0; }
+
+    /* In-page links land below the floating nav rather than behind it. */
+    .sheet[id] { scroll-margin-top: calc(var(--gutter) * 2 + var(--nav-h)); }
+
+    @media (max-width: 768px) {
+      :root { --nav-h: 60px; }
+    }
+    h1, h2, h3, h4 {
+      font-family: var(--font-display);
+      font-weight: var(--w-black);
+      letter-spacing: var(--track-display);
+      line-height: 1.05;
+      text-wrap: balance;
+    }
+    /* Small headings don't need the same optical correction — negative
+       tracking at 1rem just closes up the counters. */
+    h3, h4 { letter-spacing: -0.015em; line-height: 1.2; }
     p { text-wrap: pretty; }
+
+    /* ── Paper grain ───────────────────────────────────────────
+       Both reference boards are printed pieces photographed on
+       stock, and the tooth of the paper is doing a lot of the work:
+       it keeps large flat fields of color from going flat and
+       digital. One fixed overlay over the whole document, under the
+       nav and modals, above everything else. */
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      pointer-events: none;
+      z-index: 150;
+      opacity: 0.42;
+      mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.32'/%3E%3C/svg%3E");
+    }
+    @media (prefers-reduced-motion: reduce) {
+      body::after { opacity: 0.3; }
+    }
+
+    /* ─────────────────────────────────────
+       SHAPE SYSTEM  (2027)
+
+       The reference boards build everything from four primitives —
+       arch, pill, circle, quarter-round — in flat unmodulated color.
+       Defining them once as utilities means a background ornament, a
+       photo crop and a card corner all cut from the same geometry,
+       which is what makes the look read as a system instead of as
+       assorted decoration.
+
+       Shapes are decorative only: they sit at z-index 0 behind
+       content, never take pointer events, and carry no meaning that
+       isn't also in the text.
+    ───────────────────────────────────── */
+    .gshape {
+      position: absolute;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .sh-arch     { border-radius: var(--r-arch); }
+    .sh-arch-d   { border-radius: var(--r-arch-d); }
+    .sh-pill     { border-radius: var(--r-pill); }
+    .sh-circle   { border-radius: 50%; }
+    .sh-leaf     { border-radius: var(--r-leaf); }
+    .sh-leaf-alt { border-radius: var(--r-leaf-alt); }
+    .sh-quarter  { border-radius: var(--r-quarter); }
+
+    .sh-pink   { background: var(--pink); }
+    .sh-blue   { background: var(--blue); }
+    .sh-green  { background: var(--green); }
+    .sh-purple { background: var(--purple); }
+    .sh-orange { background: var(--orange); }
+    .sh-yellow { background: var(--yellow); }
+    .sh-cream  { background: var(--cream); }
+    .sh-ink    { background: var(--ink); }
+
+    /* Spiky asterisk — the punctuation mark of this layout. It lands
+       beside headings and in the gutters, small and saturated, doing
+       the job the confetti dots used to do but with an edge. Drawn as
+       a clip-path so the points stay sharp at any size. */
+    .sh-star {
+      background: var(--star-color, var(--purple));
+      clip-path: polygon(
+        50% 0%, 60% 32%, 88% 12%, 72% 40%, 100% 50%,
+        72% 60%, 88% 88%, 60% 68%, 50% 100%, 40% 68%,
+        12% 88%, 28% 60%, 0% 50%, 28% 40%, 12% 12%, 40% 32%
+      );
+    }
+    /* Half disc, flat edge down — hung off a sheet corner. */
+    .sh-half   { border-radius: 999px 999px 0 0; }
+    .sh-half-l { border-radius: 999px 0 0 999px; }
+    .sh-half-r { border-radius: 0 999px 999px 0; }
+    /* Small solid square, used in stepped pairs. */
+    .sh-sq { border-radius: 2px; }
+
+    /* Sunburst — the spoked asterisk from the pink reference board.
+       A repeating-conic gradient gives hard-edged spokes with no SVG
+       and no extra request; the mask trims it to a disc so the spokes
+       radiate from a point instead of filling a square. */
+    .sh-burst {
+      background: repeating-conic-gradient(
+        var(--burst-color, var(--blue)) 0deg 11deg,
+        transparent 11deg 22deg
+      );
+      border-radius: 50%;
+      -webkit-mask-image: radial-gradient(circle, #000 62%, transparent 63%);
+      mask-image: radial-gradient(circle, #000 62%, transparent 63%);
+    }
 
     /* ─────────────────────────────────────
        NAV
     ───────────────────────────────────── */
+    /* The nav is a sheet like everything else: it floats on the ground
+       with the same gutter and the same corner radius, rather than
+       spanning edge to edge as a separate band. That is what keeps the
+       ground reading as one continuous field behind the whole stack. */
     nav {
-      position: fixed; top: 0; width: 100%;
-      background: rgba(255,253,245,0.95);
-      backdrop-filter: blur(14px);
+      position: fixed;
+      top: var(--gutter);
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(1180px, calc(100% - var(--gutter) * 2));
+      background: var(--ink);
+      border-radius: var(--r-sheet);
       z-index: 200;
-      border-bottom: 3px dashed var(--yellow);
+      border-bottom: none;
     }
     .nav-inner {
-      max-width: 1140px; margin: 0 auto;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0.55rem 1.5rem;
+      max-width: none; margin: 0;
+      display: flex; align-items: center; gap: 1rem;
+      padding: 0.5rem 0.6rem 0.5rem 0.9rem;
     }
     .nav-logo {
       display: flex; align-items: center; gap: 0.5rem;
-      text-decoration: none;
+      text-decoration: none; flex-shrink: 0;
     }
-    .nav-logo img { height: 44px; width: auto; }
-    nav ul { list-style: none; display: flex; gap: 1.75rem; }
+    /* The badge is drawn for cream; on ink it needs its own disc. */
+    .nav-logo img {
+      height: 40px; width: 40px;
+      border-radius: 50%;
+      background: var(--cream);
+      padding: 2px;
+    }
+    nav ul {
+      list-style: none; display: flex;
+      gap: 0.15rem; align-items: center;
+      margin-left: auto;
+    }
     nav a {
-      font-family: 'Baloo 2', cursive; font-weight: 700;
-      font-size: 0.95rem; text-decoration: none; color: var(--ink);
-      transition: color 0.2s;
+      font-family: var(--font-display); font-weight: var(--w-bold);
+      font-size: 0.88rem; text-decoration: none;
+      color: rgba(255,255,255,0.72);
+      letter-spacing: -0.01em;
+      padding: 0.45rem 0.7rem;
+      border-radius: var(--r-pill);
+      transition: color 0.2s, background 0.2s;
+      display: inline-block;
     }
-    nav a:hover { color: var(--pink); }
+    nav a:hover { color: var(--ink); background: var(--yellow); }
+    /* Last item is the standing ask, so it reads as a button. */
+    nav ul li:last-child a {
+      background: var(--pink); color: #fff;
+      font-weight: var(--w-black);
+      margin-left: 0.35rem;
+    }
+    nav ul li:last-child a:hover { background: var(--yellow); color: var(--ink); }
     .nav-social {
-      display: flex; align-items: center; gap: 0.35rem;
-      margin-left: 1rem;
-      padding-left: 1rem;
-      border-left: 2px solid rgba(0,0,0,0.08);
+      display: flex; align-items: center; gap: 0.2rem;
+      margin-left: 0.5rem;
+      padding-left: 0.6rem;
+      border-left: 1px solid rgba(255,255,255,0.18);
+      flex-shrink: 0;
     }
     .nav-social a {
       display: inline-flex; align-items: center; justify-content: center;
       width: 32px; height: 32px; border-radius: 50%;
-      color: var(--ink-soft);
+      color: rgba(255,255,255,0.72);
       transition: color 0.2s, background 0.2s;
     }
-    .nav-social a:hover { color: var(--pink); background: var(--pink-pale); }
+    .nav-social a:hover { color: var(--ink); background: var(--yellow); }
     .mobile-toggle {
       display: none; background: none; border: none;
-      font-size: 1.5rem; cursor: pointer; color: var(--purple);
+      font-size: 1.4rem; cursor: pointer; color: var(--yellow);
+      margin-left: auto; padding: 0.2rem 0.5rem;
+      line-height: 1;
     }
 
     /* ─────────────────────────────────────
        HERO
     ───────────────────────────────────── */
+    /* Content column left, photo mosaic right — the reference board's
+       top panel. Centering everything was the old layout's default and
+       it left the hero with no structure; a two-column split gives the
+       headline an edge to align to and puts faces above the fold. */
     .hero {
-      display: flex; align-items: center; justify-content: center;
-      padding: 7rem 1.5rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(1.75rem, 4vw, 3.5rem);
+      align-items: center;
+      padding-top: clamp(3rem, 6vw, 4.5rem);
       position: relative; overflow: hidden;
-      background: var(--cream);
+      /* Nav sits at top: var(--gutter) and is var(--nav-h) tall, so the
+         first sheet clears both and keeps a full gutter of its own. */
+      margin-top: calc(var(--gutter) * 2 + var(--nav-h));
     }
+    /* The two-column split is the homepage hero's, since it is the only
+       one carrying a photo mosaic. Other pages use .hero for a plain
+       title block and stay single column. */
+    .hero-split { grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); }
+    @media (max-width: 900px) {
+      .hero-split { grid-template-columns: 1fr; }
+    }
+    /* Ornaments hang off the sheet edges and get cropped by it, which
+       is what stops them reading as stickers dropped on the page. They
+       are small and saturated rather than large and pale: in the
+       reference they punctuate the composition, they don't fill it. */
     .hero-blob {
-      position: absolute; pointer-events: none; border-radius: 50%;
+      position: absolute; pointer-events: none; z-index: 0;
     }
+    /* Half disc off the left edge. */
     .blob-1 {
-      width: 520px; height: 520px;
-      background: radial-gradient(circle, rgba(105,207,237,0.22) 0%, transparent 70%);
-      top: -140px; right: -120px;
+      width: clamp(18px, 2.4vw, 34px); aspect-ratio: 1 / 2;
+      background: var(--blue);
+      border-radius: 0 999px 999px 0;
+      top: 30%; left: 0;
     }
+    /* Half disc off the right edge, lower. */
     .blob-2 {
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(246,84,114,0.18) 0%, transparent 70%);
-      bottom: -80px; left: -100px;
+      width: clamp(18px, 2.4vw, 34px); aspect-ratio: 1 / 2;
+      background: var(--green);
+      border-radius: 999px 0 0 999px;
+      bottom: 16%; right: 0;
     }
+    /* Stepped squares — the small pixel pair from the reference. */
     .blob-3 {
-      width: 280px; height: 280px;
-      background: radial-gradient(circle, rgba(140,198,62,0.2) 0%, transparent 70%);
-      top: 30%; left: 5%;
+      width: 22px; height: 22px;
+      background: var(--green);
+      border-radius: 3px;
+      top: 8%; right: 7%;
+      box-shadow: -18px -18px 0 var(--blue);
     }
-    .blob-4 {
-      width: 200px; height: 200px;
-      background: radial-gradient(circle, rgba(240,127,27,0.18) 0%, transparent 70%);
-      top: 15%; right: 20%;
+    /* Pill marker. */
+    .blob-4 { display: none; }
+    /* Flower, tucked into the sheet's bottom-left gutter. */
+    .hero-flower {
+      position: absolute; z-index: 0;
+      top: 3%; left: 1%;
+      width: clamp(26px, 3.2vw, 44px); aspect-ratio: 1;
+      background: var(--orange);
+      clip-path: polygon(
+        50% 0%, 61% 10%, 75% 6%, 80% 20%, 94% 25%, 90% 39%,
+        100% 50%, 90% 61%, 94% 75%, 80% 80%, 75% 94%, 61% 90%,
+        50% 100%, 39% 90%, 25% 94%, 20% 80%, 6% 75%, 10% 61%,
+        0% 50%, 10% 39%, 6% 25%, 20% 20%, 25% 6%, 39% 10%
+      );
     }
-    .hero-confetti {
-      position: absolute; inset: 0; pointer-events: none;
-      background-image:
-        radial-gradient(circle, #F65472 2.5px, transparent 2.5px),
-        radial-gradient(circle, #69CFED 2.5px, transparent 2.5px),
-        radial-gradient(circle, #8CC63E 2px, transparent 2px),
-        radial-gradient(circle, #F07F1B 2px, transparent 2px),
-        radial-gradient(circle, #9A50A5 2px, transparent 2px);
-      background-size: 80px 80px, 120px 120px, 60px 60px, 100px 100px, 140px 140px;
-      background-position: 10px 10px, 40px 60px, 20px 50px, 70px 20px, 50px 90px;
-      opacity: 0.15;
+    /* One blob character, peeking from behind the mosaic's lower edge.
+       Exactly one on the page — the charm does not survive repetition. */
+    .hero-buddy {
+      position: absolute; z-index: 0;
+      bottom: 4%; left: clamp(-26px, -2vw, -16px);
+      width: clamp(34px, 4vw, 56px); aspect-ratio: 1;
+      background: var(--green);
     }
+    @media (max-width: 900px) {
+      /* At one column the ornaments crowd the copy. */
+      .blob-3, .blob-4, .hero-buddy { display: none; }
+    }
+
+    /* ── Hero photo mosaic ──────────────────────────────────────
+       Four tiles, each on its own saturated backdrop. The photos are
+       set slightly inset so the color shows as a border, which is how
+       the reference keeps a grid of unrelated snapshots looking like
+       one designed block. */
+    .hero-mosaic {
+      position: relative; z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 12px;
+    }
+    /* Four different silhouettes rather than four rounded rectangles —
+       arch, circle, leaf, arch-down. The colored backdrop takes the
+       same cut as the photo inside it, so each tile reads as one solid
+       shape that happens to contain a picture. */
+    .hm-tile {
+      overflow: hidden;
+      aspect-ratio: 3 / 4;
+      padding: 8px;
+    }
+    .hm-tile img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+    .hm-tile:nth-child(1),
+    .hm-tile:nth-child(1) img { border-radius: 999px 999px var(--r-tile) var(--r-tile); }
+    .hm-tile:nth-child(2),
+    .hm-tile:nth-child(2) img { border-radius: 50%; }
+    .hm-tile:nth-child(3),
+    .hm-tile:nth-child(3) img { border-radius: var(--r-leaf); }
+    .hm-tile:nth-child(4),
+    .hm-tile:nth-child(4) img { border-radius: var(--r-tile) var(--r-tile) 999px 999px; }
+    /* The circle is inscribed in its cell, so it needs a square one. */
+    .hm-tile:nth-child(2) { aspect-ratio: 1; align-self: center; }
+    /* Staggered: the second column drops, so the grid reads as a
+       composition rather than as four equal boxes. */
+    .hm-tile:nth-child(2), .hm-tile:nth-child(4) { transform: translateY(clamp(14px, 3vw, 34px)); }
+    .hm-purple { background: var(--purple); }
+    .hm-orange { background: var(--orange); }
+    .hm-pink   { background: var(--pink); }
+    .hm-blue   { background: var(--blue); }
+    @media (max-width: 900px) {
+      .hero-mosaic { grid-template-columns: repeat(4, 1fr); grid-template-rows: auto; }
+      .hm-tile { aspect-ratio: 1; }
+      .hm-tile:nth-child(2), .hm-tile:nth-child(4) { transform: translateY(14px); }
+    }
+    @media (max-width: 520px) {
+      .hero-mosaic { grid-template-columns: repeat(2, 1fr); }
+    }
+    .hero-confetti { display: none; }
+    /* The four .star spans hold ✦/★ glyphs with an inline color each.
+       Rather than change six pages of markup, the glyph is hidden and
+       the span is repainted as a spoked sunburst in that same inherited
+       color — the asterisk motif from the reference board, drawn in
+       CSS. The inline colors still drive it, so the markup keeps
+       working exactly as before. */
+    /* The .star spans hold ✦/★ glyphs with an inline color each. The
+       glyph is hidden and the span repainted as the spiky asterisk in
+       that same inherited color, so the markup keeps working while the
+       mark matches the reference. */
     .star {
-      position: absolute; pointer-events: none; font-size: 1.4rem; opacity: 0.18;
+      position: absolute; pointer-events: none; z-index: 0;
+      color: var(--purple);
+      width: clamp(20px, 2.4vw, 32px); aspect-ratio: 1;
+      font-size: 0; line-height: 0; overflow: hidden;
+      opacity: 1;
+      background: currentColor;
+      clip-path: polygon(
+        50% 0%, 60% 32%, 88% 12%, 72% 40%, 100% 50%,
+        72% 60%, 88% 88%, 60% 68%, 50% 100%, 40% 68%,
+        12% 88%, 28% 60%, 0% 50%, 28% 40%, 12% 12%, 40% 32%
+      );
     }
     .hero-content {
       position: relative; z-index: 1;
-      text-align: center; max-width: 820px;
+      text-align: left; max-width: none;
     }
     .hero-logo-wrap {
-      margin: 0 auto 1.75rem;
-      display: inline-block;
+      margin: 0 0 1.5rem;
+      display: block;
     }
     .hero-logo-wrap img {
-      width: clamp(260px, 50vw, 460px);
+      width: clamp(240px, 32vw, 400px);
       height: auto;
-      filter: drop-shadow(0 6px 24px rgba(0,0,0,0.10));
+      filter: none;
     }
     .hero-tagline {
-      font-size: clamp(1.1rem, 2.5vw, 1.25rem);
-      color: var(--ink-soft);
-      font-weight: 700;
-      max-width: 560px;
-      margin: 0 auto 2rem;
+      font-family: var(--font-display);
+      font-size: clamp(1.35rem, 2.6vw, 1.85rem);
+      color: var(--ink);
+      font-weight: var(--w-black);
+      letter-spacing: var(--track-display);
+      line-height: 1.12;
+      max-width: 22ch;
+      margin: 0 0 1rem;
     }
     .hero-chips {
       display: flex; flex-wrap: wrap;
-      justify-content: center; gap: 0.65rem;
-      margin-bottom: 2rem;
+      justify-content: flex-start; gap: 0.5rem;
+      margin-bottom: 1.75rem;
     }
     .chip {
       display: inline-flex; align-items: center; gap: 0.45rem;
       padding: 0.55rem 1.2rem;
-      border-radius: 50px;
-      font-family: 'Baloo 2', cursive;
+      border-radius: var(--r-pill);
+      font-family: var(--font-accent);
       font-weight: 700; font-size: 0.95rem;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      box-shadow: none;
     }
     .chip-pink   { background: var(--pink);   color: #fff; }
     .chip-blue   { background: var(--blue);   color: #fff; }
@@ -173,19 +505,20 @@
     .chip-yellow { background: var(--yellow); color: var(--ink); }
     .hero-cta {
       display: flex; flex-wrap: wrap;
-      justify-content: center; gap: 0.75rem;
-      margin-bottom: 1.5rem;
+      justify-content: flex-start; gap: 0.65rem;
+      margin-bottom: 1.25rem;
     }
     .btn {
       display: inline-flex; align-items: center; gap: 0.4rem;
-      padding: 0.85rem 2.1rem;
-      border-radius: 50px;
-      font-family: 'Baloo 2', cursive;
-      font-size: 1.1rem; font-weight: 800;
+      padding: 0.9rem 2.2rem;
+      border-radius: var(--r-pill);
+      font-family: var(--font-display);
+      font-size: 1.05rem; font-weight: var(--w-black);
+      letter-spacing: -0.01em;
       text-decoration: none; border: none; cursor: pointer;
       transition: transform 0.2s, box-shadow 0.2s;
     }
-    .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,0,0,0.14); }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 0 rgba(26,26,46,0.14); }
     .btn-pink   { background: var(--pink);   color: #fff; }
     .btn-outline { background: #c5eda0; color: var(--purple); border: 3px solid var(--purple); }
     .btn-yellow  { background: var(--yellow); color: var(--ink); }
@@ -198,28 +531,34 @@
     .hero-rain-note span { color: var(--blue); font-weight: 800; }
 
     /* Social proof: concrete attendance beats "hundreds of families" */
+    /* The attendance number is the strongest line of copy on the page,
+       so it gets the highlighter treatment from the reference rather
+       than another color swap. */
     .hero-proof {
-      font-family: 'Baloo 2', cursive;
-      font-size: clamp(1rem, 2.2vw, 1.15rem);
+      font-size: 1rem;
       color: var(--ink);
-      font-weight: 700;
-      margin: -1.25rem auto 0.4rem;
-      max-width: 560px;
+      font-weight: var(--w-bold);
+      margin: 0 0 0.35rem;
+      max-width: 44ch;
     }
-    .hero-proof strong { color: var(--pink); font-weight: 800; }
+    .hero-proof strong {
+      color: var(--ink); font-weight: var(--w-black);
+      background: linear-gradient(to top, var(--yellow) 0 42%, transparent 42%);
+      padding: 0 0.15em;
+    }
     /* Authority: 1916 lineage, kept quiet so it reads as fact, not boast */
     .hero-authority {
       font-size: 0.85rem; color: var(--ink-soft);
-      font-weight: 600;
-      margin: 0 auto 1.75rem;
-      max-width: 560px;
+      font-weight: var(--w-med);
+      margin: 0 0 1.5rem;
+      max-width: 48ch;
     }
     /* Loss framing under the primary CTA */
     .hero-loss {
       font-size: 0.9rem; color: var(--purple);
-      font-weight: 700;
-      margin: 0 auto 1rem;
-      max-width: 480px;
+      font-weight: var(--w-bold);
+      margin: 0 0 0.9rem;
+      max-width: 44ch;
     }
     /* Secondary CTA row sits visually below the primary calendar button */
     .hero-cta-secondary { margin-bottom: 1.25rem; }
@@ -243,7 +582,7 @@
       max-width: 560px;
     }
     .closing-line {
-      font-family: 'Baloo 2', cursive;
+      font-family: var(--font-display);
       font-size: clamp(1.15rem, 3vw, 1.5rem);
       color: #fff; font-weight: 800;
       line-height: 1.45;
@@ -252,50 +591,73 @@
     .closing-line span { display: block; color: var(--yellow); }
 
     /* ─────────────────────────────────────
-       WAVE DIVIDERS
-    ───────────────────────────────────── */
-    .wave-divider {
-      display: block; width: 100%;
-      overflow: hidden; line-height: 0;
-      margin-bottom: -2px;
-    }
-    .wave-divider svg { display: block; width: 100%; }
-
-    /* ─────────────────────────────────────
        QUICK FACTS BAR
     ───────────────────────────────────── */
+    /* Four facts, four solid blocks, edge to edge. The old centered
+       flex row floated on a dark band; as a color-blocked grid the
+       facts become the first piece of the mosaic language and the
+       palette does the separating instead of whitespace. */
     .facts-bar {
       background: var(--ink);
-      padding: 1.25rem 1.5rem;
+      padding: 0;
     }
     .facts-inner {
-      max-width: 1100px; margin: 0 auto;
-      display: flex; flex-wrap: wrap;
-      justify-content: center; gap: 2rem;
+      max-width: none; margin: 0;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
     }
     .fact-item {
-      display: flex; align-items: center; gap: 0.6rem;
-      color: rgba(255,255,255,0.9);
-      font-weight: 700; font-size: 0.95rem;
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 1.5rem 1.25rem;
+      color: var(--ink);
+      font-weight: var(--w-bold); font-size: 0.95rem;
     }
+    .fact-item:nth-child(1) { background: var(--pink); }
+    .fact-item:nth-child(2) { background: var(--blue); }
+    .fact-item:nth-child(3) { background: var(--green); }
+    /* Not yellow: this row sits on the yellow ground, so a yellow cell
+       dissolves into the gutter at the sheet's edge. Purple is the one
+       brand color the row doesn't already use. */
+    .fact-item:nth-child(4) { background: var(--purple); }
+    /* Ink reads on pink, blue and green; purple needs the light side. */
+    .fact-item:nth-child(4) .fact-value { color: #fff; }
+    .fact-item:nth-child(4) .fact-label { color: rgba(255,255,255,0.72); }
     .fact-icon {
-      width: 36px; height: 36px; border-radius: 50%;
+      width: 42px; height: 42px;
+      border-radius: var(--r-arch);
+      background: rgba(255,255,255,0.55) !important;
       display: flex; align-items: center; justify-content: center;
-      font-size: 1rem; flex-shrink: 0;
+      font-size: 1.1rem; flex-shrink: 0;
     }
-    .fact-label { color: rgba(255,255,255,0.5); font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; display: block; }
-    .fact-value { color: #fff; font-size: 0.95rem; font-weight: 800; display: block; }
+    .fact-label {
+      color: rgba(26,26,46,0.62); font-size: 0.68rem;
+      font-weight: var(--w-black); text-transform: uppercase;
+      letter-spacing: var(--track-eyebrow); display: block;
+    }
+    .fact-value {
+      color: var(--ink); font-size: 0.98rem;
+      font-family: var(--font-display);
+      font-weight: var(--w-black); letter-spacing: -0.02em;
+      display: block; line-height: 1.2;
+    }
+    @media (max-width: 860px) {
+      .facts-inner { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 420px) {
+      .facts-inner { grid-template-columns: 1fr; }
+    }
 
     /* ─────────────────────────────────────
        PHOTO STRIP
     ───────────────────────────────────── */
     .photo-strip {
-      background: var(--white);
-      padding: 2.5rem 0;
+      background: var(--cream);
+      padding: 2.25rem 0;
       overflow: hidden;
     }
     .strip-label {
-      font-family: 'Baloo 2', cursive;
+      font-family: var(--font-display);
       font-size: 0.85rem; font-weight: 800;
       letter-spacing: 0.12em; text-transform: uppercase;
       color: var(--ink-soft);
@@ -315,19 +677,21 @@
     @media (prefers-reduced-motion: reduce) {
       .strip-track { animation: none; }
     }
+    /* The strip used to be tilted, bordered snapshots — a scrapbook.
+       Now the photos are cut into the shape set instead: arch, circle,
+       pill, arch-down, on a straight baseline. The rhythm comes from
+       the alternating silhouettes rather than from jitter, which is
+       the whole difference between the old look and this one. */
     .strip-photo {
       flex: 0 0 auto;
-      width: 300px; height: 215px;
-      border-radius: 18px; overflow: hidden;
-      box-shadow: 0 4px 18px rgba(0,0,0,0.10);
+      width: 230px; height: 290px;
+      overflow: hidden;
+      border-radius: var(--r-arch);
+      background: var(--cream);
     }
-    .strip-photo:nth-child(odd)  { transform: rotate(-1.5deg); margin-top: 10px; }
-    .strip-photo:nth-child(even) { transform: rotate(1.2deg);  margin-top: -10px; }
-    .strip-photo:nth-child(5n+1) { border: 4px solid var(--pink); }
-    .strip-photo:nth-child(5n+2) { border: 4px solid var(--blue); }
-    .strip-photo:nth-child(5n+3) { border: 4px solid var(--green); }
-    .strip-photo:nth-child(5n+4) { border: 4px solid var(--orange); }
-    .strip-photo:nth-child(5n+5) { border: 4px solid var(--purple); }
+    .strip-photo:nth-child(4n+2) { border-radius: 50%;            width: 250px; height: 250px; align-self: center; }
+    .strip-photo:nth-child(4n+3) { border-radius: var(--r-pill);  width: 300px; height: 200px; align-self: center; }
+    .strip-photo:nth-child(4n+4) { border-radius: var(--r-arch-d);width: 230px; height: 270px; }
     .strip-photo img {
       width: 100%; height: 100%;
       object-fit: cover; display: block;
@@ -338,19 +702,23 @@
     /* ─────────────────────────────────────
        ACTIVITIES
     ───────────────────────────────────── */
-    #activities {
-      background: var(--cream);
-      padding: 5.5rem 1.5rem;
-      position: relative; overflow: hidden;
+    #activities { position: relative; overflow: hidden; }
+    /* Headers run left, not centered. A centered stack reads as a
+       greeting card; ranged left against a wide sheet it reads as a
+       printed page, and it gives the accent glyphs an edge to sit on. */
+    .section-header {
+      text-align: left;
+      margin-bottom: 2.75rem;
+      max-width: 44ch;
+      position: relative; z-index: 1;
     }
-    .section-header { text-align: center; margin-bottom: 3rem; }
     .section-eyebrow {
       display: inline-block;
-      font-family: 'Baloo 2', cursive;
-      font-size: 0.82rem; font-weight: 800;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      padding: 0.3rem 0.9rem; border-radius: 50px;
-      margin-bottom: 0.75rem;
+      font-family: var(--font-display);
+      font-size: 0.78rem; font-weight: var(--w-black);
+      letter-spacing: var(--track-eyebrow); text-transform: uppercase;
+      padding: 0.38rem 1rem; border-radius: var(--r-pill);
+      margin-bottom: 0.9rem;
     }
     .ey-orange { background: var(--orange-pale); color: var(--orange); }
     .ey-blue   { background: var(--blue-pale);   color: #4BA8C5; }
@@ -359,7 +727,11 @@
     .ey-pink   { background: var(--pink-pale);   color: var(--pink); }
     .ey-yellow { background: var(--yellow-pale); color: #B8860B; }
     .section-h2 {
-      font-size: clamp(2rem, 4.5vw, 3rem); color: var(--ink);
+      font-size: clamp(2.1rem, 5.4vw, 3.6rem);
+      color: var(--ink);
+      font-weight: var(--w-black);
+      letter-spacing: var(--track-display);
+      line-height: 1;
     }
     .section-h2 .c-pink   { color: var(--pink); }
     .section-h2 .c-blue   { color: var(--blue); }
@@ -367,47 +739,69 @@
     .section-h2 .c-purple { color: var(--purple); }
     .section-h2 .c-orange { color: var(--orange); }
     .section-sub {
-      color: var(--ink-soft); font-size: 1.05rem;
-      font-weight: 600; max-width: 560px;
-      margin: 0.5rem auto 0;
+      color: var(--ink-soft); font-size: 1.02rem;
+      font-weight: var(--w-med); max-width: 56ch;
+      margin: 0.85rem 0 0;
     }
+    /* Seven tilted white cards on a tint became a tessellating mosaic
+       of solid color blocks. Four columns with the first card spanning
+       two fills exactly eight cells over two rows, so the grid closes
+       with no ragged tail. Each tile is arch-topped, flat, and carries
+       its own color — the card IS the color block, rather than a white
+       card wearing a colored stripe. */
     .activities-scatter {
       max-width: 1100px; margin: 0 auto;
-      display: flex; flex-wrap: wrap;
-      gap: 1.25rem; justify-content: center;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      align-items: stretch;
+      position: relative; z-index: 1;
     }
     .act-card {
-      background: var(--white);
-      border-radius: 26px; padding: 1.75rem 1.5rem;
+      border-radius: var(--r-tile);
+      padding: 1.6rem 1.35rem 1.5rem;
       overflow: hidden;
-      text-align: center;
-      box-shadow: 0 4px 18px rgba(0,0,0,0.07);
-      flex: 0 1 220px;
-      transition: transform 0.25s, box-shadow 0.25s;
+      text-align: left;
+      box-shadow: none;
+      transition: transform 0.25s;
       position: relative;
+      display: flex; flex-direction: column; align-items: flex-start;
     }
-    .act-card:hover {
-      transform: translateY(-6px) rotate(0deg) !important;
-      box-shadow: 0 14px 32px rgba(0,0,0,0.12);
-    }
-    .act-card:nth-child(1) { transform: rotate(-2deg); }
-    .act-card:nth-child(2) { transform: rotate(1.5deg); }
-    .act-card:nth-child(3) { transform: rotate(-1deg); }
-    .act-card:nth-child(4) { transform: rotate(2deg); }
-    .act-card:nth-child(5) { transform: rotate(-1.5deg); }
-    .act-card:nth-child(6) { transform: rotate(1deg); }
-    .act-card:nth-child(7) { transform: rotate(-0.5deg); }
-    .act-card:nth-child(8) { transform: rotate(1.8deg); }
+    .act-card:nth-child(1) { grid-column: span 2; }
+    .act-card:nth-child(1) { background: var(--pink);   color: #fff; }
+    .act-card:nth-child(2) { background: var(--blue);   color: var(--ink); }
+    .act-card:nth-child(3) { background: var(--green);  color: var(--ink); }
+    .act-card:nth-child(4) { background: var(--purple); color: #fff; }
+    .act-card:nth-child(5) { background: var(--orange); color: #fff; }
+    .act-card:nth-child(6) { background: var(--yellow); color: var(--ink); }
+    .act-card:nth-child(7) { background: var(--ink);    color: #fff; }
+    .act-card:hover { transform: translateY(-6px); }
     .act-card-icon {
-      width: 72px; height: 72px; border-radius: 50%;
+      width: 56px; height: 56px;
+      border-radius: var(--r-pill);
+      background: rgba(255,255,255,0.7) !important;
       display: flex; align-items: center; justify-content: center;
-      font-size: 2rem; margin: 0 auto 1rem;
+      font-size: 1.6rem; margin: 0 0 0.9rem;
+      flex-shrink: 0;
     }
-    .act-card h3 { font-size: 1.1rem; color: var(--ink); margin-bottom: 0.4rem; }
-    .act-card p  { font-size: 0.9rem; color: var(--ink-soft); }
-    .act-top-stripe {
-      position: absolute; top: 0; left: 0; right: 0;
-      height: 6px;
+    /* Dark tiles need a light disc, not a translucent white one. */
+    .act-card:nth-child(7) .act-card-icon { background: rgba(255,255,255,0.92) !important; }
+    .act-card h3 {
+      font-size: 1.12rem; color: inherit; margin-bottom: 0.45rem;
+      font-weight: var(--w-black);
+    }
+    .act-card p  { font-size: 0.9rem; color: inherit; opacity: 0.82; }
+    /* The colored hairline is redundant now the whole tile is that color. */
+    .act-top-stripe { display: none; }
+
+    @media (max-width: 900px) {
+      .activities-scatter { grid-template-columns: repeat(2, 1fr); }
+      .act-card:nth-child(1) { grid-column: span 2; }
+    }
+    @media (max-width: 520px) {
+      .activities-scatter { grid-template-columns: 1fr; }
+      .act-card:nth-child(1) { grid-column: span 1; }
+      .act-card { border-radius: 999px 999px var(--r-card) var(--r-card); }
     }
     .age-note {
       text-align: center; margin-top: 2.5rem;
@@ -416,20 +810,17 @@
     .age-badge {
       display: inline-flex; align-items: center; gap: 0.4rem;
       background: var(--white);
-      border-radius: 50px; padding: 0.45rem 1rem;
-      font-weight: 700; font-size: 0.88rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      border-radius: var(--r-pill); padding: 0.45rem 1rem;
+      font-weight: var(--w-bold); font-size: 0.86rem;
+      box-shadow: none;
+      border: 2px solid rgba(26,26,46,0.08);
       color: var(--ink-soft);
     }
 
     /* ─────────────────────────────────────
        ENTERTAINMENT
     ───────────────────────────────────── */
-    #entertainment {
-      background: var(--ink);
-      padding: 5.5rem 1.5rem;
-      position: relative; overflow: hidden;
-    }
+    #entertainment { position: relative; overflow: hidden; }
     #entertainment::before {
       content: '';
       position: absolute; inset: 0;
@@ -446,7 +837,7 @@
     }
     .ent-eyebrow {
       display: inline-block;
-      font-family: 'Baloo 2', cursive;
+      font-family: var(--font-display);
       font-size: 0.82rem; font-weight: 800;
       letter-spacing: 0.12em; text-transform: uppercase;
       color: rgba(255,255,255,0.45); margin-bottom: 0.75rem;
@@ -466,7 +857,7 @@
       align-items: stretch;
     }
     .sched-time {
-      font-family: 'Baloo 2', cursive;
+      font-family: var(--font-display);
       font-size: 0.85rem; font-weight: 800;
       color: rgba(255,255,255,0.4);
       text-align: right;
@@ -493,7 +884,7 @@
       display: flex; flex-direction: column; gap: 0.2rem;
     }
     .ent-name {
-      font-family: 'Baloo 2', cursive;
+      font-family: var(--font-display);
       font-size: clamp(1.2rem, 3vw, 1.75rem);
       font-weight: 800; color: var(--white); display: block;
     }
@@ -509,11 +900,7 @@
     /* ─────────────────────────────────────
        FOOD
     ───────────────────────────────────── */
-    #food {
-      background: var(--orange-pale);
-      padding: 5.5rem 1.5rem;
-      position: relative; overflow: hidden;
-    }
+    #food { position: relative; overflow: hidden; }
     .food-inner {
       max-width: 1000px; margin: 0 auto;
       display: flex; gap: 3.5rem; align-items: center; flex-wrap: wrap;
@@ -524,35 +911,33 @@
     .food-chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.25rem; }
     .food-chip {
       display: inline-flex; align-items: center; gap: 0.4rem;
-      background: var(--white); border-radius: 50px;
-      padding: 0.45rem 1rem; font-weight: 700; font-size: 0.88rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.07); color: var(--ink);
+      background: var(--yellow); border-radius: var(--r-pill);
+      padding: 0.45rem 1rem; font-weight: var(--w-bold); font-size: 0.88rem;
+      box-shadow: none; color: var(--ink);
     }
     .food-visual {
       flex: 1 1 260px;
       display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;
     }
     .food-card {
-      background: var(--white);
-      border-radius: 20px; padding: 1.5rem;
+      border-radius: var(--r-tile); padding: 1.4rem;
       text-align: center; width: 140px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+      box-shadow: none;
       transition: transform 0.2s;
     }
-    .food-card:nth-child(odd) { transform: rotate(-2deg); }
-    .food-card:nth-child(even) { transform: rotate(2deg); }
-    .food-card:hover { transform: scale(1.06) rotate(0deg) !important; }
+    .food-card:nth-child(1) { background: var(--pink);   color: #fff; }
+    .food-card:nth-child(2) { background: var(--blue);   color: var(--ink); }
+    .food-card:nth-child(3) { background: var(--green);  color: var(--ink); }
+    .food-card:nth-child(4) { background: var(--purple); color: #fff; }
+    .food-card p { color: inherit !important; }
+    .food-card:hover { transform: translateY(-5px); }
     .food-card .food-emoji { font-size: 2.5rem; margin-bottom: 0.5rem; }
     .food-card p { font-size: 0.85rem; font-weight: 700; color: var(--ink-soft); }
 
     /* ─────────────────────────────────────
        ABOUT
     ───────────────────────────────────── */
-    #about {
-      background: var(--white);
-      padding: 5.5rem 1.5rem;
-      position: relative; overflow: hidden;
-    }
+    #about { position: relative; overflow: hidden; }
     .about-inner {
       max-width: 1100px; margin: 0 auto;
       display: flex; gap: 4rem; align-items: center; flex-wrap: wrap;
@@ -560,13 +945,18 @@
     .about-text { flex: 1 1 380px; }
     .about-eyebrow {
       display: inline-block;
-      font-family: 'Baloo 2', cursive;
+      font-family: var(--font-display);
       font-size: 0.82rem; font-weight: 800;
       letter-spacing: 0.12em; text-transform: uppercase;
       color: var(--pink); background: var(--pink-pale);
       padding: 0.3rem 0.9rem; border-radius: 50px; margin-bottom: 1rem;
     }
-    .about-h2 { font-size: clamp(1.9rem, 4vw, 2.8rem); margin-bottom: 1.25rem; line-height: 1.1; }
+    .about-h2 {
+      font-size: clamp(2.1rem, 5vw, 3.4rem);
+      margin-bottom: 1.25rem; line-height: 1;
+      font-weight: var(--w-black);
+      letter-spacing: var(--track-display);
+    }
     .about-h2 em { font-style: normal; color: var(--green); }
     .about-text p { font-size: 1.05rem; color: var(--ink-soft); margin-bottom: 1rem; font-weight: 600; }
     .org-list { margin-top: 1.75rem; display: flex; flex-direction: column; gap: 0.6rem; }
@@ -574,107 +964,116 @@
     .org-tag {
       display: inline-flex; align-items: center; gap: 0.5rem;
       text-decoration: none; color: var(--ink);
-      background: var(--cream); border-radius: 50px;
-      padding: 0.5rem 1rem 0.5rem 0.6rem;
-      font-weight: 700; font-size: 0.93rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      background: var(--yellow); border-radius: var(--r-pill);
+      padding: 0.45rem 1rem 0.45rem 0.5rem;
+      font-weight: var(--w-bold); font-size: 0.9rem;
+      box-shadow: none;
       width: fit-content;
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: transform 0.2s;
     }
-    .org-tag:hover { transform: translateX(5px); box-shadow: 0 4px 14px rgba(0,0,0,0.1); }
+    .org-tag:hover { transform: translateX(5px); }
     .org-swatch { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; }
     .about-visual { flex: 1 1 340px; position: relative; }
+    /* Was a tilted photo in a yellow frame with an offset drop shadow.
+       Now a straight arch-topped tile, cut from the same shape set as
+       every other image on the page. */
     .about-img-wrap {
-      border-radius: 28px; overflow: hidden;
-      border: 5px solid var(--yellow);
-      box-shadow: 12px 12px 0 var(--blue-pale);
-      transform: rotate(1.5deg);
+      border-radius: 140px 140px var(--r-tile) var(--r-tile);
+      overflow: hidden;
+      border: none;
+      box-shadow: none;
+      transform: none;
     }
     .about-img-wrap img { width: 100%; display: block; }
     .about-badge {
-      position: absolute; bottom: -1rem; left: -1rem;
-      background: var(--white); border: 3px solid var(--pink);
-      border-radius: 16px; padding: 0.6rem 1rem;
-      font-family: 'Baloo 2', cursive;
-      font-weight: 800; font-size: 0.88rem; color: var(--pink);
-      box-shadow: 4px 4px 0 var(--pink-pale);
-      transform: rotate(-3deg); z-index: 2;
+      position: absolute; bottom: 0.9rem; left: 50%;
+      transform: translateX(-50%);
+      background: var(--pink); border: none;
+      border-radius: var(--r-pill); padding: 0.5rem 1.1rem;
+      font-family: var(--font-display);
+      font-weight: var(--w-black); font-size: 0.82rem; color: #fff;
+      box-shadow: none;
+      white-space: nowrap; z-index: 2;
     }
-    .about-float-star {
-      position: absolute; top: -1.2rem; right: -0.8rem;
-      font-size: 2.5rem;
-      animation: spin 8s linear infinite;
-    }
+    /* The spinning glyph belonged to the old look; the sheet already
+       carries its two edge marks. */
+    .about-float-star { display: none; }
     @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     #about::before {
       content: '';
       position: absolute;
-      width: 350px; height: 350px; border-radius: 50%;
-      background: var(--purple-pale);
-      top: -120px; right: -80px; z-index: 0;
+      width: clamp(22px, 2.6vw, 38px); aspect-ratio: 1 / 2;
+      border-radius: 999px 0 0 999px;
+      background: var(--purple);
+      top: 18%; right: 0; z-index: 0;
     }
     .about-inner { position: relative; z-index: 1; }
 
     /* ─────────────────────────────────────
        GALLERY
     ───────────────────────────────────── */
-    #gallery {
-      background: var(--blue-pale);
-      padding: 5.5rem 1.5rem;
-      position: relative; overflow: hidden;
-    }
+    #gallery { position: relative; overflow: hidden; }
+    /* Was six tilted photos with tape strips and colored frames. Now an
+       aligned mosaic where the variety comes from the silhouettes —
+       arch, circle, pill, leaf — instead of from rotation. */
     .gallery-collage {
       max-width: 1100px; margin: 2.5rem auto 0;
-      display: flex; gap: 1rem; flex-wrap: wrap;
-      align-items: flex-start; justify-content: center;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      grid-auto-rows: clamp(120px, 15vw, 180px);
+      gap: 12px;
     }
     .gcol-item {
-      border-radius: 20px; overflow: hidden;
-      box-shadow: 0 6px 24px rgba(0,0,0,0.10);
-      flex-shrink: 0; position: relative;
+      overflow: hidden;
+      box-shadow: none;
+      position: relative;
       transition: transform 0.3s;
     }
-    .gcol-item:hover { transform: scale(1.03) rotate(0deg) !important; }
+    .gcol-item:hover { transform: scale(1.02); }
     .gcol-item img { display: block; width: 100%; height: 100%; object-fit: cover; }
-    .gcol-item::before {
-      content: '';
-      position: absolute;
-      width: 60px; height: 18px;
-      background: rgba(255,217,61,0.7);
-      top: -6px; left: 50%; transform: translateX(-50%);
-      border-radius: 4px; z-index: 2;
+    /* The tape strip goes with the scrapbook. */
+    .gcol-item::before { content: none; }
+    .gcol-item:nth-child(1) { grid-column: span 3; grid-row: span 2; border: none; border-radius: 200px 200px var(--r-tile) var(--r-tile); }
+    .gcol-item:nth-child(2) { grid-column: span 2; border: none; border-radius: var(--r-pill); }
+    .gcol-item:nth-child(3) { grid-column: span 1; border: none; border-radius: 50%; }
+    .gcol-item:nth-child(4) { grid-column: span 1; border: none; border-radius: var(--r-leaf); }
+    .gcol-item:nth-child(5) { grid-column: span 2; border: none; border-radius: var(--r-tile); }
+    .gcol-item:nth-child(6) { grid-column: span 3; border: none; border-radius: var(--r-tile); }
+    @media (max-width: 760px) {
+      .gallery-collage { grid-template-columns: repeat(2, 1fr); }
+      .gcol-item:nth-child(1) { grid-column: span 2; grid-row: span 1; border-radius: 160px 160px var(--r-tile) var(--r-tile); }
+      .gcol-item:nth-child(2), .gcol-item:nth-child(5), .gcol-item:nth-child(6) { grid-column: span 2; }
+      .gcol-item:nth-child(3), .gcol-item:nth-child(4) { grid-column: span 1; }
     }
-    .gcol-item:nth-child(1) { width: 380px; height: 270px; border: 4px solid var(--pink);   transform: rotate(-1.5deg); }
-    .gcol-item:nth-child(2) { width: 270px; height: 195px; border: 4px solid var(--green);  transform: rotate(2deg);   align-self: flex-end; }
-    .gcol-item:nth-child(3) { width: 340px; height: 240px; border: 4px solid var(--orange); transform: rotate(-1deg); }
-    .gcol-item:nth-child(4) { width: 300px; height: 215px; border: 4px solid var(--purple); transform: rotate(1.8deg); align-self: flex-end; }
-    .gcol-item:nth-child(5) { width: 360px; height: 255px; border: 4px solid var(--blue);   transform: rotate(-0.8deg); }
-    .gcol-item:nth-child(6) { width: 280px; height: 200px; border: 4px solid var(--yellow); transform: rotate(1.4deg); align-self: flex-end; }
 
     /* ─────────────────────────────────────
        PLAN YOUR VISIT
     ───────────────────────────────────── */
-    #visit {
-      background: var(--cream);
-      padding: 5.5rem 1.5rem;
-    }
+    #visit { position: relative; }
     .visit-inner { max-width: 1100px; margin: 0 auto; }
+    /* Two cards, two columns. The old nested column wrappers existed to
+       stack four cards two-by-two; with two cards they just pushed both
+       into the left half and left the right half empty. */
     .visit-grid {
-      display: flex; flex-wrap: wrap;
-      gap: 1.5rem; margin-top: 3rem;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 2.5rem;
+      align-items: start;
     }
-    /* Left: bring list + getting there stacked */
-    .visit-col-left  { flex: 1 1 300px; display: flex; flex-direction: column; gap: 1.5rem; }
-    .visit-col-right { flex: 1 1 300px; display: flex; flex-direction: column; gap: 1.5rem; }
+    @media (max-width: 760px) {
+      .visit-grid { grid-template-columns: 1fr; }
+    }
     .visit-card {
-      background: var(--white); border-radius: 24px;
-      padding: 1.75rem; position: relative; overflow: hidden;
-      box-shadow: 0 3px 16px rgba(0,0,0,0.06);
+      background: var(--white); border-radius: var(--r-tile);
+      padding: 1.6rem; position: relative; overflow: hidden;
+      box-shadow: none;
+      border: 2px solid rgba(26,26,46,0.08);
     }
     .visit-card::after {
       content: '';
       position: absolute; top: 0; left: 0; right: 0;
-      height: 5px; border-radius: 24px 24px 0 0;
+      height: 6px;
     }
     .vc-blue::after   { background: var(--blue); }
     .vc-green::after  { background: var(--green); }
@@ -715,23 +1114,21 @@
     /* ─────────────────────────────────────
        FAQ
     ───────────────────────────────────── */
-    #faq {
-      background: var(--cream);
-      padding: 5.5rem 1.5rem;
-    }
+    #faq { position: relative; }
     .faq-inner { max-width: 780px; margin: 0 auto; }
     .faq-list { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
     details {
-      background: var(--cream);
-      border-radius: 18px;
+      background: var(--white);
+      border-radius: var(--r-tile);
       overflow: hidden;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      box-shadow: none;
+      border: 2px solid rgba(26,26,46,0.08);
     }
-    details[open] { box-shadow: 0 4px 18px rgba(0,0,0,0.10); }
+    details[open] { box-shadow: none; border-color: var(--pink); }
     summary {
-      padding: 1.1rem 1.5rem;
-      font-family: 'Baloo 2', cursive;
-      font-size: 1.05rem; font-weight: 700;
+      padding: 1.05rem 1.4rem;
+      font-family: var(--font-display);
+      font-size: 1.02rem; font-weight: var(--w-black);
       cursor: pointer; list-style: none;
       display: flex; justify-content: space-between; align-items: center;
       color: var(--ink);
@@ -754,30 +1151,35 @@
        COMMUNITY
     ───────────────────────────────────── */
     #community {
-      background: linear-gradient(145deg, var(--purple) 0%, #6B2B8E 100%);
-      padding: 5.5rem 1.5rem;
-      position: relative; overflow: hidden; text-align: center;
+      background: var(--purple);
+      position: relative; overflow: hidden; text-align: left;
     }
     #community::after {
       content: '';
-      position: absolute; width: 600px; height: 600px; border-radius: 50%;
-      background: rgba(255,255,255,0.05);
-      bottom: -250px; right: -200px; pointer-events: none;
+      position: absolute;
+      width: clamp(22px, 2.6vw, 38px); aspect-ratio: 1 / 2;
+      border-radius: 999px 0 0 999px;
+      background: var(--yellow);
+      top: 10%; right: 0; pointer-events: none;
     }
     .community-inner { max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
     #community .section-eyebrow { background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.9); }
     #community .section-h2 { color: var(--yellow); }
     .comm-orgs {
-      display: flex; flex-wrap: wrap;
-      justify-content: center; gap: 1.25rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
       margin: 2.5rem 0;
+      text-align: left;
     }
+    @media (max-width: 900px) { .comm-orgs { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .comm-orgs { grid-template-columns: 1fr; } }
     .comm-org-card {
       background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 24px; padding: 2rem 1.75rem;
-      backdrop-filter: blur(6px);
-      flex: 1 1 200px; max-width: 240px; text-align: center;
+      border: none;
+      border-radius: var(--r-tile); padding: 1.6rem 1.4rem;
+      backdrop-filter: none;
+      max-width: none; text-align: left;
       transition: background 0.25s, transform 0.25s;
     }
     .comm-org-card:hover { background: rgba(255,255,255,0.2); transform: translateY(-4px); }
@@ -789,8 +1191,8 @@
     .donate-note {
       margin-top: 2rem;
       background: rgba(255,255,255,0.12);
-      border-radius: 20px; padding: 1.5rem 2rem;
-      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: var(--r-tile); padding: 1.4rem 1.75rem;
+      border: none;
       font-size: 0.95rem; color: rgba(255,255,255,0.8);
       max-width: 600px; margin-left: auto; margin-right: auto;
       font-weight: 600;
@@ -826,7 +1228,7 @@
       padding: 0.45rem 1rem;
       border-radius: 50px;
       background: rgba(255,255,255,0.1); color: #fff;
-      font-family: 'Baloo 2', cursive; font-weight: 700; font-size: 0.85rem;
+      font-family: var(--font-display); font-weight: 700; font-size: 0.85rem;
       text-decoration: none;
       transition: background 0.2s, color 0.2s;
     }
@@ -844,12 +1246,14 @@
       .mobile-toggle { display: block; }
       .nav-social { display: none; }
       nav.open ul {
-        display: flex; flex-direction: column;
-        position: absolute; top: 100%; left: 0; right: 0;
-        background: var(--cream);
-        padding: 1rem 1.5rem; gap: 0.75rem;
-        border-bottom: 3px dashed var(--yellow);
+        display: flex; flex-direction: column; align-items: stretch;
+        position: absolute; top: calc(100% + 6px); left: 0; right: 0;
+        background: var(--ink);
+        border-radius: var(--r-sheet);
+        padding: 0.6rem; gap: 0.15rem;
+        margin-left: 0;
       }
+      nav.open ul li:last-child a { margin-left: 0; text-align: center; }
       .about-inner { flex-direction: column; }
       .about-visual { order: -1; }
       .food-inner { flex-direction: column; }
@@ -870,24 +1274,23 @@
       .gcol-item:nth-child(6) {
         width: 100% !important; height: 180px !important;
       }
-      .visit-col-left, .visit-col-right { flex: 1 1 100%; }
     }
 
     /* ─────────────────────────────────────
        HERO SHARE ROW
     ───────────────────────────────────── */
     .hero-share {
-      display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
-      gap: 0.45rem; margin-bottom: 1.25rem;
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-start;
+      gap: 0.4rem; margin-bottom: 1.1rem;
     }
     .share-label {
-      font-size: 0.8rem; font-weight: 700; color: var(--ink-soft);
-      width: 100%; text-align: center; margin-bottom: 0.1rem;
+      font-size: 0.78rem; font-weight: var(--w-bold); color: var(--ink-soft);
+      width: 100%; text-align: left; margin-bottom: 0.15rem;
     }
     .share-pill {
       display: inline-flex; align-items: center; gap: 0.35rem;
       padding: 0.38rem 0.9rem; border-radius: 50px;
-      font-family: 'Baloo 2', cursive; font-size: 0.8rem; font-weight: 700;
+      font-family: var(--font-display); font-size: 0.8rem; font-weight: 700;
       border: 2px solid var(--ink); color: var(--ink);
       background: rgba(255,255,255,0.7); cursor: pointer;
       text-decoration: none; transition: background 0.2s, color 0.2s, border-color 0.2s;
@@ -904,7 +1307,7 @@
     /* ─────────────────────────────────────
        INVITE A NEIGHBOR
     ───────────────────────────────────── */
-    .invite-section { background: #1A1A2E; padding: 4rem 1.5rem 5rem; text-align: center; }
+    .invite-section { text-align: center; }
     .invite-inner { max-width: 680px; margin: 0 auto; }
     .invite-h2 {
       font-size: clamp(2rem, 5vw, 3rem); color: var(--white); margin-bottom: 0.4rem;
@@ -922,7 +1325,7 @@
       display: inline-flex; align-items: center; gap: 0.4rem;
       padding: 0.55rem 1.4rem; border-radius: 50px;
       background: var(--pink); color: #fff;
-      font-family: 'Baloo 2', cursive; font-size: 0.9rem; font-weight: 800;
+      font-family: var(--font-display); font-size: 0.9rem; font-weight: 800;
       border: none; cursor: pointer; transition: background 0.2s, transform 0.1s;
     }
     .invite-copy-btn:hover { background: #e03d5e; transform: scale(1.03); }
@@ -950,7 +1353,7 @@
     .invite-dl-label {
       display: inline-flex; align-items: center; gap: 0.35rem;
       padding: 0.35rem 0.9rem; border-radius: 50px;
-      font-family: 'Baloo 2', cursive; font-size: 0.8rem; font-weight: 700;
+      font-family: var(--font-display); font-size: 0.8rem; font-weight: 700;
       border: 2px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.8);
       background: rgba(255,255,255,0.07);
       transition: background 0.2s, border-color 0.2s;
@@ -968,7 +1371,7 @@
     .invite-share-pill {
       display: inline-flex; align-items: center; gap: 0.35rem;
       padding: 0.4rem 1.1rem; border-radius: 50px;
-      font-family: 'Baloo 2', cursive; font-size: 0.82rem; font-weight: 700;
+      font-family: var(--font-display); font-size: 0.82rem; font-weight: 700;
       border: 2px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.75);
       background: rgba(255,255,255,0.06); cursor: pointer;
       text-decoration: none; transition: background 0.2s, color 0.2s, border-color 0.2s;
@@ -980,17 +1383,14 @@
     /* ─────────────────────────────────────
        LOCATION MAP
     ───────────────────────────────────── */
-    #location {
-      background: var(--cream);
-      padding: 4rem 1.5rem 5rem;
-    }
+    #location { position: relative; }
     .map-wrap {
       margin: 2rem auto 0;
       max-width: 1100px;
-      border-radius: 24px;
+      border-radius: var(--r-tile);
       overflow: hidden;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.13);
-      border: 5px solid #fff;
+      box-shadow: none;
+      border: none;
     }
     .map-wrap iframe {
       display: block; width: 100%; height: 420px; border: 0;
@@ -1001,13 +1401,13 @@
     }
     .map-chip {
       display: inline-flex; align-items: center; gap: 0.4rem;
-      padding: 0.5rem 1.1rem;
-      border-radius: 50px;
-      background: #c5eda0;
-      font-family: 'Baloo 2', cursive;
-      font-weight: 700; font-size: 0.9rem;
+      padding: 0.45rem 1.05rem;
+      border-radius: var(--r-pill);
+      background: var(--yellow);
+      font-family: var(--font-accent);
+      font-weight: var(--w-bold); font-size: 0.88rem;
       color: var(--ink);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      box-shadow: none;
     }
 
 
@@ -1087,7 +1487,7 @@
   color: #fff;
   padding: 0.45rem 0.9rem;
   border-radius: 8px;
-  font-family: 'Baloo 2', cursive;
+  font-family: var(--font-display);
   font-size: 0.95rem;
   font-weight: 700;
   white-space: nowrap;
@@ -1159,7 +1559,7 @@
   flex-shrink: 0;
 }
 .krsvp-title {
-  font-family: 'Baloo 2', cursive;
+  font-family: var(--font-display);
   font-size: 1.05rem;
   font-weight: 700;
   color: var(--yellow);
@@ -1248,7 +1648,7 @@
   background: var(--yellow);
   color: var(--ink);
   border-radius: 50px;
-  font-family: 'Baloo 2', cursive;
+  font-family: var(--font-display);
   font-weight: 800;
   font-size: 1.05rem;
   box-shadow: 0 6px 18px rgba(240,127,27,0.25);
@@ -1269,12 +1669,12 @@
 }
 .mobile-cta-bar.show { transform: translateY(0); }
 .mcb-date {
-  font-family: 'Baloo 2', cursive; font-weight: 800; font-size: 0.9rem;
+  font-family: var(--font-display); font-weight: 800; font-size: 0.9rem;
   color: var(--ink); white-space: nowrap; flex-shrink: 0;
 }
 .mcb-btn {
   flex: 1; text-align: center; text-decoration: none; white-space: nowrap;
-  font-family: 'Baloo 2', cursive; font-weight: 800; font-size: 0.95rem;
+  font-family: var(--font-display); font-weight: 800; font-size: 0.95rem;
   padding: 0.6rem 0.5rem; border-radius: 50px;
 }
 .mcb-cal  { background: var(--yellow); color: var(--ink); }
@@ -1286,3 +1686,221 @@
 @media (prefers-reduced-motion: reduce) {
   .mobile-cta-bar { transition: none; }
 }
+
+/* ─────────────────────────────────────
+   2026 RECAP  (2027 page)
+
+   With no date to announce yet, last year's Gathering is the page's
+   proof. Stats read first at display weight, then a mosaic of six
+   photographs cut to different silhouettes from the shape system.
+───────────────────────────────────── */
+.hero-eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: var(--w-black);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--pink);
+  margin-bottom: 0.65rem;
+}
+
+.recap-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 1.75rem;
+  position: relative; z-index: 1;
+}
+.recap-stat {
+  border-radius: var(--r-tile);
+  padding: 1.25rem 1rem;
+  display: flex; flex-direction: column; gap: 0.15rem;
+}
+.recap-stat:nth-child(1) { background: var(--purple); color: #fff; }
+.recap-stat:nth-child(2) { background: var(--blue);   color: var(--ink); }
+.recap-stat:nth-child(3) { background: var(--green);  color: var(--ink); }
+.recap-stat:nth-child(4) { background: var(--pink);   color: #fff; }
+.rs-num {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4vw, 2.9rem);
+  font-weight: var(--w-black);
+  letter-spacing: var(--track-display);
+  line-height: 1;
+}
+.rs-label {
+  font-size: 0.82rem; font-weight: var(--w-bold);
+  opacity: 0.85;
+}
+
+/* Six tiles over four columns: two of them span two columns so the
+   grid closes flush across two rows instead of trailing off. */
+.recap-mosaic {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: clamp(130px, 17vw, 200px);
+  gap: 12px;
+  position: relative; z-index: 1;
+}
+.recap-mosaic figure { margin: 0; overflow: hidden; }
+.rm-tile img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.rm-a { grid-column: span 2; border-radius: var(--r-tile); }
+.rm-b { border-radius: var(--r-arch); }
+.rm-c { border-radius: 50%; }
+.rm-d { grid-column: span 2; border-radius: var(--r-tile); }
+.rm-e { border-radius: var(--r-arch-d); }
+.rm-f { grid-column: span 2; border-radius: var(--r-tile); }
+
+/* Flat cells, cut to the same silhouettes as the photographs. */
+.rm-fill { position: relative; }
+.rm-orange { background: var(--orange); border-radius: var(--r-arch); }
+.rm-blue   { background: var(--blue);   border-radius: 50%; }
+.rm-flower {
+  background: var(--purple);
+  border-radius: var(--r-tile);
+  display: flex; align-items: center; justify-content: center;
+}
+.rm-flower-mark {
+  width: 62%; aspect-ratio: 1;
+  background: var(--yellow);
+  clip-path: polygon(
+    50% 0%, 61% 10%, 75% 6%, 80% 20%, 94% 25%, 90% 39%,
+    100% 50%, 90% 61%, 94% 75%, 80% 80%, 75% 94%, 61% 90%,
+    50% 100%, 39% 90%, 25% 94%, 20% 80%, 6% 75%, 10% 61%,
+    0% 50%, 10% 39%, 6% 25%, 20% 20%, 25% 6%, 39% 10%
+  );
+}
+
+.recap-more {
+  margin-top: 1.5rem;
+  font-weight: var(--w-bold);
+  position: relative; z-index: 1;
+}
+.recap-more a { color: var(--purple); }
+
+@media (max-width: 760px) {
+  .recap-stats  { grid-template-columns: repeat(2, 1fr); }
+  .recap-mosaic { grid-template-columns: repeat(2, 1fr); }
+  .rm-a, .rm-d, .rm-f { grid-column: span 2; }
+}
+
+/* ─────────────────────────────────────
+   ORGANIC SHAPES  (2027)
+
+   The geometric set — arch, pill, circle — is the structure. This set
+   is the personality: squishy asymmetric blobs, scalloped flowers and
+   rounded-point stars, in flat saturated color. They are what keeps a
+   grid of hard rectangles from reading as a corporate dashboard, and
+   they are the reason the reference boards feel like a kids' festival
+   rather than a conference.
+
+   All decorative. None of them carry meaning that isn't in the text.
+───────────────────────────────────── */
+
+/* Blob — an asymmetric squish. The eight-value border-radius gives
+   each corner its own horizontal and vertical radius, which is what
+   makes it read as drawn rather than as a rounded rectangle. */
+.sh-blob   { border-radius: 42% 58% 63% 37% / 47% 39% 61% 53%; }
+.sh-blob-2 { border-radius: 66% 34% 38% 62% / 54% 62% 38% 46%; }
+.sh-blob-3 { border-radius: 38% 62% 55% 45% / 63% 38% 62% 37%; }
+
+/* Flower — a ring of petals around a disc, drawn with repeating conic
+   stops and softened into lobes by the radial mask. Twelve petals is
+   the count that reads as a flower and not as a gear. */
+.sh-flower {
+  --petals: 12;
+  background: var(--flower-color, var(--orange));
+  clip-path: polygon(
+    50% 0%, 61% 10%, 75% 6%, 80% 20%, 94% 25%, 90% 39%,
+    100% 50%, 90% 61%, 94% 75%, 80% 80%, 75% 94%, 61% 90%,
+    50% 100%, 39% 90%, 25% 94%, 20% 80%, 6% 75%, 10% 61%,
+    0% 50%, 10% 39%, 6% 25%, 20% 20%, 25% 6%, 39% 10%
+  );
+}
+
+/* Star with rounded points — the green mark from the Church Kids board.
+   Fewer, fatter points than the spiky asterisk, so the two read as
+   different marks rather than as the same one at two sizes. */
+.sh-star-soft {
+  background: var(--star-color, var(--green));
+  clip-path: polygon(
+    50% 0%, 64% 26%, 93% 19%, 82% 45%, 100% 66%,
+    71% 70%, 66% 100%, 45% 79%, 17% 90%, 22% 61%,
+    0% 41%, 29% 33%, 30% 4%
+  );
+}
+
+/* ── Blob characters ───────────────────────────────────────
+   A blob with two eyes. Used sparingly — two on the page, no more —
+   because the joke stops being charming the fourth time. The eyes are
+   drawn with the same ink as the type so they sit in the palette. */
+/* Apply to an element that is already positioned (relative, absolute or
+   fixed) — the eyes are absolute and need it as their containing block.
+   This rule deliberately does not set position itself: doing so would
+   override an absolutely positioned caller and drop it back into flow. */
+.sh-face::before,
+.sh-face::after {
+  content: '';
+  position: absolute;
+  top: 38%;
+  width: 14%; height: 19%;
+  border-radius: 50%;
+  background: var(--ink);
+}
+.sh-face::before { left: 28%; }
+.sh-face::after  { right: 28%; }
+
+/* Section marks — the ornament pair each sheet is allowed. Half discs
+   cropped by the sheet edge, in the gutter, never over copy. */
+.sec-mark { position: absolute; z-index: 0; pointer-events: none; }
+.sec-mark-a {
+  top: 14%; right: 0;
+  width: clamp(20px, 2.6vw, 38px); aspect-ratio: 1 / 2;
+  background: var(--orange);
+  border-radius: 999px 0 0 999px;
+}
+.sec-mark-b {
+  bottom: 12%; left: 0;
+  width: clamp(20px, 2.6vw, 38px); aspect-ratio: 1 / 2;
+  background: var(--green);
+  border-radius: 0 999px 999px 0;
+}
+
+/* ─────────────────────────────────────
+   LOCATION MAP  (MapLibre)
+
+   Same provider, tiles and pin treatment as the parking page, so the
+   two maps on the site read as one thing. Self-hosted library plus
+   keyless OpenFreeMap tiles means no third-party tracking here.
+───────────────────────────────────── */
+#lmap {
+  width: 100%;
+  height: min(58vh, 460px);
+  background: #eef1f4;
+}
+.lmap-fallback {
+  display: none;
+  position: absolute; inset: 0;
+  flex-direction: column; align-items: center; justify-content: center;
+  gap: 0.9rem; text-align: center; padding: 1.5rem;
+  background: var(--cream);
+}
+#lmap-wrap { position: relative; }
+#lmap-wrap.failed .lmap-fallback { display: flex; }
+
+/* Map pins — matched to the parking page. */
+.pin { display: flex; flex-direction: column; align-items: center; cursor: pointer; line-height: 1; }
+.pin-bubble {
+  font-family: var(--font-display); font-weight: var(--w-black);
+  font-size: 0.8rem; color: #fff; white-space: nowrap;
+  padding: 0.4rem 0.75rem; border-radius: var(--r-pill);
+  border: 2px solid #fff;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.28);
+}
+.pin-stem { width: 3px; height: 12px; margin-top: -1px; border-radius: 0 0 2px 2px; }
+.pin-dot {
+  width: 15px; height: 15px; border-radius: 50%;
+  border: 3px solid #fff; margin-top: -2px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.pin-event .pin-bubble, .pin-event .pin-stem, .pin-event .pin-dot { background: var(--pink); }
+.maplibregl-ctrl-attrib { font-size: 10px; }

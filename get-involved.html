@@ -30,12 +30,13 @@
   <!-- Self-hosted fonts (no third-party requests) -->
   <link rel="preload" href="fonts/nunito-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/baloo-2-800-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="fonts.css">
+  <link rel="preload" href="fonts/satoshi-variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="fonts.css?v=2027">
 
   <link rel="icon" href="logo-badge.svg" type="image/svg+xml">
   <meta name="theme-color" content="#F65472">
   <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=2027">
 </head>
 <body>
 
@@ -52,10 +53,9 @@
         onclick="document.getElementById('main-nav').classList.toggle('open')">&#9776;</button>
       <ul>
         <li><a href="index.html#activities">Activities</a></li>
-        <li><a href="index.html#entertainment">Entertainment</a></li>
+        <li><a href="index.html#recap2026">2026</a></li>
         <li><a href="index.html#food">Food</a></li>
         <li><a href="index.html#visit">Plan Your Visit</a></li>
-        <li><a href="parking.html">Parking</a></li>
         <li><a href="index.html#location">Location</a></li>
         <li><a href="index.html#faq">FAQ</a></li>
         <li><a href="index.html#community">Community</a></li>
@@ -76,10 +76,10 @@
 <main id="main-content">
 
 <!-- ═══ GET INVOLVED HERO ═══ -->
-<section class="hero" style="min-height:40vh;padding:4rem 1.5rem;" aria-label="Get Involved">
+<section class="hero sheet" aria-label="Get Involved">
   <div class="hero-blob blob-1" aria-hidden="true"></div>
   <div class="hero-blob blob-2" aria-hidden="true"></div>
-  <div class="hero-content" style="padding-top:2rem;">
+  <div class="hero-content">
     <h1 style="margin-bottom:0.5rem;">
       <img src="logo.svg" alt="Madison Good Neighbor Gathering" width="480" height="137" fetchpriority="high" style="max-width:100%;height:auto;">
     </h1>
@@ -87,13 +87,8 @@
   </div>
 </section>
 
-<!-- Wave into content -->
-<div class="wave-divider" style="background:var(--cream)" aria-hidden="true">
-  <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,30 C480,0 960,60 1440,20 L1440,60 L0,60 Z" fill="#1A1A2E"/></svg>
-</div>
-
 <!-- ═══ SPONSORS & SUPPORT ═══ -->
-<section id="sponsors" style="background:#1A1A2E;color:#fff;padding:4rem 1.5rem;" aria-labelledby="sponsors-heading">
+<section id="sponsors" class="sheet sheet-ink" aria-labelledby="sponsors-heading">
   <div style="max-width:720px;margin:0 auto;text-align:center;">
     <h2 id="sponsors-heading" style="font-family:'Baloo 2',cursive;font-size:2rem;color:var(--yellow);margin-bottom:1rem;">Thank you to our 2026 sponsors &amp; donors!</h2>
     <p style="font-size:1.1rem;line-height:1.6;color:rgba(255,255,255,0.9);margin-bottom:1.5rem;">
@@ -159,13 +154,8 @@
   </div>
 </section>
 
-<!-- Wave into volunteer -->
-<div class="wave-divider" style="background:#1A1A2E" aria-hidden="true">
-  <svg viewBox="0 0 1440 55" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,25 C480,50 960,0 1440,25 L1440,55 L0,55 Z" fill="var(--cream)"/></svg>
-</div>
-
 <!-- ═══ VOLUNTEER ═══ -->
-<section style="background:var(--cream);padding:4rem 1.5rem;" aria-labelledby="volunteer-heading">
+<section class="sheet" aria-labelledby="volunteer-heading">
   <div style="max-width:720px;margin:0 auto;text-align:center;">
     <h2 id="volunteer-heading" style="font-family:'Baloo 2',cursive;font-size:1.75rem;color:var(--purple);margin-bottom:1rem;">Volunteer</h2>
     <p style="font-size:1.05rem;line-height:1.6;color:var(--ink);margin-bottom:1.5rem;">
@@ -175,13 +165,8 @@
   </div>
 </section>
 
-<!-- Wave into kids rsvp -->
-<div class="wave-divider" style="background:var(--cream)" aria-hidden="true">
-  <svg viewBox="0 0 1440 50" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,25 C480,50 960,0 1440,25 L1440,50 L0,50 Z" fill="#1A1A2E"/></svg>
-</div>
-
 <!-- ═══ KIDS RSVP ═══ -->
-<section style="background:#1A1A2E;color:#fff;padding:4rem 1.5rem;" aria-labelledby="kids-rsvp-heading">
+<section class="sheet sheet-ink" aria-labelledby="kids-rsvp-heading">
   <div style="max-width:720px;margin:0 auto;text-align:center;">
     <h2 id="kids-rsvp-heading" style="font-family:'Baloo 2',cursive;font-size:1.75rem;color:var(--yellow);margin-bottom:1rem;">&#127881; Kids RSVP</h2>
     <p style="font-size:1.05rem;line-height:1.6;color:rgba(255,255,255,0.9);margin-bottom:1rem;">
@@ -191,13 +176,8 @@
   </div>
 </section>
 
-<!-- Wave into vendor section -->
-<div class="wave-divider" style="background:#1A1A2E" aria-hidden="true">
-  <svg viewBox="0 0 1440 50" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,25 C480,50 960,0 1440,25 L1440,50 L0,50 Z" fill="var(--cream)"/></svg>
-</div>
-
 <!-- ═══ VENDOR REGISTRATION ═══ -->
-<section style="background:var(--cream);padding:4rem 1.5rem;" aria-labelledby="vendor-heading">
+<section class="sheet" aria-labelledby="vendor-heading">
   <div style="max-width:720px;margin:0 auto;text-align:center;">
     <h2 id="vendor-heading" style="font-family:'Baloo 2',cursive;font-size:1.75rem;color:var(--purple);margin-bottom:1rem;">&#128717; Vendors</h2>
     <p style="font-size:1.05rem;line-height:1.6;color:var(--ink);margin-bottom:1.5rem;">
@@ -207,13 +187,8 @@
   </div>
 </section>
 
-<!-- Wave into table section -->
-<div class="wave-divider" style="background:var(--cream)" aria-hidden="true">
-  <svg viewBox="0 0 1440 50" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,25 C480,0 960,50 1440,25 L1440,50 L0,50 Z" fill="#1A1A2E"/></svg>
-</div>
-
 <!-- ═══ TABLE / VENDOR INTEREST ═══ -->
-<section style="background:#1A1A2E;color:#fff;padding:4rem 1.5rem;" aria-labelledby="table-heading">
+<section class="sheet sheet-ink" aria-labelledby="table-heading">
   <div style="max-width:720px;margin:0 auto;text-align:center;">
     <h2 id="table-heading" style="font-family:'Baloo 2',cursive;font-size:1.75rem;color:var(--yellow);margin-bottom:1rem;">&#127978; Interested in Being a Part?</h2>
     <p style="font-size:1.05rem;line-height:1.6;color:rgba(255,255,255,0.9);margin-bottom:1rem;">
@@ -225,11 +200,6 @@
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4nvHSfqMmlXzShYup_nCxJ5ODswZ90EESywvsht0-ojo0ZQ/viewform" target="_blank" rel="noopener" class="btn btn-yellow" style="max-width:min(32rem,100%);white-space:normal;line-height:1.35;text-align:center;justify-content:center;padding:1rem 1.9rem;border-radius:28px;">&#128203; RSVP for Vendors, Tablers, Performers, Activities &amp; Everyone Who Will Be a Part of the Day</a>
   </div>
 </section>
-
-<!-- Wave into footer -->
-<div class="wave-divider" style="background:#1A1A2E" aria-hidden="true">
-  <svg viewBox="0 0 1440 50" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,25 C480,50 960,0 1440,25 L1440,50 L0,50 Z" fill="#1A1A2E"/></svg>
-</div>
 
 </main>
 
