@@ -79,8 +79,12 @@
       --ground: var(--yellow);
       --gutter: clamp(10px, 1.6vw, 22px);
       /* Height of the floating nav bar. The first sheet clears it, and
-         anchored sections scroll clear of it, from this one number. */
-      --nav-h: 70px;
+         anchored sections scroll clear of it, from this one number, so
+         it has to be at least the bar's real height — undershoot and
+         the clearance eats the gutter instead of adding to it. The bar
+         measures ~70px at every width (a 44px logo disc plus padding),
+         so this is that rounded up. */
+      --nav-h: 72px;
     }
 
     html { scroll-behavior: smooth; background: var(--ground); }
@@ -129,9 +133,7 @@
     /* In-page links land below the floating nav rather than behind it. */
     .sheet[id] { scroll-margin-top: calc(var(--gutter) * 2 + var(--nav-h)); }
 
-    @media (max-width: 768px) {
-      :root { --nav-h: 60px; }
-    }
+
     h1, h2, h3, h4 {
       font-family: var(--font-display);
       font-weight: var(--w-black);
@@ -334,6 +336,13 @@
     .hero-split { grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); }
     @media (max-width: 900px) {
       .hero-split { grid-template-columns: 1fr; }
+      /* Stacked, there is no second column for the left rag to align
+         against, so the copy centres over the mosaic below it. */
+      .hero-split .hero-content { text-align: center; }
+      .hero-split .hero-logo-wrap img { margin-inline: auto; }
+      .hero-split .hero-tagline { max-width: none; margin-inline: auto; }
+      .hero-split .hero-proof   { max-width: none; margin-inline: auto; }
+      .hero-split .hero-cta     { justify-content: center; }
     }
     /* Ornaments hang off the sheet edges and get cropped by it, which
        is what stops them reading as stickers dropped on the page. They
