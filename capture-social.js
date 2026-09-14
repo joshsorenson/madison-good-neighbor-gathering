@@ -52,7 +52,7 @@ const queue = only.length
   const context = await browser.newContext({ deviceScaleFactor: 1 });
   const page = await context.newPage();
 
-  console.log(`\n🎨  GNG 2026 Social Media Kit — Capturing ${queue.length} graphics\n`);
+  console.log(`\n🎨  GNG 2027 Social Media Kit — Capturing ${queue.length} graphics\n`);
 
   for (const g of queue) {
     const srcPath = path.join(SOCIAL_DIR, g.file);

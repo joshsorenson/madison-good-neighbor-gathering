@@ -14,6 +14,15 @@ import { next, rewrite } from '@vercel/functions';
  * Madison runs on CDT (UTC-5) through all of September, so the boundaries are
  * fixed instants. No timezone database needed at the edge.
  */
+/**
+ * STALE ON PURPOSE. These are the 2026 dates and the 2027 date is not set yet.
+ * A window in the past simply never matches, so `/` keeps serving index.html,
+ * which is the right behaviour until there is a real date. Guessing one would
+ * hand the homepage to today.html on a day nothing is happening.
+ *
+ * When the 2027 date is announced, set both of these AND `EVENT_Y/M/D` plus the
+ * `SCHEDULE` array in today.html. Nothing rolls forward on its own.
+ */
 const DAY_OPENS  = Date.UTC(2026, 8, 13, 5, 0, 0); // Sun Sep 13, 00:00 Madison
 const DAY_CLOSES = Date.UTC(2026, 8, 14, 5, 0, 0); // Mon Sep 14, 00:00 Madison
 

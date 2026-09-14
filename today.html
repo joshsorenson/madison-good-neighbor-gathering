@@ -524,6 +524,9 @@
   };
 
   /* ── Event constants (Madison local time) ── */
+  // STALE ON PURPOSE: 2026 dates, because the 2027 date is not announced yet.
+  // This page only ever renders on event day, and middleware.js will not route
+  // here until its window is updated too. Set both together.
   var EVENT_Y = 2026, EVENT_M = 9, EVENT_D = 13;   // Sunday, Sept 13 2026
   var DOORS   = 12 * 60;   // 12:00 PM, in minutes past midnight
   var CLOSE   = 16 * 60;   // 4:00 PM
