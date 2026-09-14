@@ -30,8 +30,12 @@ const RECAP_AFTER = false;
  * window to close at midnight. Flipped on the evening of the event, once the
  * park has emptied and the day-of page has nothing left to tell anyone.
  * Set to false and the date boundaries above take over again.
+ *
+ * Off for the 2027 cycle. This is checked ahead of the date logic, so it
+ * overrides RECAP_AFTER: leaving it on kept the homepage pinned to the
+ * recap no matter what the flag below said.
  */
-const RECAP_NOW = true;
+const RECAP_NOW = false;
 
 export default function middleware(request) {
   try {
