@@ -96,23 +96,15 @@
         "name": "Is the Good Neighbor Gathering really free?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes! The Madison Good Neighbor Gathering is 100% free. There are no tickets, no registration, and no catch. Just show up and enjoy."
+          "text": "Yes. No tickets, no registration, no hidden fees. Just show up."
         }
       },
       {
         "@type": "Question",
-        "name": "What time does the Good Neighbor Gathering start?",
+        "name": "When is the 2027 Gathering?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The event runs from 12:00 PM to 4:00 PM on Sunday, September 13, 2026."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Where is the Good Neighbor Gathering held?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "The event is held at Brittingham Park, 829 W. Washington Ave., Madison, WI 53715."
+          "text": "The 2027 date has not been announced yet. It lands on a Sunday afternoon in early fall, and it has run 12:00 to 4:00 PM in past years. Follow the Gathering on Instagram for the announcement."
         }
       },
       {
@@ -125,27 +117,26 @@
       },
       {
         "@type": "Question",
-        "name": "Is there parking at the Good Neighbor Gathering?",
+        "name": "Is there parking nearby?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Free street parking is available on surrounding streets. The park is also accessible by Metro Transit bus and is very bike-friendly. BCycle stations are nearby."
+          "text": "Free street parking surrounds Brittingham Park, and it fills up on nice days. Metro Transit and BCycle are both good alternatives."
         }
       },
       {
         "@type": "Question",
-        "name": "Is the Good Neighbor Gathering stroller and wheelchair accessible?",
+        "name": "Can I bring my dog?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes! Brittingham Park has paved paths and is accessible for strollers, wheelchairs, and mobility devices."
+          "text": "Yes, on a leash. Clean up after them and keep them comfortable in the crowd."
         }
       },
       {
         "@type": "Question",
-        "name": "Is there food at the Good Neighbor Gathering?",
+        "name": "How can I volunteer or sponsor the event?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes! Multiple food carts will be on-site offering diverse, family-friendly cuisine. Food carts accept both cash and card."
-
+          "text": "Visit the Get Involved page to sign up to volunteer or to ask about sponsorship. Volunteers and sponsors are what keep the Gathering free."
         }
       }
     ]
@@ -233,20 +224,6 @@
     <div class="hero-cta">
       <a href="https://www.instagram.com/madisongoodneighborgathering" target="_blank" rel="noopener" class="btn btn-pink">&#128247; Follow for the date</a>
       <a href="get-involved.html" class="btn btn-sm btn-outline">Get involved &#8594;</a>
-    </div>
-    <div class="hero-share" aria-label="Share this event">
-      <button class="share-pill share-pill-main" id="btn-share-main" aria-label="Share event">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-        Share Event
-      </button>
-      <a class="share-pill share-pill-fb" id="btn-share-fb" href="#" target="_blank" rel="noopener" aria-label="Share on Facebook">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-        Facebook
-      </a>
-      <button class="share-pill share-pill-copy" id="btn-copy-link" aria-label="Copy link to event">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-        Copy Link
-      </button>
     </div>
   </div>
 
@@ -648,46 +625,6 @@
   </div>
 </footer>
 
-<script>
-(function () {
-  var PAGE_URL = window.location.href;
-  var SHARE_TITLE = 'Madison Good Neighbor Gathering';
-  var SHARE_TEXT = 'The Madison Good Neighbor Gathering is back in 2027 at Brittingham Park. Free festival: live music, food trucks, bouncy structures & kids activities. All ages, no tickets needed. Date announced soon!';
-
-  function fbUrl() { return 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(PAGE_URL); }
-
-  function setLinks() {
-    ['btn-share-fb'].forEach(function(id) {
-      var el = document.getElementById(id); if (el) el.href = fbUrl();
-    });
-  }
-
-  function doShare() {
-    if (navigator.share) {
-      navigator.share({ title: SHARE_TITLE, text: SHARE_TEXT, url: PAGE_URL }).catch(function(){});
-    } else {
-      doCopy(PAGE_URL, 'btn-copy-link', 'Link copied!');
-    }
-  }
-
-  function doCopy(text, btnId, label) {
-    navigator.clipboard.writeText(text).then(function() {
-      var btn = document.getElementById(btnId);
-      if (!btn) return;
-      var orig = btn.innerHTML;
-      btn.textContent = '\u2713 ' + label;
-      setTimeout(function() { btn.innerHTML = orig; }, 2200);
-    });
-  }
-
-  document.addEventListener('DOMContentLoaded', function() {
-    setLinks();
-    var el;
-    el = document.getElementById('btn-share-main'); if (el) el.addEventListener('click', doShare);
-    el = document.getElementById('btn-copy-link');  if (el) el.addEventListener('click', function() { doCopy(PAGE_URL, 'btn-copy-link', 'Link copied!'); });
-  });
-}());
-</script>
 
 
 
