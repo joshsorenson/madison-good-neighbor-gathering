@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>GNG 2026 &ndash; Thank You (Square)</title>
+<link rel="stylesheet" href="../fonts.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1080px; height: 1080px; overflow: hidden; font-family: 'Nunito', sans-serif; }
+
+  .canvas { position: relative; width: 1080px; height: 1080px; overflow: hidden; background: #1A1A2E; }
+
+  /* Photo on top, type on a solid band below, so nothing competes. */
+  .photo {
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 660px;
+    overflow: hidden;
+  }
+  .photo img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center 45%;
+    display: block;
+  }
+  .photo::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 160px;
+    background: linear-gradient(to top, #1A1A2E, rgba(26,26,46,0));
+  }
+
+  .band {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    height: 460px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 0 70px 34px;
+  }
+
+  .badge {
+    width: 128px; height: 128px;
+    margin-top: -78px;
+    margin-bottom: 20px;
+    /* Knock the badge out to white so it reads on the dark band. */
+    filter: brightness(0) invert(1);
+  }
+
+  .headline {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: 74px;
+    line-height: 1.04;
+    color: #fff;
+    letter-spacing: -0.5px;
+  }
+
+  .sub {
+    margin-top: 16px;
+    font-size: 33px;
+    font-weight: 700;
+    color: #69CFED;
+  }
+
+  .kicker {
+    margin-top: 12px;
+    font-size: 27px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.8);
+  }
+
+  .dots { display: flex; gap: 13px; margin-top: 26px; }
+  .dots span { width: 13px; height: 13px; border-radius: 50%; }
+  .dots span:nth-child(1) { background: #F65472; }
+  .dots span:nth-child(2) { background: #69CFED; }
+  .dots span:nth-child(3) { background: #8CC63E; }
+  .dots span:nth-child(4) { background: #9A50A5; }
+  .dots span:nth-child(5) { background: #F07F1B; }
+</style>
+</head>
+<body>
+  <div class="canvas">
+    <div class="photo">
+      <img src="../photos/2026-folklorico-skirt.jpg" alt="">
+    </div>
+
+    <div class="band">
+      <img class="badge" src="../logo-badge.svg" alt="Madison Good Neighbor Gathering">
+      <div class="headline">Thank you,<br>Madison</div>
+      <div class="sub">Brittingham Park &middot; September 13, 2026</div>
+      <div class="kicker">Back in the park next September</div>
+      <div class="dots"><span></span><span></span><span></span><span></span><span></span></div>
+    </div>
+  </div>
+</body>
+</html>

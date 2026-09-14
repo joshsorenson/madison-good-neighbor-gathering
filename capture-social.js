@@ -29,19 +29,37 @@ const graphics = [
   { file: 'twitter-card.html',     w: 1200, h: 675,  label: 'Twitter/X Card' },
   // LinkedIn 1200×627
   { file: 'linkedin-post.html',    w: 1200, h: 627,  label: 'LinkedIn Post' },
+  // Post-event thank you. These two land at the repo root as JPGs because the
+  // wide one is the link preview the recap page points at, and the square one
+  // is what gets posted to Instagram after the day.
+  { file: 'wide-thanks.html',      w: 1200, h: 630,  label: 'Thank You (Wide)',   out: '../og-recap.jpg',            jpegQuality: 86 },
+  { file: 'sq-thanks.html',        w: 1080, h: 1080, label: 'Thank You (Square)', out: '../share-recap-square.jpg',  jpegQuality: 86 },
 ];
 
+// Optional filter: `node capture-social.js thanks` renders only the graphics
+// whose filename matches, instead of re-rendering the whole kit.
+const only = process.argv.slice(2);
+const queue = only.length
+  ? graphics.filter((g) => only.some((m) => g.file.includes(m)))
+  : graphics;
+
 (async () => {
-  const browser = await chromium.launch();
+  // PW_CHROMIUM_PATH lets this run against a Chromium that is already on the
+  // machine, for anyone who skipped Playwright's own browser download.
+  const browser = await chromium.launch(
+    process.env.PW_CHROMIUM_PATH ? { executablePath: process.env.PW_CHROMIUM_PATH } : {}
+  );
   const context = await browser.newContext({ deviceScaleFactor: 1 });
   const page = await context.newPage();
 
-  console.log(`\n🎨  GNG 2026 Social Media Kit — Capturing ${graphics.length} graphics\n`);
+  console.log(`\n🎨  GNG 2026 Social Media Kit — Capturing ${queue.length} graphics\n`);
 
-  for (const g of graphics) {
+  for (const g of queue) {
     const srcPath = path.join(SOCIAL_DIR, g.file);
-    const outName = g.file.replace('.html', '.png');
-    const outPath = path.join(OUT_DIR, outName);
+    const outName = g.out || g.file.replace('.html', '.png');
+    const outPath = g.out
+      ? path.join(SOCIAL_DIR, g.out)
+      : path.join(OUT_DIR, outName);
 
     await page.setViewportSize({ width: g.w, height: g.h });
     await page.goto(`file://${srcPath}`, { waitUntil: 'networkidle' });
@@ -52,10 +70,11 @@ const graphics = [
     await page.screenshot({
       path: outPath,
       clip: { x: 0, y: 0, width: g.w, height: g.h },
+      ...(g.jpegQuality ? { type: 'jpeg', quality: g.jpegQuality } : {}),
     });
 
     const kb = Math.round(fs.statSync(outPath).size / 1024);
-    console.log(`  ✅  ${g.label.padEnd(32)} → images/${outName}  (${kb} KB)`);
+    console.log(`  ✅  ${g.label.padEnd(32)} → ${g.out ? outName.replace('../', '') : `images/${outName}`}  (${kb} KB)`);
   }
 
   await browser.close();
