@@ -20,6 +20,14 @@ const DAY_CLOSES = Date.UTC(2026, 8, 14, 5, 0, 0); // Mon Sep 14, 00:00 Madison
  */
 const RECAP_AFTER = true;
 
+/**
+ * Hands the homepage to the recap right now, without waiting for the day
+ * window to close at midnight. Flipped on the evening of the event, once the
+ * park has emptied and the day-of page has nothing left to tell anyone.
+ * Set to false and the date boundaries above take over again.
+ */
+const RECAP_NOW = true;
+
 export default function middleware(request) {
   try {
     const url = new URL(request.url);
@@ -29,6 +37,13 @@ export default function middleware(request) {
     const preview = url.searchParams.get('preview');
     if (preview === 'today' || preview === 'recap') {
       url.pathname = preview === 'today' ? '/today.html' : '/recap.html';
+      return rewrite(url);
+    }
+
+    // Checked before the day window, so the evening switch beats the clock.
+    // The preview hatches above still win, which keeps rehearsal working.
+    if (RECAP_NOW) {
+      url.pathname = '/recap.html';
       return rewrite(url);
     }
 
