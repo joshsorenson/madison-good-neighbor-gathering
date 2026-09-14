@@ -1,11 +1,15 @@
 import { next, rewrite } from '@vercel/functions';
 
 /**
- * The homepage has three lives across the year.
+ * The homepage has two lives across the year.
  *
- *   before the day   index.html   persuade someone to come
- *   on the day       today.html   parking, what's on stage, is it still on
- *   after the day    recap.html   thank you, sponsors, how to help next year
+ *   before and after   index.html   the 2027 page, with last year built in
+ *   on the day         today.html   parking, what's on stage, is it still on
+ *
+ * There used to be a third, recap.html, which took the homepage from the day
+ * after the event until next year's page was ready. The 2027 rebuild folded
+ * that content into index.html as its own section, so the page and both of its
+ * flags (RECAP_AFTER, RECAP_NOW) are gone.
  *
  * Madison runs on CDT (UTC-5) through all of September, so the boundaries are
  * fixed instants. No timezone database needed at the edge.
@@ -13,46 +17,14 @@ import { next, rewrite } from '@vercel/functions';
 const DAY_OPENS  = Date.UTC(2026, 8, 13, 5, 0, 0); // Sun Sep 13, 00:00 Madison
 const DAY_CLOSES = Date.UTC(2026, 8, 14, 5, 0, 0); // Mon Sep 14, 00:00 Madison
 
-/**
- * The post-event page stays up until next year's homepage replaces it, which
- * is a deliberate edit rather than a date. Set this to false to hand the
- * homepage straight back to index.html.
- *
- * Turned off for the 2027 cycle: index.html is now the 2027 page, and it
- * carries its own 2026 recap section, so the homepage should serve it
- * rather than last year's thank-you page. /recap.html is still reachable
- * directly and from the 2026 section's "full recap" link.
- */
-const RECAP_AFTER = false;
-
-/**
- * Hands the homepage to the recap right now, without waiting for the day
- * window to close at midnight. Flipped on the evening of the event, once the
- * park has emptied and the day-of page has nothing left to tell anyone.
- * Set to false and the date boundaries above take over again.
- *
- * Off for the 2027 cycle. This is checked ahead of the date logic, so it
- * overrides RECAP_AFTER: leaving it on kept the homepage pinned to the
- * recap no matter what the flag below said.
- */
-const RECAP_NOW = false;
-
 export default function middleware(request) {
   try {
     const url = new URL(request.url);
 
-    // Rehearsal hatches: /?preview=today and /?preview=recap force either page
-    // on any date, so both can be checked without touching the live window.
-    const preview = url.searchParams.get('preview');
-    if (preview === 'today' || preview === 'recap') {
-      url.pathname = preview === 'today' ? '/today.html' : '/recap.html';
-      return rewrite(url);
-    }
-
-    // Checked before the day window, so the evening switch beats the clock.
-    // The preview hatches above still win, which keeps rehearsal working.
-    if (RECAP_NOW) {
-      url.pathname = '/recap.html';
+    // Rehearsal hatch: /?preview=today forces the day-of page on any date, so
+    // it can be checked without touching the live window.
+    if (url.searchParams.get('preview') === 'today') {
+      url.pathname = '/today.html';
       return rewrite(url);
     }
 
@@ -63,11 +35,6 @@ export default function middleware(request) {
       // Query string survives, so ?at= and ?status= previews still work.
       return rewrite(url);
     }
-
-    if (RECAP_AFTER && now >= DAY_CLOSES) {
-      url.pathname = '/recap.html';
-      return rewrite(url);
-    }
   } catch (err) {
     // This sits in front of the homepage on the busiest day of the year.
     // If anything at all goes wrong, fall through and serve it normally.
@@ -76,8 +43,7 @@ export default function middleware(request) {
 }
 
 /**
- * Only the bare root. Everything else, /index.html included, is untouched,
- * which is what keeps both pages' "Event info" links working.
+ * Only the bare root. Everything else, /index.html included, is untouched.
  */
 export const config = {
   matcher: '/',

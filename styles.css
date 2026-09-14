@@ -126,6 +126,7 @@
     }
     .sheet-ink   { background: var(--ink); color: #fff; }
     .sheet-white { background: var(--white); }
+    .sheet-pink  { background: var(--pink-pale); }
     /* Full-bleed sheets (photo strip, map) keep the sheet silhouette
        but drop the inner padding so the content reaches the corners. */
     .sheet-flush { padding: 0; }
@@ -1905,3 +1906,24 @@
 }
 .pin-event .pin-bubble, .pin-event .pin-stem, .pin-event .pin-dot { background: var(--pink); }
 .maplibregl-ctrl-attrib { font-size: 10px; }
+
+    /* ── SUPPORT / DONATE ────────────────────────────────────────────
+       Carried over from recap.html when that page was retired. The
+       giving link is the only ask on the page that costs money, so it
+       gets its own sheet rather than a line inside another section. */
+    .support-inner {
+      max-width: 44rem;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .support-inner p { margin: 0 auto 1.6rem; max-width: 46ch; }
+    .support-fine {
+      display: block;
+      margin-top: 1.1rem;
+      font-size: 0.85rem;
+      color: rgba(26, 26, 26, 0.65);
+      max-width: 44ch;
+      margin-inline: auto;
+    }
